@@ -3,6 +3,5 @@
 ## Installation steps
 ## How to run
 ## Evaluation
-### Datasets
-### Test results
+### Tests and datasets
 
