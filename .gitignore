@@ -19,7 +19,6 @@
 
 # Go workspace file
 go.work
-*.xes
 mining-data/output/process-01_output.pnml
 mining-data/output/process-01_output.pnml
 *.csv
