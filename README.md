@@ -1,7 +1,7 @@
 # CONFINE Framework
-
-## Installation steps
 ## Repository structure
+## Installation steps
+## How to run
 ## Evaluation
 ### Datasets
 ### Test results
