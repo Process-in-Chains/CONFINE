@@ -1,5 +1,5 @@
 # CONFINE Framework
-## Istallation steps
+## Installation steps
 ## How to run
 ## Evaluation
 ### Datasets
