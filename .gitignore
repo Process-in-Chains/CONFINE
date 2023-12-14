@@ -22,8 +22,6 @@ go.work
 mining-data/output/process-01_output.pnml
 mining-data/output/process-01_output.pnml
 *.csv
-*.pnml
-*.pnml
 *.json
 *.json
 *.json
