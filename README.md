@@ -1,8 +1,8 @@
-# CONFINE framework
-CONFINE is a decentralilzed framework for inter-organizational process mining that leverages trusted applications running in Trusted Execution Environments (TEEs) to preserve data privacy and secrecy. In this repository, you can find the prototype implementation of the framework's main components, namely:
+# CONFINE: Preserving data secrecy in inter-organizational process mining
+The CONFINE framework represents a decentralized paradigm for inter-organizational process mining, utilizing trusted applications operating within Trusted Execution Environments (TEEs) to uphold the tenets of data privacy and confidentiality. This repository houses the prototype implementation of the principal components constituting the framework, namely:
 
-- Provisioners: deliver event log to be mined;
-- Secure Miners: retrieve and merge event log to be fed into process mining algorithms from provisioner sources.
+Provisioners: HTTP servers responsible for delivering event logs designated for mining.
+Secure Miners: EGo Intel SGX trusted applications retrieving and merging event logs to be fed into process mining algorithms.
 ## Installation steps
 ## Setup and run
 ### Provisioner node
