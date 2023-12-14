@@ -1,0 +1,209 @@
+<pnml>
+    <net id="net1">
+        <place id="P1">
+            <name>
+                <text>P1</text>
+            </name>
+        </place>
+        <place id="P2">
+            <name>
+                <text>P2</text>
+            </name>
+        </place>
+        <place id="P3">
+            <name>
+                <text>P3</text>
+            </name>
+        </place>
+        <place id="P4">
+            <name>
+                <text>P4</text>
+            </name>
+        </place>
+        <place id="P5">
+            <name>
+                <text>P5</text>
+            </name>
+        </place>
+        <place id="P6">
+            <name>
+                <text>P6</text>
+            </name>
+        </place>
+        <place id="P7">
+            <name>
+                <text>P7</text>
+            </name>
+        </place>
+        <place id="P0">
+            <name>
+                <text>P0</text>
+            </name>
+        </place>
+        <place id="P8">
+            <name>
+                <text>P8</text>
+            </name>
+        </place>
+        <place id="P9">
+            <name>
+                <text>P9</text>
+            </name>
+        </place>
+        <place id="P10">
+            <name>
+                <text>P10</text>
+            </name>
+        </place>
+        <place id="P11">
+            <name>
+                <text>P11</text>
+            </name>
+        </place>
+        <transition id="Order_drugs">
+            <name>
+                <text>Order drugs</text>
+            </name>
+        </transition>
+        <transition id="Receive_drugs">
+            <name>
+                <text>Receive drugs</text>
+            </name>
+        </transition>
+        <transition id="Receive_patient_back">
+            <name>
+                <text>Receive patient back</text>
+            </name>
+        </transition>
+        <transition id="Administer_drug">
+            <name>
+                <text>Administer drug</text>
+            </name>
+        </transition>
+        <transition id="Perform_response_to_treatment_analyses">
+            <name>
+                <text>Perform response to treatment analyses</text>
+            </name>
+        </transition>
+        <transition id="Transfer_patient">
+            <name>
+                <text>Transfer patient</text>
+            </name>
+        </transition>
+        <transition id="Perform_response_to_treatment_analyses">
+            <name>
+                <text>Perform response to treatment analyses</text>
+            </name>
+        </transition>
+        <transition id="Declare_patient_healed">
+            <name>
+                <text>Declare patient healed</text>
+            </name>
+        </transition>
+        <transition id="Perform_response_to_treatment_analyses">
+            <name>
+                <text>Perform response to treatment analyses</text>
+            </name>
+        </transition>
+        <transition id="Receive_patient_back">
+            <name>
+                <text>Receive patient back</text>
+            </name>
+        </transition>
+        <transition id="Discharge_patient">
+            <name>
+                <text>Discharge patient</text>
+            </name>
+        </transition>
+        <transition id="Prepare_clinic_documentation">
+            <name>
+                <text>Prepare clinic documentation</text>
+            </name>
+        </transition>
+        <transition id="Perform_response_to_treatment_analyses">
+            <name>
+                <text>Perform response to treatment analyses</text>
+            </name>
+        </transition>
+        <transition id="Receive_patient_back">
+            <name>
+                <text>Receive patient back</text>
+            </name>
+        </transition>
+        <transition id="Discharge_patient">
+            <name>
+                <text>Discharge patient</text>
+            </name>
+        </transition>
+        <transition id="Transfer_patient">
+            <name>
+                <text>Transfer patient</text>
+            </name>
+        </transition>
+        <transition id="Receive_patient_back">
+            <name>
+                <text>Receive patient back</text>
+            </name>
+        </transition>
+        <transition id="Patient_hospitalised">
+            <name>
+                <text>Patient hospitalised</text>
+            </name>
+        </transition>
+        <transition id="Carry_out_preliminary_analyses">
+            <name>
+                <text>Carry out preliminary analyses</text>
+            </name>
+        </transition>
+        <transition id="Carry_out_preliminary_analyses">
+            <name>
+                <text>Carry out preliminary analyses</text>
+            </name>
+        </transition>
+        <transition id="Order_drugs">
+            <name>
+                <text>Order drugs</text>
+            </name>
+        </transition>
+        <transition id="Receive_drugs">
+            <name>
+                <text>Receive drugs</text>
+            </name>
+        </transition>
+        <transition id="Administer_drug">
+            <name>
+                <text>Administer drug</text>
+            </name>
+        </transition>
+        <transition id="Discharge_patient">
+            <name>
+                <text>Discharge patient</text>
+            </name>
+        </transition>
+        <arc id="A1" source="Order_drugs" target="P1"></arc>
+        <arc id="A2" source="P1" target="Receive_drugs"></arc>
+        <arc id="A3" source="Administer_drug" target="P2"></arc>
+        <arc id="A4" source="P2" target="Perform_response_to_treatment_analyses"></arc>
+        <arc id="A5" source="P2" target="Transfer_patient"></arc>
+        <arc id="A6" source="P3" target="Declare_patient_healed"></arc>
+        <arc id="A7" source="Perform_response_to_treatment_analyses" target="P3"></arc>
+        <arc id="A8" source="Receive_patient_back" target="P3"></arc>
+        <arc id="A9" source="Declare_patient_healed" target="P4"></arc>
+        <arc id="A10" source="P4" target="Discharge_patient"></arc>
+        <arc id="A11" source="P5" target="Prepare_clinic_documentation"></arc>
+        <arc id="A12" source="Perform_response_to_treatment_analyses" target="P5"></arc>
+        <arc id="A13" source="Receive_patient_back" target="P5"></arc>
+        <arc id="A14" source="Prepare_clinic_documentation" target="P6"></arc>
+        <arc id="A15" source="P6" target="Discharge_patient"></arc>
+        <arc id="A16" source="Transfer_patient" target="P7"></arc>
+        <arc id="A17" source="P7" target="Receive_patient_back"></arc>
+        <arc id="A18" source="P0" target="Patient_hospitalised"></arc>
+        <arc id="A19" source="Patient_hospitalised" target="P8"></arc>
+        <arc id="A20" source="P8" target="Carry_out_preliminary_analyses"></arc>
+        <arc id="A21" source="Carry_out_preliminary_analyses" target="P9"></arc>
+        <arc id="A22" source="P9" target="Order_drugs"></arc>
+        <arc id="A23" source="Receive_drugs" target="P10"></arc>
+        <arc id="A24" source="P10" target="Administer_drug"></arc>
+        <arc id="A25" source="Discharge_patient" target="P11"></arc>
+    </net>
+</pnml>

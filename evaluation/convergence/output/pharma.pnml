@@ -1,0 +1,55 @@
+<pnml>
+    <net id="net1">
+        <place id="P1">
+            <name>
+                <text>P1</text>
+            </name>
+        </place>
+        <place id="P0">
+            <name>
+                <text>P0</text>
+            </name>
+        </place>
+        <place id="P2">
+            <name>
+                <text>P2</text>
+            </name>
+        </place>
+        <place id="P3">
+            <name>
+                <text>P3</text>
+            </name>
+        </place>
+        <transition id="Ship_drug">
+            <name>
+                <text>Ship drug</text>
+            </name>
+        </transition>
+        <transition id="Receive_drugs_order_from_hospital">
+            <name>
+                <text>Receive drugs order from hospital</text>
+            </name>
+        </transition>
+        <transition id="Produce_drug_in_laboratory">
+            <name>
+                <text>Produce drug in laboratory</text>
+            </name>
+        </transition>
+        <transition id="Produce_drug_in_laboratory">
+            <name>
+                <text>Produce drug in laboratory</text>
+            </name>
+        </transition>
+        <transition id="Ship_drug">
+            <name>
+                <text>Ship drug</text>
+            </name>
+        </transition>
+        <arc id="A1" source="Ship_drug" target="P1"></arc>
+        <arc id="A2" source="P0" target="Receive_drugs_order_from_hospital"></arc>
+        <arc id="A3" source="Receive_drugs_order_from_hospital" target="P2"></arc>
+        <arc id="A4" source="P2" target="Produce_drug_in_laboratory"></arc>
+        <arc id="A5" source="Produce_drug_in_laboratory" target="P3"></arc>
+        <arc id="A6" source="P3" target="Ship_drug"></arc>
+    </net>
+</pnml>

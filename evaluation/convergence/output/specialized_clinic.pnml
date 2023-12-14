@@ -1,0 +1,89 @@
+<pnml>
+    <net id="net1">
+        <place id="P1">
+            <name>
+                <text>P1</text>
+            </name>
+        </place>
+        <place id="P2">
+            <name>
+                <text>P2</text>
+            </name>
+        </place>
+        <place id="P3">
+            <name>
+                <text>P3</text>
+            </name>
+        </place>
+        <place id="P0">
+            <name>
+                <text>P0</text>
+            </name>
+        </place>
+        <place id="P4">
+            <name>
+                <text>P4</text>
+            </name>
+        </place>
+        <place id="P5">
+            <name>
+                <text>P5</text>
+            </name>
+        </place>
+        <transition id="Perform_treatment">
+            <name>
+                <text>Perform treatment</text>
+            </name>
+        </transition>
+        <transition id="Verify_response_to_treatment">
+            <name>
+                <text>Verify response to treatment</text>
+            </name>
+        </transition>
+        <transition id="Verify_response_to_treatment">
+            <name>
+                <text>Verify response to treatment</text>
+            </name>
+        </transition>
+        <transition id="Transfer_patient_back">
+            <name>
+                <text>Transfer patient back</text>
+            </name>
+        </transition>
+        <transition id="Transfer_patient_back">
+            <name>
+                <text>Transfer patient back</text>
+            </name>
+        </transition>
+        <transition id="Patient_arrives_from_hospital">
+            <name>
+                <text>Patient arrives from hospital</text>
+            </name>
+        </transition>
+        <transition id="Perform_in-depth_analyses">
+            <name>
+                <text>Perform in-depth analyses</text>
+            </name>
+        </transition>
+        <transition id="Perform_in-depth_analyses">
+            <name>
+                <text>Perform in-depth analyses</text>
+            </name>
+        </transition>
+        <transition id="Perform_treatment">
+            <name>
+                <text>Perform treatment</text>
+            </name>
+        </transition>
+        <arc id="A1" source="Perform_treatment" target="P1"></arc>
+        <arc id="A2" source="P1" target="Verify_response_to_treatment"></arc>
+        <arc id="A3" source="Verify_response_to_treatment" target="P2"></arc>
+        <arc id="A4" source="P2" target="Transfer_patient_back"></arc>
+        <arc id="A5" source="Transfer_patient_back" target="P3"></arc>
+        <arc id="A6" source="P0" target="Patient_arrives_from_hospital"></arc>
+        <arc id="A7" source="Patient_arrives_from_hospital" target="P4"></arc>
+        <arc id="A8" source="P4" target="Perform_in-depth_analyses"></arc>
+        <arc id="A9" source="Perform_in-depth_analyses" target="P5"></arc>
+        <arc id="A10" source="P5" target="Perform_treatment"></arc>
+    </net>
+</pnml>
