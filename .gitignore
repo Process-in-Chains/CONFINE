@@ -21,8 +21,5 @@
 go.work
 mining-data/output/process-01_output.pnml
 mining-data/output/process-01_output.pnml
-*.csv
-*.json
-*.json
 *.json
 mining-data/consumption-data/process-01/miningMetadata/dependencyMatrix.json
