@@ -1,6 +1,8 @@
 # CONFINE Framework
 ## Installation steps
-## How to run
+## Setup and run
+### Provisioner node
+### Secure miner
 ## Evaluation
 ### Datasets
 ### Tests
