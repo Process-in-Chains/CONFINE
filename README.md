@@ -8,12 +8,12 @@ The CONFINE framework represents a decentralized paradigm for inter-organization
 ## Repository overview
 The repository is structured as follows
 -  [/src/](https://github.com/Process-in-Chains/CONFINE/tree/main/src): the root folder of the implementation source code
-    - [/src/secure-miner/](https://github.com/Process-in-Chains/CONFINE/tree/main/src) folder of the Secure Miner implementation as an EGo Intel SGX application
-    - [/src/provisioner/](https://github.com/Process-in-Chains/CONFINE/tree/main/src) folder of the Log Provider component implementation in GO
--  [/evaluation/](https://github.com/Process-in-Chains/CONFINE/tree/main/src): folder containing datatsets and results employeed for our  evaluation
-    - [/evaluation/convergence/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/convergence) 
-    - [/evaluation/memoryusage/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/memoryusage) 
-    - [/evaluation/scalability/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/scalability) 
+    - [/src/secure-miner/](https://github.com/Process-in-Chains/CONFINE/tree/main/src) contains the Secure Miner implementation as an EGo Intel SGX application
+    - [/src/provisioner/](https://github.com/Process-in-Chains/CONFINE/tree/main/src) contains the Log Provider component implementation in GO
+-  [/evaluation/](https://github.com/Process-in-Chains/CONFINE/tree/main/src): folder containing datasets and results employed for our  evaluation
+    - [/evaluation/convergence/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/convergence) contains the convergence test data 
+    - [/evaluation/memoryusage/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/memoryusage) includes the memory usage tests data 
+    - [/evaluation/scalability/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/scalability) contains the data of the scalability tests
 ## Setup and run
 ### Provisioner node
 ### Secure miner
