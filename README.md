@@ -5,6 +5,8 @@ The CONFINE framework represents a decentralized paradigm for inter-organization
 - Secure Miners: [EGo](https://www.edgeless.systems/products/ego/) Intel SGX trusted applications retrieving and merging event logs to be fed into process mining algorithms.
 
 ## Framework overview
+[deploymentdiagram.pdf](https://github.com/Process-in-Chains/CONFINE/files/13716372/deploymentdiagram.pdf)
+
 ## Repository
 The repository is structured as follows:
 -  [/src/](https://github.com/Process-in-Chains/CONFINE/tree/main/src): the root folder of the implementation source code
