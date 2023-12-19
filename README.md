@@ -5,10 +5,12 @@ The CONFINE framework represents a decentralized paradigm for inter-organization
 - Secure Miners: [EGo](https://www.edgeless.systems/products/ego/) Intel SGX trusted applications retrieving and merging event logs to be fed into process mining algorithms.
 
 ## Framework overview
-[deploymentdiagram.pdf](https://github.com/Process-in-Chains/CONFINE/files/13716372/deploymentdiagram.pdf)
+![deploymentdiagram-1](https://github.com/Process-in-Chains/CONFINE/assets/60829979/5c8dded3-5f04-42a7-a9d0-1a4583ddf708)
+Our framework involves different information systems running on multiple machines. An organization can take at least one of the following roles: provisioning if it delivers local event logs to be collaboratively mined; mining if it applies process mining algorithms using event logs retrieved from provisioners. Depending on the played role, nodes come endowed with a Provisioner or a Secure Miner component, or both. Provisioner Nodes host the Provisioner's components, encompassing the Log Recorder and the Log Provider. The Miner Node is characterized by two distinct execution environments: the Operating System(OS) and the Trusted Execution Environment (TEE). TEEs establish isolated contexts separate from the OS, safeguarding code and data through hardware-based encryption mechanisms. We leverage the security guarantees provided by TEEs to protect a Trusted App responsible for fulfilling the functions of the \Compo{Secure Miner} and its associated sub-components. 
+
 
 ## Repository
-The repository is structured as follows:
+The main content of the repository is structured as follows:
 -  [/src/](https://github.com/Process-in-Chains/CONFINE/tree/main/src): the root folder of the implementation source code
     - [/src/secure-miner/](https://github.com/Process-in-Chains/CONFINE/tree/main/src/secure-miner) contains the Secure Miner implementation as an EGo Intel SGX application
     - [/src/provisioner/](https://github.com/Process-in-Chains/CONFINE/tree/main/src/provisioner) contains the Log Provider component implementation in GO
