@@ -37,7 +37,7 @@ To experimentally validate the correctness of our approach in the transmission a
 - (I) No Comput 
 - (II) Comput
 - (III) Multiple log lines
-- (VI) Multiple log segsize
+- (IV) Multiple log segsize
 
 [/event_log/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/memoryusage/event_log)
 [/bpic13/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/memoryusage/event_log/bpic13)
