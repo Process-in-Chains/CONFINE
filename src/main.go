@@ -1,25 +1,23 @@
-// https://tour.golang.org/concurrency/1
-
 package main
 
 import (
 	logreception "app/secure-miner/log-consumption"
 	"app/secure-miner/log-consumption/miningAlgorithms"
 	logrequest "app/secure-miner/log-request"
+	"app/utils/encryption"
 	"app/utils/reset"
 	"app/utils/test"
 	"app/utils/xes"
-	"crypto/rsa"
-	"crypto/x509"
-	"encoding/base64"
-	"encoding/pem"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"strconv"
 	"time"
 )
 
+/*
+The main of the Secure Miner.
+It initializes the necessary variables, parses command-line arguments, starts the log receiver, and prompts the user for commands to execute.
+*/
 func main() {
 	var port string
 	var segmentsize int
@@ -41,53 +39,37 @@ func main() {
 		return
 	}
 	for true {
-		fmt.Printf("Command list:----------------------------------------------------------\n1: Start mining (Inter-organizational)\n2: Start mining (Only owned traces)\n3: Show public key\n4: Reset knowledge\n")
+		fmt.Printf("Command list:------------------------------------------------\n1: Start CONFINE protocol\n2: Mine specific log\n3: Show miner public key\n4: Reset Secure Miner's memory\n")
 		var command string
 		fmt.Scanln(&command)
+		/*This command initiates the mining process via CONFINE protocol.*/
 		if command == "1" {
 			if TESTMODE {
 				test.STOPMONITORING = false
 				go test.PrintRamUsage()
+				println("TESTMODE - TEST STARTED AT: ", time.Now().UnixMilli())
 			}
-			println("TESTMODE - TEST STARTED AT: ", time.Now().UnixMilli())
 			logrequest.LogRequest("process-01", port, segmentsize)
 			test.WaitUntilStop()
 
 		}
+		/*This command initiates the mining process using 'event_log.xes' located in './mining-data/provision-data/process-01'.*/
 		if command == "2" {
 			log_path := "./mining-data/provision-data/" + "process-01" + "/event_log.xes"
 			eventLog := xes.ReadXes(log_path)
 			prosessMiningAlgorithms.HeuristicMiner(eventLog.XesToSlices(), "process-01")
 		}
+		/*This comand reads the public key associated with the Secure Miner*/
 		if command == "3" {
+			pubKey, err := encryption.ParsePublicKeyToString("./public.pem")
+			if err != nil {
+				fmt.Println("Error reading public key:", err)
+			} else {
+				fmt.Println("Public key:\n" + pubKey)
+			}
 
-			// Read the contents of the PEM file
-			pemData, err := ioutil.ReadFile("./public.pem")
-			if err != nil {
-				fmt.Println("Error reading PEM file:", err)
-			}
-			// Decode the PEM data
-			block, _ := pem.Decode(pemData)
-			if block == nil {
-				fmt.Println("Failed to decode PEM block")
-			}
-			// Parse the DER-encoded public key
-			pubKey, err := x509.ParsePKIXPublicKey(block.Bytes)
-			if err != nil {
-				fmt.Println("Error parsing public key:", err)
-			}
-			// Assert the type of the public key to RSA
-			rsaPubKey, ok := pubKey.(*rsa.PublicKey)
-			if !ok {
-				fmt.Println("Public key is not an RSA key")
-			}
-			a := *rsaPubKey
-			pubKeyBytes, err := x509.MarshalPKIXPublicKey(&a)
-			if err != nil {
-				panic(err)
-			}
-			fmt.Println("Public key:\n" + base64.StdEncoding.EncodeToString(pubKeyBytes))
 		}
+		/*This comand resets the result knwoledge gained from the previous CONFINE elaborations. It resets the knowledge by deleting files and emptying matrices and maps.*/
 		if command == "4" {
 			err := reset.DeleteAllFilesInSubfolders("mining-data/consumption-data/process-01/")
 			if err != nil {

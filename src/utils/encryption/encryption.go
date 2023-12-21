@@ -181,12 +181,37 @@ func generateAESKey() ([]byte, error) {
 	}
 	return key, nil
 }
-func PublicKeyToString(objectPublicKey *rsa.PublicKey) string {
 
-	pubKeyBytes, err := x509.MarshalPKIXPublicKey(&objectPublicKey)
+func ParsePublicKeyToString(path string) (string, error) {
+	// Read the contents of the PEM file
+	pemData, err := ioutil.ReadFile(path)
 	if err != nil {
-		panic(err)
+		fmt.Println("Error reading PEM file:", err)
+		return "", err
 	}
-	//fmt.Println("Public key:\n" + base64.StdEncoding.EncodeToString(pubKeyBytes))
-	return base64.StdEncoding.EncodeToString(pubKeyBytes)
+	// Decode the PEM data
+	block, _ := pem.Decode(pemData)
+	if block == nil {
+		fmt.Println("Failed to decode PEM block")
+		return "", err
+	}
+	// Parse the DER-encoded public key
+	pubKey, err := x509.ParsePKIXPublicKey(block.Bytes)
+	if err != nil {
+		fmt.Println("Error parsing public key:", err)
+		return "", err
+	}
+	// Assert the type of the public key to RSA
+	rsaPubKey, ok := pubKey.(*rsa.PublicKey)
+	if !ok {
+		fmt.Println("Public key is not an RSA key")
+		return "", err
+	}
+	a := *rsaPubKey
+	pubKeyBytes, err := x509.MarshalPKIXPublicKey(&a)
+	if err != nil {
+		return "", err
+	}
+	return base64.StdEncoding.EncodeToString(pubKeyBytes), nil
+
 }
