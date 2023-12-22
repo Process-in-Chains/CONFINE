@@ -23,10 +23,79 @@ The main content of the repository is structured as follows:
     - [/evaluation/convergence/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/convergence) contains the convergence test data 
     - [/evaluation/memoryusage/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/memoryusage) includes the memory usage tests data 
     - [/evaluation/scalability/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/scalability) contains the data of the scalability tests
-## Installation
+## Installation with Docker
+To run the code, we prepared a CONFINE Docker image containing all the necessary requirements in order to run the framework. In order to use it, you need to have [Docker] installed, you can do that by following [this page](https://docs.docker.com/get-docker/). After installation, you can start creating the container to run the framework. After installation, you can pull the images executing the following command.
+```
+docker pull valeriogoretti9/confine:latest
+```
+Once the image has been downloaded, you can execute the following command to create a container with the CONFINE image. Before execution, you must be careful to enter your volume path instead of the <INSERT HERE YOUR VOLUME PATH> tag. You can also set a container name by replacing the tag <INSERT HERE YOUR DOCKER CONTAINER NAME>.
+```
+docker run --volume /var/run/aesmd:/var/run/aesmd -v <INSERT HERE YOUR VOLUME PATH>:/volume --name <INSERT HERE YOUR DOCKER CONTAINER NAME> -ti valeriogoretti9/confine:latest
+```
+Once the Docker container is created, the following commands allow you to start it.
+```
+docker start <INSERT HERE YOUR DOCKER CONTAINER NAME>
+docker attach <INSERT HERE YOUR DOCKER CONTAINER NAME>
+```
+
 ## Setup and run
-### Provisioner node
+Once the docker container is running, you can proceed with the CONFINE setup. Execute the following commands to clone the CONFINE code and access it.
+```
+cd volume
+apt-get update
+apt-get install git
+git clone https://github.com/Process-in-Chains/CONFINE.git
+cd CONFINE/
+```
+
+### Provisioner
+At this point, the container is running and CONFINE is set. By executing the following command you will enter the folder dedicated to the provisioner part.
+```
+cd src/provisioner/log-provision
+```
+You have to put the log (in csv format) you want to provide to your collaborators in the inter-organisational context into this folder.
+Once you added the csv file, you have to build the 'log_provision.go' program, which is located in the current folder. 
+However, the execution of the build command must be done in the src folder. So, please follow the following commands to return to the src folder and build the log provider.
+```
+cd ..
+cd ..
+go build -o logprovision provisioner/log-provision/log_provision.go
+```
+Once the build has been executed, you can start the log provider with the following command replacing the <INSERT THE PATH OF YOUR CSV FILE HERE> tag with the inserted csv path
+```
+./logprovision -port 8087 -log <INSERT THE PATH OF YOUR CSV FILE HERE>
+```
+
+
 ### Secure miner
+In order to enable communication with other parties involved in the Inter-organizational environment, you have to set your collaborator. To do so, you must edit the file refeece.json. The following commands describe how to do this. To do so, you must edit the file reference.json. First, from the src folder, navigate to the file:
+```
+cd mining-data/collaborators/process-01/
+```
+Inside this folder is the references.json file. Edit this file adding your collaborators. The file contains a list of contributors and for each one you need to set the public key and the reference port on which you want to communicate. The following json is an example for an environment with 2 other collaborators.
+```
+[
+  {
+    "public_key": "...""
+    "http_reference": "..."
+  },
+  {
+    "public_key": "...""
+    "http_reference": "..."
+  }
+]
+```
+You have to put the log (in csv format) you want to provide in the inter-organisational context into this folder. The name of this csv file must be "event_log.xes". 
+
+Afterwards, you can build the secure miner code and execute it with the following commands.
+```
+ego-go build -buildvcs=false
+ego-go sign
+```
+And finally run the secure miner with the command:
+```
+OE_SIMULATION=1 ego run ./app -segsize 2000 -port 8080 -test true
+```
 ## Evaluation
 The following section contains the experimental toolbench used to evaluate the effectiveness of CONFINE, presented in the paper Section 6. Evaluation files can be found in [/evaluation/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation). We conduct convergence analysis to demonstrate the correctness of the collaborative data exchange process. Moreover, we gauge the memory usage with synthetic and real-life event logs, to observe the trend during the enactment of our protocol and assess scalability. 
 
@@ -61,3 +130,8 @@ We examine the [scalability](https://github.com/Process-in-Chains/CONFINE/tree/m
 - To conduct the test on the maximum number of events, we modified the motivating scenario [event log](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/scalability/event_log/log_test_maxevents) by adding a loop back from the final to the initial activity of the process model, progressively increasing the number of iterations. The results of the test are available in [/output_test_max_events/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/scalability/output_test_max_events).
 - Concerning the test on the number of cases, we simulated additional process instances, building new  [event logs](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/scalability/event_log/log_test_cases).  The results of the test are available in [/output_test_cases/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/scalability/output_test_cases).
 - Finally, for the assessment of the number of organizations, the test necessitated the distribution of the process model activities’ into a variable number of pools, each representing a different organization. Event logs are available in [/log_test_organizations/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/scalability/event_log/log_test_organizations), results of the test are available in [/output_test_organizations/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation/scalability/output_test_organizations).
+
+
+
+[//]: # 
+[Docker]: <https://www.docker.com>
