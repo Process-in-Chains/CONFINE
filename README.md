@@ -47,7 +47,7 @@ apt-get install git
 git clone https://github.com/Process-in-Chains/CONFINE.git
 cd CONFINE/
 ```
-In the next parts, you can see [how to run the provisioner](#provisioner) and the [secure miner](#secure-miner). 
+In the next parts, you can see how to run [provisioner](#provisioner) and [secure miner](#secure-miner) components. 
 ### Provisioner
 At this point, the container is running and CONFINE is set. By executing the following command you will enter the folder dedicated to the provisioner part.
 ```
