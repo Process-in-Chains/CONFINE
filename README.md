@@ -53,17 +53,17 @@ At this point, the container is running and CONFINE is set. By executing the fol
 ```
 cd src/provisioner/log-provision
 ```
-You have to put the log (in csv format) you want to provide to your collaborators in the inter-organisational context into this folder.
-Once you added the csv file, you have to build the 'log_provision.go' program, which is located in the current folder. 
+You have to put the log (in xes format) you want to provide to your collaborators in the inter-organizational context into this folder.
+Once you added the xes file, you have to build the 'log_provision.go' program, which is located in the current folder. 
 However, the execution of the build command must be done in the src folder. So, please follow the following commands to return to the src folder and build the log provider.
 ```
 cd ..
 cd ..
 go build -o logprovision provisioner/log-provision/log_provision.go
 ```
-Once the build has been executed, you can start the log provider with the following command replacing the <INSERT THE PATH OF YOUR CSV FILE HERE> tag with the inserted csv path
+Once the build has been executed, you can start the log provider with the following command replacing the <INSERT THE PATH OF YOUR XES FILE HERE> tag with the inserted xes path
 ```
-./logprovision -port 8087 -log <INSERT THE PATH OF YOUR CSV FILE HERE>
+./logprovision -port 8087 -log <INSERT THE PATH OF YOUR XES FILE HERE>
 ```
 
 
@@ -85,7 +85,7 @@ Inside this folder is the references.json file. Edit this file adding your colla
   }
 ]
 ```
-You have to put the log (in csv format) you want to provide in the inter-organisational context into this folder. The name of this csv file must be "event_log.xes". 
+You have to put the log (in xes format) you want to provide in the inter-organizational context into this folder. The name of this xes file must be "event_log.xes". 
 
 Afterwards, you can build the secure miner code and execute it with the following commands.
 ```
