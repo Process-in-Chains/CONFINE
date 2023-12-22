@@ -65,8 +65,6 @@ Once the build has been executed, you can start the log provider with the follow
 ```
 ./logprovision -port 8087 -log <INSERT THE PATH OF YOUR XES FILE HERE>
 ```
-
-
 ### Secure miner
 In order to enable communication with other parties involved in the Inter-organizational environment, you have to set your collaborator. To do so, you must edit the file refeece.json. The following commands describe how to do this. To do so, you must edit the file reference.json. First, from the src folder, navigate to the file:
 ```
@@ -85,8 +83,7 @@ Inside this folder is the references.json file. Edit this file adding your colla
   }
 ]
 ```
-You have to put the log (in xes format) you want to provide in the inter-organizational context into this folder. The name of this xes file must be "event_log.xes". 
-
+You have to put, inside this direcroty, the log (in xes format) you want to provide in the inter-organizational context into this folder. The name of this xes file must be "event_log.xes". 
 Afterwards, you can build the secure miner code and execute it with the following commands.
 ```
 ego-go build -buildvcs=false
