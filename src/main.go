@@ -15,7 +15,7 @@ import (
 )
 
 /*
-The main of the Secure Miner.
+Secure Miner main. 
 It initializes the necessary variables, parses command-line arguments, starts the log receiver, and prompts the user for commands to execute.
 */
 func main() {
