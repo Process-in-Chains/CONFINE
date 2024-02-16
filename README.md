@@ -87,7 +87,7 @@ You have to put, inside this direcroty, the log (in xes format) you want to prov
 Afterwards, you can build the secure miner code and execute it with the following commands.
 ```
 ego-go build -buildvcs=false
-ego-go sign
+ego sign
 ```
 And finally run the secure miner with the command:
 ```
