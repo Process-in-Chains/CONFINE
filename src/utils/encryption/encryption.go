@@ -181,7 +181,15 @@ func generateAESKey() ([]byte, error) {
 	}
 	return key, nil
 }
+func PublicKeyToString(objectPublicKey *rsa.PublicKey) string {
 
+	pubKeyBytes, err := x509.MarshalPKIXPublicKey(&objectPublicKey)
+	if err != nil {
+		panic(err)
+	}
+	//fmt.Println("Public key:\n" + base64.StdEncoding.EncodeToString(pubKeyBytes))
+	return base64.StdEncoding.EncodeToString(pubKeyBytes)
+}
 func ParsePublicKeyToString(path string) (string, error) {
 	// Read the contents of the PEM file
 	pemData, err := ioutil.ReadFile(path)
@@ -212,6 +220,8 @@ func ParsePublicKeyToString(path string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	fmt.Println("Public key:\n" + base64.StdEncoding.EncodeToString(pubKeyBytes))
 	return base64.StdEncoding.EncodeToString(pubKeyBytes), nil
 
 }
+

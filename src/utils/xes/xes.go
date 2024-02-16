@@ -87,6 +87,14 @@ func (trace Trace) traceToSlice() []string {
 	}
 	return names
 }
+func (trace Trace) GetAttributeValue(attribute string) (string, error) {
+	for _, traceAttr := range trace.Name {
+		if traceAttr.Key == attribute {
+			return traceAttr.Value, nil
+		}
+	}
+	return "", errors.New("Attribute name not found in the trace")
+}
 func (trace Trace) TraceToByte() []byte {
 	emptyXes := XES{}
 	emptyXes.Traces = append(emptyXes.Traces, trace)
@@ -127,14 +135,15 @@ type Attribute struct {
 
 func (xes XES) getTrace(caseId string) *Trace {
 	for _, trace := range xes.Traces {
-		for _, trace_attr := range trace.Name {
-			if (trace_attr.Key == "concept:name") && (trace_attr.Value == caseId) {
+		for _, traceAttr := range trace.Name {
+			if (traceAttr.Key == "concept:name") && (traceAttr.Value == caseId) {
 				return &trace
 			}
 		}
 	}
 	return nil
 }
+
 func (xes XES) XesToSlices() [][]string {
 	var traces [][]string
 	for _, t := range xes.Traces {

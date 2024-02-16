@@ -1,10 +1,9 @@
 package logreception
 
 //ego-go build -buildvcs=false && ego sign enclave.json && OE_SIMULATION=1 ego run ./app -segsize 2000 -port 8080 -test true
-//ego sign enclave.json
-//ego run ./app
 import (
 	"app/secure-miner/log-consumption/miningAlgorithms"
+	"app/utils/collaborators"
 	"app/utils/encryption"
 	"app/utils/test"
 	"app/utils/xes"
@@ -94,22 +93,6 @@ func (s *LogReceiver) Stop(ctx context.Context) error {
 	fmt.Println("Shutting down Log Receiver...")
 	return s.server.Shutdown(ctx)
 }
-
-/*
-*
-
-	func waitForInterrupt(ctx context.Context) {
-	    c := make(chan os.Signal, 1)
-	    signal.Notify(c, os.Interrupt)
-	    select {
-	    case <-c:
-	        fmt.Println("\nReceived interrupt signal")
-	    case <-ctx.Done():
-	    }
-	}
-
-*
-*/
 func createCertificate() ([]byte, crypto.PrivateKey) {
 	template := &x509.Certificate{
 		SerialNumber: &big.Int{},
@@ -121,8 +104,6 @@ func createCertificate() ([]byte, crypto.PrivateKey) {
 	cert, _ := x509.CreateCertificate(rand.Reader, template, template, &priv.PublicKey, priv)
 	return cert, priv
 }
-
-// {'messageType':'0,1,2', 'secret':{eventLog, index}, 'key':decryptionToken/"", 'header':{bytes:_,hashList:_,segmentNumber:},}
 func secretLogHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		//r.Body = http.MaxBytesReader(w, r.Body, 50000)
@@ -174,15 +155,7 @@ func secretLogHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal("Error decrypting XES data:", err)
 		}
-		//err = createFolderIfNotExists("data/enclave/" + base64.StdEncoding.EncodeToString(symKey))
-		//if err != nil {
-		//	return
-		//}
-		//logFilenameDecrypted := "data/enclave/" + base64.StdEncoding.EncodeToString(symKey) + "/" + segmentNumber + ".xes"
-		//HERE YOU HAVE TO PARSE decryptedData to turn it into a XES object. Than
-		//you can extract traces and save them or marge them
 		xesSegment := xes.ParseXes(decryptedData)
-		//Read the traces from the traceMap file
 		mutex.Lock()
 		writtenTraceMap, err := ioutil.ReadFile("mining-data/consumption-data/process-01/traceMap.json")
 		readTraceMap := make(map[string]map[string]bool)
@@ -191,15 +164,12 @@ func secretLogHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("Error decoding JSON:", err)
 			return
 		}
-		handleTrace(*xesSegment, "process-01", senderPublicKey, senderReference, readTraceMap)
+		reference, error := collaborators.GetReference(senderReference)
+		if error != nil {
+			log.Fatalf("Error getting references: %v", error)
+		}
+		handleTrace(*xesSegment, "process-01", senderPublicKey, senderReference, reference.MergeKey, readTraceMap)
 		mutex.Unlock()
-		//err = ioutil.WriteFile(logFilenameDecrypted, decryptedData, 0644)
-		//if err != nil {
-		//	fmt.Println("Error writing to file:", err)
-		//	response, _ := prepareResponse(false)
-		//	w.Write([]byte(response))
-		//	return
-		//}
 		response, _ := prepareResponse(true)
 		w.Write([]byte(response))
 		if DEBUG {
@@ -261,29 +231,37 @@ func createFolderIfNotExists(folderPath string) error {
 	}
 	return nil
 }
-func handleTrace(eventLog xes.XES, processName string, publicKey string, myreference string, traceMap map[string]map[string]bool) {
+func handleTrace(eventLog xes.XES, processName string, publicKey string, myreference string, mergekey string, traceMap map[string]map[string]bool) {
 	for _, trace := range eventLog.Traces {
-		traceId, _ := trace.GetId()
+		//traceId, _ := trace.GetId()
+		traceId, error := trace.GetAttributeValue(mergekey)
+		if error != nil {
+			log.Fatal(error)
+			return
+		}
 		if _, ok := traceMap[traceId]; ok && !traceMap[traceId][myreference] {
 			traceMap[traceId][myreference] = true
 			if allValuesTrue(traceMap[traceId]) {
 				if DEBUG {
 					fmt.Println("It's time to mine Trace: ", traceId)
 				}
-				//TODO: FIX HERE TO ADD CASE IF MINER DOESN'T HAVE ANY TRACE(LOOK AT TODOS IN log-request AND log-provision)-------------------------------------------------------------------------------------------------------------
-				my := xes.ReadXes("/mining-data/provision-data/process-01/trace_" + traceId + "/trace_" + traceId + ".xes")
-				mergedTrace, _ := xes.MergeTraces(trace, my.Traces[0])
-				//iterate over files in the data/enclave/process_01 folder
+				//TODO: FIX HERE TO ADD CASE IF MINER DOESN'T HAVE ANY TRACE(LOOK AT TODOS IN log-request AND log-provision) DONE
 				files, err := os.ReadDir("/mining-data/consumption-data/" + processName + "/trace_" + traceId)
 				if err != nil {
 					log.Fatal(err)
 				}
-				for _, traceFile := range files {
-					currentTrace := xes.ReadXes("mining-data/consumption-data/" + processName + "/trace_" + traceId + "/" + traceFile.Name())
-					if DEBUG {
-						fmt.Println("Merging: ", "mining-data/consumption-data/"+processName+"/trace_"+traceId+"/"+traceFile.Name())
+				mergedTrace := xes.Trace{}
+				for nfile, traceFile := range files {
+					if nfile == 0 {
+						mergedTrace, _ = xes.MergeTraces(trace, xes.ReadXes("mining-data/consumption-data/" + processName + "/trace_" + traceId + "/" + traceFile.Name()).Traces[0])
+
+					} else {
+						currentTrace := xes.ReadXes("mining-data/consumption-data/" + processName + "/trace_" + traceId + "/" + traceFile.Name())
+						if DEBUG {
+							fmt.Println("Merging: ", "mining-data/consumption-data/"+processName+"/trace_"+traceId+"/"+traceFile.Name())
+						}
+						mergedTrace, _ = xes.MergeTraces(mergedTrace, currentTrace.Traces[0])
 					}
-					mergedTrace, _ = xes.MergeTraces(mergedTrace, currentTrace.Traces[0])
 				}
 				if DEBUG {
 					for _, ev := range mergedTrace.Events {
@@ -298,7 +276,6 @@ func handleTrace(eventLog xes.XES, processName string, publicKey string, myrefer
 					fmt.Println("TESTMODE - FIRST COMPUTATION AT:", time.Now().UnixMilli())
 					FIRSTCOMP = true
 				}
-
 				prosessMiningAlgorithms.HeuristicMiner(x.XesToSlices(), processName)
 
 			} else {
@@ -351,7 +328,6 @@ func allValuesTrue(myMap map[string]bool) bool {
 	}
 	return true
 }
-
 func allTracesCompleted(traceMap map[string]map[string]bool) bool {
 	for _, value := range traceMap {
 		if !allValuesTrue(value) {
