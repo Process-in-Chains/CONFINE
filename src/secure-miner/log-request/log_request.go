@@ -1,7 +1,7 @@
 package logrequest
 
 import (
-	"app/utils/xes"
+	"app/utils/collaborators"
 	"crypto/rsa"
 	"crypto/tls"
 	"crypto/x509"
@@ -13,40 +13,38 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"sort"
 	"strconv"
 	"time"
 )
 
-// package logreception
 const STOPWRITING = true
 
-// go build -o logrequest log-request/log-request.go && ./logrequest -segsize 2000 -port 8080 -test true
+/*This function contains the logic of the Secure Miner's Log Requester*/
 func LogRequest(processName string, receiverPort string, segmentsize int) {
 	println("TESTMODE - INITIALIZATION STARTED AT:", time.Now().UnixMilli())
 	//Initalize and write the trace map
-	//TODO:FIX HERE TO MAKE THE MINER NOT OWNER OF TRACES3
-	log_path := "./mining-data/provision-data/" + processName + "/event_log.xes"
-	//TODO:FIX HERE TO MAKE THE MINER NOT OWNER OF TRACES
-	eventLog := xes.ReadXes(log_path)
+	//TODO:FIX HERE TO MAKE THE MINER NOT OWNER OF TRACES. DONE
+	//log_path := "./mining-data/provision-data/" + processName + "/event_log.xes"
+	//TODO:FIX HERE TO MAKE THE MINER NOT OWNER OF TRACES. DONE
+	//eventLog := xes.ReadXes(log_path)
 	globalTracesMap := make(map[string]map[string]bool)
 	if STOPWRITING {
 		_ = os.MkdirAll("./mining-data/consumption-data/"+processName+"/miningMetadata", os.ModePerm)
 		_ = os.WriteFile("./mining-data/consumption-data/"+processName+"/miningMetadata/map.json", []byte("{}"), 0644)
 
-		//TODO:FIX HERE TO MAKE THE MINER NOT OWNER OF TRACES. THIS FOR SHOULD BE SKIPPED IN THAT CASE
-		for _, trace := range eventLog.Traces {
-			traceId, _ := trace.GetId()
-			traceMap := map[string]bool{
-				"0": true,
-			}
-			globalTracesMap[traceId] = traceMap
-			byteTrace := trace.TraceToByte()
-			//TODO: THIS THING HERE SHOULD BE DONE ALSO WHEN NOT KNOWN TRACE ARRIVE FROM PROVISIONERS _X_
-			_ = os.MkdirAll("./mining-data/provision-data/"+processName+"/trace_"+traceId, os.ModePerm)
-			_ = os.MkdirAll("./mining-data/consumption-data/"+processName+"/trace_"+traceId, os.ModePerm)
-			_ = os.WriteFile("./mining-data/provision-data/"+processName+"/trace_"+traceId+"/trace_"+traceId+".xes", byteTrace, 0644)
-		}
+		//TODO:FIX HERE TO MAKE THE MINER NOT OWNER OF TRACES. THIS FOR SHOULD BE SKIPPED IN THAT CASE. DONE
+		//for _, trace := range eventLog.Traces {
+		//	traceId, _ := trace.GetId()
+		//	traceMap := map[string]bool{
+		//		"0": true,
+		//	}
+		//	globalTracesMap[traceId] = traceMap
+		//	byteTrace := trace.TraceToByte()
+		//	//TODO: THIS THING HERE SHOULD BE DONE ALSO WHEN NOT KNOWN TRACE ARRIVE FROM PROVISIONERS _X_. DONE
+		//	_ = os.MkdirAll("./mining-data/provision-data/"+processName+"/trace_"+traceId, os.ModePerm)
+		//	_ = os.MkdirAll("./mining-data/consumption-data/"+processName+"/trace_"+traceId, os.ModePerm)
+		//	_ = os.WriteFile("./mining-data/provision-data/"+processName+"/trace_"+traceId+"/trace_"+traceId+".xes", byteTrace, 0644)
+		//}
 
 		jsonData, err := json.MarshalIndent(globalTracesMap, "", "  ")
 		if err != nil {
@@ -62,8 +60,12 @@ func LogRequest(processName string, receiverPort string, segmentsize int) {
 	}
 
 	//Read collaborator refeferences
+	references, err := collaborators.GetReferences()
+	if err != nil {
+		log.Fatalf("Error getting references: %v", err)
+	}
 	writtendata, err := ioutil.ReadFile("./mining-data/collaborators/" + processName + "/references.json")
-	var references []map[string]interface{}
+	//var references []map[string]interface{}
 	err = json.Unmarshal(writtendata, &references)
 	if err != nil {
 		fmt.Println("Error decoding JSON:", err)
@@ -90,8 +92,7 @@ func LogRequest(processName string, receiverPort string, segmentsize int) {
 	}
 	//Iterate over collaborators and get their tracelists
 	for _, item := range references {
-
-		httpReference, _ := item["http_reference"].(string)
+		httpReference := item.WebReference
 		//publicKey, _ := item["public_key"].(string)
 		response := httpPOST(tlsConfig, httpReference+"/tracelistrequest", string(pubKeyBytes), "http://localhost:"+receiverPort, segmentsize, "")
 		//privateKey, err := loadPrivateKeyFromFile("./private.pem")
@@ -108,12 +109,21 @@ func LogRequest(processName string, receiverPort string, segmentsize int) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		//TODO: FIX BELOW IF YOU WANT TO INCLUDE TRACES NOT OWNED BY THE MINER (LOOK AT TODOS IN log_reception AND log-provision )----------------------------------------------------------------------------------------------------------------------------------
+		//TODO: FIX BELOW IF YOU WANT TO INCLUDE TRACES NOT OWNED BY THE MINER (LOOK AT TODOS IN log_reception AND log-provision ) DONE.
 		for trId, _ := range responseJson {
 			if _, ok := readTraceMap[trId]; ok {
 				readTraceMap[trId][httpReference] = !STOPWRITING
+				//TODO: IF OK=FALSE (LOOK ABOVE) THEN THE TRACE IS NOT OWNED BY THE MINER SO A NEW ENTRY SHOULD BE ADDED IN THE TRACEMAP WITH THE ID OF THE TRACE. YOU SHOULD DO ALSO ALL THE STUFF IN _X_
+			} else {
+				/*h is the header, it's not a case reference*/
+				if trId != "h" {
+					readTraceMap[trId] = make(map[string]bool)
+					readTraceMap[trId][httpReference] = !STOPWRITING
+					//os.MkdirAll("./mining-data/provision-data/"+processName+"/trace_"+trId, os.ModePerm)
+					os.MkdirAll("./mining-data/consumption-data/"+processName+"/trace_"+trId, os.ModePerm)
+				}
+				//os.WriteFile("./mining-data/provision-data/"+processName+"/trace_"+trId+"/trace_"+trId+".xes", byteTrace, 0644)
 			}
-			//TODO: IF OK=FALSE (LOOK ABOVE) THEN THE TRACE IS NOT OWNED BY THE MINER SO A NEW ENTRY SHOULD BE ADDED IN THE TRACEMAP WITH THE ID OF THE TRACE. YOU SHOULD DO ALSO ALL THE STUFF IN _X_
 		}
 		jsonData, err := json.MarshalIndent(readTraceMap, "", "  ")
 		if err != nil {
@@ -139,27 +149,10 @@ func LogRequest(processName string, receiverPort string, segmentsize int) {
 		return
 	}
 	for _, item := range references {
-		httpReference, _ := item["http_reference"].(string)
+		httpReference := item.WebReference
 		go httpPOST(tlsConfig, httpReference+"/logrequest", string(pubKeyBytes), "http://localhost:"+receiverPort, segmentsize, string(traceListByte))
 	}
 }
-func httpGet(tlsConfig *tls.Config, url string) []byte {
-	client := http.Client{Transport: &http.Transport{TLSClientConfig: tlsConfig}}
-	resp, err := client.Get(url)
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK {
-		panic(resp.Status)
-	}
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	return body
-}
-
 func httpPOST(tlsConfig *tls.Config, posturl string, publicKey string, logreceiver string, segmentSize int, loglist string) []byte {
 	client := &http.Client{
 		Transport: &http.Transport{
@@ -186,7 +179,6 @@ func httpPOST(tlsConfig *tls.Config, posturl string, publicKey string, logreceiv
 	defer response.Body.Close()
 	return body
 }
-
 func readPublicKey() rsa.PublicKey {
 	// Read the contents of the PEM file
 	pemData, err := ioutil.ReadFile("./public.pem")
@@ -209,30 +201,4 @@ func readPublicKey() rsa.PublicKey {
 		fmt.Println("Public key is not an RSA key")
 	}
 	return *rsaPubKey
-}
-
-// Function to convert RSA public key to string representation
-func rsaPubKeyToString(pubKey *rsa.PublicKey) string {
-	return fmt.Sprintf("RSA Public Key\nN: %s\nE: %d", pubKey.N.String(), pubKey.E)
-}
-func sortByFirstValue(arr [][]string) [][]string {
-	sort.Slice(arr, func(i, j int) bool {
-		return arr[i][0] < arr[j][0]
-	})
-	return arr
-}
-func loadPrivateKeyFromFile(keyPath string) (*rsa.PrivateKey, error) {
-	keyBytes, err := ioutil.ReadFile(keyPath)
-	if err != nil {
-		return nil, err
-	}
-	block, _ := pem.Decode(keyBytes)
-	if block == nil || block.Type != "RSA PRIVATE KEY" {
-		return nil, fmt.Errorf("invalid private key")
-	}
-	privateKey, err := x509.ParsePKCS1PrivateKey(block.Bytes)
-	if err != nil {
-		return nil, err
-	}
-	return privateKey, nil
 }

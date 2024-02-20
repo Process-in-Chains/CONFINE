@@ -1,6 +1,6 @@
 package main
 
-//go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log healthcare_event_log/specialised_clinic.xes
+//go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log healthcare_newkeys/specialised_clinic_newkeys.xes -mergekey hospitalCaseId
 import (
 	utilsHTTP "app/utils/attestation"
 	utilsAttestation "app/utils/http"
@@ -30,13 +30,16 @@ import (
 
 var MYLOGPATH = "./mining-data/provision-data/process-01/event_log_TEST.xes"
 var MYREFERENCE = "http://localhost:"
+var MYMERGEKEY = "concept:name"
 
 const PROCESSNAME = "process-01"
 
 func main() {
 	serverPort := flag.Int("port", 8081, "server address")
 	provisionData := flag.String("log", "event_log_TEST.xes", "event log to provide")
+	mrgkey := flag.String("mergekey", "concept:name", "merge key to be used when merging traces")
 	flag.Parse()
+	MYMERGEKEY = *mrgkey
 	MYREFERENCE = MYREFERENCE + strconv.Itoa(*serverPort)
 	MYLOGPATH = "./mining-data/provision-data/process-01/" + *provisionData
 	fmt.Println("Serving event log: ", MYLOGPATH)
@@ -45,7 +48,6 @@ func main() {
 	if err2 != nil && err2 != http.ErrServerClosed {
 		fmt.Printf("Failed to start server: %v\n", err2)
 	}
-
 	fmt.Println(server)
 }
 
@@ -168,7 +170,8 @@ func handleTraceListRequest(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	fmt.Println(string(encryptedKey))
-	traceSizeList, err := xes.GetTraceSize(MYLOGPATH)
+	fmt.Println("----------------------------------------merge key is: ", MYMERGEKEY)
+	traceSizeList, err := xes.GetTraceSize(MYLOGPATH, MYMERGEKEY)
 	if err != nil {
 		log.Fatal(err)
 	}
