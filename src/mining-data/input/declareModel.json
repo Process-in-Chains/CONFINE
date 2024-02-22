@@ -1,0 +1,2382 @@
+{
+    "response": {
+        "Administer drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "responded_existence": {
+        "Patient hospitalised<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "altresponse": {
+        "Produce drug in laboratory<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "altprecedence": {
+        "Receive drugs order from hospital<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "existence": {
+        "Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "precedence": {
+        "Patient hospitalised<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "chainresponse": {
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "chainprecedence": {
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "exactly_one": {
+        "Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "init": {
+        "Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "succession": {
+        "Order drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "altsuccession": {
+        "Order drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "chainsuccession": {
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    },
+    "coexistence": {
+        "Discharge patient<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Discharge patient<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Order drugs<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Carry out preliminary analyses<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Declare patient healed<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs order from hospital<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Produce drug in laboratory<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Administer drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Patient hospitalised<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Prepare clinic documentation<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Ship drug<<AND>>Receive drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Discharge patient": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Order drugs": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Carry out preliminary analyses": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Declare patient healed": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Receive drugs order from hospital": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Produce drug in laboratory": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Administer drug": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Patient hospitalised": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Prepare clinic documentation": {
+            "support": 1000,
+            "confidence": 1000
+        },
+        "Receive drugs<<AND>>Ship drug": {
+            "support": 1000,
+            "confidence": 1000
+        }
+    }
+}

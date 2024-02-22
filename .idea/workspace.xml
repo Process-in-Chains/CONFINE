@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cba642b-1f33-45d0-82ef-1c5047244812" name="Changes" comment="" />
+    <list default="true" id="4cba642b-1f33-45d0-82ef-1c5047244812" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/declare-conformance/Sepsis.xes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/declare-conformance/declare-model.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/declare-conformance/declareConformance.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/declare-conformance/event_log.xes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/enclave-debug.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mining-data/input/declareModel.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/logElaboration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app" beforeDir="false" afterPath="$PROJECT_DIR$/src/app" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enclave.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/enclave.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-consumption/log_reception.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-consumption/miningAlgorithms/cnIOsets.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/cnIOsets.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-consumption/miningAlgorithms/heuristicMiner.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/heuristicMiner.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-consumption/miningAlgorithms/pnmlLibrary.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/pnmlLibrary.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-request/log_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-request/logRequest.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,33 +52,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/dave/Desktop/docker-volumes/EGo-volume/InterOrganizationalProcessMining/CONFINE&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/home/dave/Desktop/docker-volumes/EGo-volume/InterOrganizationalProcessMining/CONFINE/src/mining-data/input",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/mining-data/input" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/mining-data/provision-data/process-01" />
       <recent name="$PROJECT_DIR$/mining-data/consumption-data/process-01/miningMetadata" />
       <recent name="$PROJECT_DIR$/mining-data/provision-data" />
-      <recent name="$PROJECT_DIR$/protected-fs/output" />
-      <recent name="$PROJECT_DIR$/protected-fs/miningMetadata/process_01" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/secure-miner/log-elaboration" />
       <recent name="$PROJECT_DIR$/mining-data/provision-data/process-01" />
     </key>
   </component>

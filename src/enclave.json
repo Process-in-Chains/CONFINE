@@ -8,26 +8,14 @@
  "securityVersion": 1,
  "mounts": [
         {
-            "source": "./protected-fs",
-            "target": "/data",
-            "type": "hostfs",
-            "readOnly": false
-        },
-        {
           "source": "./mining-data/collaborators",
           "target": "/mining-data/collaborators",
           "type": "hostfs",
           "readOnly": false
         },
-        {
-          "source": "./mining-data/provision-data",
-          "target": "/mining-data/provision-data",
-          "type": "hostfs",
-          "readOnly": false
-        },
        {
-         "source": "./mining-data/consumption-data",
-         "target": "/mining-data/consumption-data",
+         "source": "./mining-data/input",
+         "target": "/mining-data/input",
          "type": "hostfs",
          "readOnly": false
        },
