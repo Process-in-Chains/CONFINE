@@ -126,8 +126,8 @@ func MergeTraces(trace1 Trace, trace2 Trace) (Trace, error) {
 	eventList2 = append(eventList2, trace2.Events...)
 	eventList = append(eventList, eventList2...)
 	sort.Slice(eventList, func(i, j int) bool {
-		time1, _ := time.Parse("2006-01-02T15:04:05Z", eventList[i].Timestamp.Value)
-		time2, _ := time.Parse("2006-01-02T15:04:05Z", eventList[j].Timestamp.Value)
+		time1, _ := time.Parse("2006-01-02T15:04:05.999999999Z07:00", eventList[i].Timestamp.Value)
+		time2, _ := time.Parse("2006-01-02T15:04:05.999999999Z07:00", eventList[j].Timestamp.Value)
 		return time1.Before(time2)
 	})
 	newTrace := Trace{Name: trace1.Name, Events: eventList}

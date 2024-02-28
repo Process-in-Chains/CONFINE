@@ -2,10 +2,10 @@ package logreception
 
 //go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log healthcare_newkeys/specialised_clinic_newkeys.xes -mergekey hospitalCaseId
 import (
-	"app/secure-miner/log-elaboration/miningAlgorithms"
+	"app/secure-miner/log-elaboration"
+	logmanagement "app/secure-miner/log-management"
 	"app/utils/collaborators"
 	"app/utils/encryption"
-	"app/utils/test"
 	"app/utils/xes"
 	"context"
 	"crypto"
@@ -20,9 +20,7 @@ import (
 	"io/ioutil"
 	"math/big"
 	"net/http"
-	"net/url"
 	"os"
-	"path/filepath"
 	"sync"
 	"time"
 	//"log"
@@ -30,29 +28,37 @@ import (
 	"log"
 )
 
+/*Variable for debugging prints*/
 var DEBUG = false
+
+/*Variable for tests*/
 var FIRSTTS = false
 var FIRSTATT = false
-var FIRSTCOMP = false
 var (
 	mutex sync.Mutex
 )
 
+/*The log receiver object activated in the main*/
 type LogReceiver struct {
-	port      int
-	server    *http.Server
-	algorithm string
+	port          int
+	server        *http.Server
+	algorithm     string
+	logElaborator *logelaboration.LogElaborator
 }
 
+/*Constructor function of the log receiver*/
 func NewLogReceiver(port int) *LogReceiver {
-
+	/*Generate a certificate and a private key for TLS with the provisioner.*/
 	cert, priv := createCertificate()
 	hash := sha256.Sum256(cert)
+	s := &LogReceiver{port: port}
+	/*Generate the report (i.e., the attestation evidence) signed by the hardware's TEE. The report contains the hashed TLS certificate	*/
 	//TODO REPORT GENERATION AND SIGNING SHOULD BE MOVED IN /report REQUETS. ADD NONCE IN THE PROTOCOL TO AVOID REPLAY ATTACKS.
 	report, err := enclave.GetRemoteReport(hash[:])
 	if err != nil {
 		fmt.Println(err)
 	}
+	/*Define the handlers for the /cert, /report and /secret HTTP functions*/
 	handler := http.NewServeMux()
 	handler.HandleFunc("/cert", func(w http.ResponseWriter, r *http.Request) {
 		if DEBUG {
@@ -70,7 +76,10 @@ func NewLogReceiver(port int) *LogReceiver {
 		}
 		w.Write(report)
 	})
-	handler.HandleFunc("/secret", secretLogHandler)
+	handler.HandleFunc("/secret", func(w http.ResponseWriter, r *http.Request) {
+		secretLogHandler(w, r, s)
+	})
+	/*Use the certificate for the TLS configuratin*/
 	tlsCfg := tls.Config{
 		Certificates: []tls.Certificate{
 			{
@@ -79,27 +88,33 @@ func NewLogReceiver(port int) *LogReceiver {
 			},
 		},
 	}
-	s := &LogReceiver{port: port}
 	s.server = &http.Server{
 		Addr:      fmt.Sprintf(":%d", port),
 		Handler:   handler,
 		TLSConfig: &tlsCfg,
 	}
-
+	s.logElaborator = logelaboration.NewLogElaborator()
 	return s
 }
+
+/*Function to change the Algorithm of the LogReceiver*/
 func (s *LogReceiver) SetAlgorithm(algorithm string) {
 	s.algorithm = algorithm
 }
 
+/*Function to start the LogReceiver's server*/
 func (s *LogReceiver) Start() error {
 	fmt.Printf("Log Receiver listening on port %d...\n", s.port)
 	return s.server.ListenAndServe()
 }
+
+/*Function to stop the LogReceiver's server*/
 func (s *LogReceiver) Stop(ctx context.Context) error {
 	fmt.Println("Shutting down Log Receiver...")
 	return s.server.Shutdown(ctx)
 }
+
+/*Function to create the TLS certificate using the private key*/
 func createCertificate() ([]byte, crypto.PrivateKey) {
 	template := &x509.Certificate{
 		SerialNumber: &big.Int{},
@@ -111,7 +126,10 @@ func createCertificate() ([]byte, crypto.PrivateKey) {
 	cert, _ := x509.CreateCertificate(rand.Reader, template, template, &priv.PublicKey, priv)
 	return cert, priv
 }
-func secretLogHandler(w http.ResponseWriter, r *http.Request) {
+
+/*Function that handles the log segments sent by providers*/
+func secretLogHandler(w http.ResponseWriter, r *http.Request, logReceiver *LogReceiver) {
+	/*The LogReceiver only handles POST requests*/
 	if r.Method == "POST" {
 		//r.Body = http.MaxBytesReader(w, r.Body, 50000)
 		maxRequestSize := int64(70 * 1024 * 1024) // 10 MB in bytes
@@ -132,16 +150,19 @@ func secretLogHandler(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(response))
 		return
 	}
+	/*If it's an header message...*/
 	if r.Form.Has("header") {
 		if DEBUG {
 			//bytes, segmentNumber, hashList := readHeader(headerString)
 			fmt.Println("New header received: ", r.Form.Get("header"))
 		}
-	} else {
+	} else { /*If the message it's a log segment...*/
+		/*Check for the tests*/
 		if !FIRSTTS {
 			println("TESTMODE - FIRST SEGMENT RECEIVED AT:", time.Now().UnixMilli())
 			FIRSTTS = true
 		}
+		/*Parse the attributes of the POST form*/
 		eventLog := r.Form.Get("secret")
 		_ = r.Form.Get("segmentNumber")
 		senderPublicKey := r.Form.Get("publicKey")
@@ -152,31 +173,39 @@ func secretLogHandler(w http.ResponseWriter, r *http.Request) {
 			log.Fatal("Error loading private key:", err)
 		}
 		key := r.Form.Get("key")
-		// Decrypt the symmetric key using RSA
+		/*Decrypt the symmetric key using RSA*/
 		symKey, err := encryption.DecryptSymmetricKey([]byte(key), privateKey)
 		if err != nil {
 			log.Fatal("Error decrypting symmetric key:", err)
 		}
-		// Decrypt the XES data using AES
+		/*Decrypt the XES data using AES*/
 		decryptedData, err := encryption.DecryptXES([]byte(eventLog), symKey)
 		if err != nil {
 			log.Fatal("Error decrypting XES data:", err)
 		}
+		/*Parse the XES*/
 		xesSegment := xes.ParseXes(decryptedData)
 		mutex.Lock()
+		/*Read the json containing the map of the traces received */
 		writtenTraceMap, err := ioutil.ReadFile("mining-data/consumption-data/process-01/traceMap.json")
 		readTraceMap := make(map[string]map[string]bool)
+		/*Parse the JSON*/
 		err = json.Unmarshal(writtenTraceMap, &readTraceMap)
 		if err != nil {
 			fmt.Println("Error decoding JSON:", err)
 			return
 		}
+		/*Read the json containing the references of the provisioners*/
 		reference, error := collaborators.GetReference(senderReference)
 		if error != nil {
 			log.Fatalf("Error getting references: %v", error)
 		}
-		handleTrace(*xesSegment, "process-01", senderPublicKey, senderReference, reference.MergeKey, readTraceMap)
+		/*Get the algorithm set in the main*/
+		algorithm := logReceiver.algorithm
+		/*Call the trace handler*/
+		logmanagement.HandleSegment(*xesSegment, "process-01", senderPublicKey, senderReference, reference.MergeKey, readTraceMap, algorithm, *logReceiver.logElaborator)
 		mutex.Unlock()
+		/*Send response to the provisioner*/
 		response, _ := prepareResponse(true)
 		w.Write([]byte(response))
 		if DEBUG {
@@ -184,6 +213,8 @@ func secretLogHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+/*Response message to the provisioner*/
 func prepareResponse(success bool) (string, bool) {
 	message := ""
 	if success {
@@ -202,6 +233,8 @@ func prepareResponse(success bool) (string, bool) {
 	jsonString := string(jsonData)
 	return jsonString, true
 }
+
+/*Function that reads the header of the log segments*/
 func readHeader(header string) (int, int, []string) {
 	// Declare a map to hold the decoded data
 	var data map[string]interface{}
@@ -227,9 +260,9 @@ type Response struct {
 }
 
 func createFolderIfNotExists(folderPath string) error {
-	// Verifica se la cartella esiste
+	// Verify if the folder exists
 	if _, err := os.Stat(folderPath); os.IsNotExist(err) {
-		// La cartella non esiste, quindi la crea
+		// If the folder does not extist, create it
 		err := os.MkdirAll(folderPath, os.ModePerm)
 		if err != nil {
 			return err
@@ -237,106 +270,4 @@ func createFolderIfNotExists(folderPath string) error {
 		log.Printf("La cartella %s è stata creata.", folderPath)
 	}
 	return nil
-}
-func handleTrace(eventLog xes.XES, processName string, publicKey string, myreference string, mergekey string, traceMap map[string]map[string]bool) {
-	for _, trace := range eventLog.Traces {
-		//traceId, _ := trace.GetId()
-		traceId, error := trace.GetAttributeValue(mergekey)
-		if error != nil {
-			log.Fatal(error)
-			return
-		}
-		if _, ok := traceMap[traceId]; ok && !traceMap[traceId][myreference] {
-			traceMap[traceId][myreference] = true
-			if allValuesTrue(traceMap[traceId]) {
-				if DEBUG {
-					fmt.Println("It's time to mine Trace: ", traceId)
-				}
-				//TODO: FIX HERE TO ADD CASE IF MINER DOESN'T HAVE ANY TRACE(LOOK AT TODOS IN log-request AND log-provision) DONE
-				files, err := os.ReadDir("/mining-data/consumption-data/" + processName + "/trace_" + traceId)
-				if err != nil {
-					log.Fatal(err)
-				}
-				mergedTrace := xes.Trace{}
-				for nfile, traceFile := range files {
-					if nfile == 0 {
-						mergedTrace, _ = xes.MergeTraces(trace, xes.ReadXes("mining-data/consumption-data/" + processName + "/trace_" + traceId + "/" + traceFile.Name()).Traces[0])
-
-					} else {
-						currentTrace := xes.ReadXes("mining-data/consumption-data/" + processName + "/trace_" + traceId + "/" + traceFile.Name())
-						if DEBUG {
-							fmt.Println("Merging: ", "mining-data/consumption-data/"+processName+"/trace_"+traceId+"/"+traceFile.Name())
-						}
-						mergedTrace, _ = xes.MergeTraces(mergedTrace, currentTrace.Traces[0])
-					}
-				}
-				if DEBUG {
-					for _, ev := range mergedTrace.Events {
-						fmt.Println(ev.GetAttributeValue("concept:name").Value, ev.Timestamp.Value)
-					}
-				}
-				tr := []xes.Trace{}
-				tr = append(tr, mergedTrace)
-				x := xes.XES{Traces: tr}
-				if !FIRSTCOMP {
-					fmt.Println("TESTMODE - FIRST COMPUTATION AT:", time.Now().UnixMilli())
-					FIRSTCOMP = true
-				}
-				prosessMiningAlgorithms.HeuristicMiner(x.XesToSlices(), processName)
-			} else {
-				if DEBUG {
-					fmt.Println("Write in memory Trace: ", traceId)
-				}
-				filename := "mining-data/consumption-data/" + processName + "/trace_" + traceId + "/trace_" + url.PathEscape(fmt.Sprintf("%d", time.Now().UnixNano()/int64(time.Millisecond))) + ".xes"
-				byteTrace := trace.TraceToByte()
-				err := os.MkdirAll(filepath.Dir(filename), os.ModePerm)
-				if err != nil {
-					log.Fatal(err)
-				}
-
-				err = os.WriteFile(filename, byteTrace, 0644)
-				if err != nil {
-					log.Fatal(err)
-				}
-				//}
-			}
-
-		} else {
-			fmt.Printf("'%s' is not a key in the map or sender not expected\n", traceId)
-		}
-
-	}
-
-	jsonData, err := json.MarshalIndent(traceMap, "", "  ")
-	if err != nil {
-		fmt.Println("Error converting JSON:", err)
-		return
-	}
-	// WRITE Json in file
-	err = ioutil.WriteFile("./mining-data/consumption-data/"+processName+"/traceMap.json", jsonData, 0644)
-	if err != nil {
-		fmt.Println("Errore nella scrittura del file JSON:", err)
-		return
-	}
-	if allTracesCompleted(traceMap) {
-		fmt.Println("TESTMODE - TEST ENDED AT: ", time.Now().UnixMilli())
-		test.STOPMONITORING = true
-	}
-
-}
-func allValuesTrue(myMap map[string]bool) bool {
-	for _, value := range myMap {
-		if !value {
-			return false
-		}
-	}
-	return true
-}
-func allTracesCompleted(traceMap map[string]map[string]bool) bool {
-	for _, value := range traceMap {
-		if !allValuesTrue(value) {
-			return false
-		}
-	}
-	return true
 }

@@ -36,6 +36,12 @@
          "target": "/mining-data/output",
          "type": "hostfs",
          "readOnly": false
+       },
+       {
+         "source": "./mining-data/input",
+         "target": "/mining-data/input",
+         "type": "hostfs",
+         "readOnly": false
        }
         ],
  "env": null,

@@ -2,6 +2,7 @@ package main
 
 import (
 	"app/secure-miner/log-elaboration/miningAlgorithms"
+	logmanagement "app/secure-miner/log-management"
 	logreception "app/secure-miner/log-reception"
 	logrequest "app/secure-miner/log-request"
 	"app/utils/encryption"
@@ -39,7 +40,7 @@ func main() {
 	logReceiver := logreception.NewLogReceiver(p)
 	go logReceiver.Start()
 	for true {
-		fmt.Printf("Command list:------------------------------------------------\n1: CONFINE DISCOVERY-Discover process model with HeuristicsMiner via CONFINE protocol\n2:CONFINE-CONFORMANCE CHEKCING: Conformance checking of the JSON declare model declare model at '/mining-data/input/declareModel.json' via CONFINE protocol \n3: Apply HeuristicsMiner using the local event log at '/mining-data/provision-data/process-01/event_log.xes'\n4: Show miner public key\n5: Reset Secure Miner's memory\n")
+		fmt.Printf("Command list:------------------------------------------------\n1: CONFINE DISCOVERY - Discover process model with HeuristicsMiner via CONFINE protocol\n2: CONFINE CONFORMANCE CHEKCING - Conformance checking of the JSON declare model declare model at '/mining-data/input/declareModel.json' via CONFINE protocol \n3: Apply HeuristicsMiner using the local event log at '/mining-data/provision-data/process-01/event_log.xes'\n4: Show miner public key\n5: Reset Secure Miner's memory\n")
 		var command string
 		fmt.Scanln(&command)
 		/*This command initiates the mining process via CONFINE protocol.*/
@@ -98,6 +99,6 @@ func main() {
 		}
 		logreception.FIRSTTS = false
 		logreception.FIRSTATT = false
-		logreception.FIRSTCOMP = false
+		logmanagement.FIRSTCOMP = false
 	}
 }
