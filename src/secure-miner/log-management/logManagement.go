@@ -35,7 +35,7 @@ func HandleSegment(logSegment xes.XES, processName string, publicKey string, myr
 				/*Mark the trace of the provisioner as arrived*/
 				traceMap[traceId][myreference] = true
 				/*If each provisioner has delivered the trace*/
-				if allValuesTrue(traceMap[traceId]) {
+				if isTraceCompleted(traceMap[traceId]) {
 					/*Get the references to the partial traces in memory*/
 					files, err := os.ReadDir("/mining-data/consumption-data/" + processName + "/trace_" + traceId)
 					if err != nil {
@@ -63,52 +63,60 @@ func HandleSegment(logSegment xes.XES, processName string, publicKey string, myr
 					logElaborator.ApplyAlgorithm(algorithm, processName, logWithMergedTrace)
 				} else /*If some provisioner has not already sent its trace...*/ {
 					/*Store the trace in memory*/
-					storeTrace(processName, traceId, trace)
+					storeTrace(processName, traceId, trace, url.PathEscape(fmt.Sprintf("%d", time.Now().UnixNano()/int64(time.Millisecond))))
 				}
 			}
 			/*If the algorithm is DeclareConformance, we adopt a lazy computation approach. Therefore, we compute just one time, when the whole log is completed.*/
 			//TODO THIS CHECK SHOULD BE REMOVED FOR BETTER GENERALIZATION (AS PER HEURISTICSMINER)
 			if algorithm == "DeclareConformance" {
+				/*Set the trace from*/
 				traceMap[traceId][myreference] = true
 				mergedTrace := xes.Trace{}
-				if !FIRSTCOMP {
-					fmt.Println("TESTMODE - FIRST COMPUTATION AT:", time.Now().UnixMilli())
-					FIRSTCOMP = true
-				}
 				//mergedTrace, err := xes.MergeTraces(trace, xes.ReadXes("mining-data/consumption-data/" + processName + "/trace_" + traceId + "/trace_"+traceId+"_merged.xes"))
 				if _, err := os.Stat("mining-data/consumption-data/" + processName + "/trace_" + traceId + "/trace_" + traceId + "_merged.xes"); os.IsNotExist(err) {
 					mergedTrace = trace
 				} else {
 					mergedTrace, _ = xes.MergeTraces(trace, xes.ReadXes("mining-data/consumption-data/" + processName + "/trace_" + traceId + "/trace_" + traceId + "_merged.xes").Traces[0])
 				}
-				storeMergedTrace(processName, traceId, mergedTrace)
+				storeTrace(processName, traceId, mergedTrace, traceId+"_merged")
 			}
 		} else {
 			fmt.Printf("'%s' is not a key in the map or sender not expected\n", traceId)
 		}
+		/*Store the updated tracemap*/
 		jsonData, err := json.MarshalIndent(traceMap, "", "  ")
 		if err != nil {
 			fmt.Println("Error converting JSON:", err)
 			return
 		}
-		// WRITE Json in file
 		err = ioutil.WriteFile("./mining-data/consumption-data/"+processName+"/traceMap.json", jsonData, 0644)
 		if err != nil {
 			fmt.Println("Errore nella scrittura del file JSON:", err)
 			return
 		}
-		if allTracesCompleted(traceMap) {
-			fmt.Println("TESTMODE - TEST ENDED AT: ", time.Now().UnixMilli())
-			test.STOPMONITORING = true
+		/*If all the provisioners have delivered their traces....*/
+		if allTracesCollected(traceMap) {
+			/*In this case, we can apply the DeclareConformance algorithm*/
+			//TODO this check should be removed for better generalization
 			if algorithm == "DeclareConformance" {
+				/*Collect all the merged traces*/
 				finalLog := collectMergedTraces(processName)
+				if !FIRSTCOMP {
+					fmt.Println("TESTMODE - FIRST COMPUTATION AT:", time.Now().UnixMilli())
+					FIRSTCOMP = true
+				}
+				/*Apply the DeclareConformance algorithm on the merged traces*/
 				logElaborator.ApplyAlgorithm(algorithm, processName, finalLog)
 			}
+			/*Print for testing*/
+			fmt.Println("TESTMODE - TEST ENDED AT: ", time.Now().UnixMilli())
+			test.STOPMONITORING = true
 		}
 	}
 }
 
-func allValuesTrue(myMap map[string]bool) bool {
+/*Check if all the provisioners have delivered their piece of trace*/
+func isTraceCompleted(myMap map[string]bool) bool {
 	for _, value := range myMap {
 		if !value {
 			return false
@@ -117,15 +125,17 @@ func allValuesTrue(myMap map[string]bool) bool {
 	return true
 }
 
-func allTracesCompleted(traceMap map[string]map[string]bool) bool {
+/*Check if all the traces*/
+func allTracesCollected(traceMap map[string]map[string]bool) bool {
 	for _, value := range traceMap {
-		if !allValuesTrue(value) {
+		if !isTraceCompleted(value) {
 			return false
 		}
 	}
 	return true
 }
 
+/*Read all the merged trace in memory and put it in an event log*/
 func collectMergedTraces(processName string) xes.XES {
 	// Get the list of traces folders in consumption-data
 	tracesDir := "mining-data/consumption-data/" + processName
@@ -133,7 +143,6 @@ func collectMergedTraces(processName string) xes.XES {
 	if err != nil {
 		log.Fatal("Error reading trace folders:", err)
 	}
-
 	// Iterate over each trace folder
 	finalLog := xes.XES{}
 	for _, traceFolder := range traceFolders {
@@ -159,8 +168,9 @@ func collectMergedTraces(processName string) xes.XES {
 
 }
 
-func storeTrace(processName string, traceId string, trace xes.Trace) {
-	filename := "mining-data/consumption-data/" + processName + "/trace_" + traceId + "/trace_" + url.PathEscape(fmt.Sprintf("%d", time.Now().UnixNano()/int64(time.Millisecond))) + ".xes"
+/*Store the trace in memory*/
+func storeTrace(processName string, traceId string, trace xes.Trace, fileName string) {
+	filename := "mining-data/consumption-data/" + processName + "/trace_" + traceId + "/trace_" + fileName + ".xes"
 	byteTrace := trace.TraceToByte()
 	err := os.MkdirAll(filepath.Dir(filename), os.ModePerm)
 	if err != nil {
@@ -172,16 +182,17 @@ func storeTrace(processName string, traceId string, trace xes.Trace) {
 	}
 	//}
 }
-func storeMergedTrace(processName string, traceId string, trace xes.Trace) {
-	filename := "mining-data/consumption-data/" + processName + "/trace_" + traceId + "/trace_" + traceId + "_merged.xes"
-	byteTrace := trace.TraceToByte()
-	err := os.MkdirAll(filepath.Dir(filename), os.ModePerm)
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = os.WriteFile(filename, byteTrace, 0644)
-	if err != nil {
-		log.Fatal(err)
-	}
-	//}
-}
+
+//func storeMergedTrace(processName string, traceId string, trace xes.Trace) {
+//	filename := "mining-data/consumption-data/" + processName + "/trace_" + traceId + "/trace_" + traceId + "_merged.xes"
+//	byteTrace := trace.TraceToByte()
+//	err := os.MkdirAll(filepath.Dir(filename), os.ModePerm)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	err = os.WriteFile(filename, byteTrace, 0644)
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	//}
+//}

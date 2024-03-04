@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cba642b-1f33-45d0-82ef-1c5047244812" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/declareConformance.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/secure-miner/log-management/logManagement.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mining-data/input/declareModelSepsis.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app" beforeDir="false" afterPath="$PROJECT_DIR$/src/app" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enclave-debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/enclave-debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logprovision" beforeDir="false" afterPath="$PROJECT_DIR$/src/logprovision" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mining-data/consumption-data/process-01/miningMetadata/dependencyMatrix.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/mining-data/consumption-data/process-01/miningMetadata/dependencyMatrix.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mining-data/consumption-data/process-01/miningMetadata/map.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/mining-data/consumption-data/process-01/miningMetadata/map.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/provisioner/log-provision/log_provision.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/provisioner/log-provision/log_provision.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mining-data/output/process-01_output.pnml" beforeDir="false" afterPath="$PROJECT_DIR$/src/mining-data/output/process-01_output.pnml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/secure-miner/log-elaboration/logElaboration.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/logElaboration.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/xes/xes-segmentation.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/xes/xes-segmentation.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/declareConformance.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/declareConformance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-management/logManagement.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-management/logManagement.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,15 +56,17 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/dave/Desktop/docker-volumes/EGo-volume/InterOrganizationalProcessMining/CONFINE/src/secure-miner/log-elaboration/miningAlgorithms&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/dave/Desktop/docker-volumes/EGo-volume/InterOrganizationalProcessMining/CONFINE/src/mining-data/input&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms" />
       <recent name="$PROJECT_DIR$/src/mining-data/input" />
+      <recent name="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/mining-data/provision-data/process-01" />
       <recent name="$PROJECT_DIR$/mining-data/consumption-data/process-01/miningMetadata" />
@@ -102,6 +98,13 @@
         <item itemvalue="Shell Script.run.sh" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-2946fb9b3188-155fe4b6e3a0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.14475.38" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">

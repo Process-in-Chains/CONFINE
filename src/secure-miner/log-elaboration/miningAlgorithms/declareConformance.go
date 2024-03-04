@@ -45,29 +45,33 @@ func DeclareConformance(eventLog xes.XES, modelPath string) {
 		print(err.Error())
 	}
 	gino := applyAlgorithm(eventLog.XesToSlices(), jsonModelStructure, nil)
-	for _, v := range gino {
-		println("------------------------------------------------------------")
-		for conformanceOutput, conformanceOutputValue := range v {
-			if conformanceOutput == "no_constr_total" {
-				println(conformanceOutput, conformanceOutputValue.(int))
-			}
-			if conformanceOutput == "no_dev_total" {
-				println(conformanceOutput, conformanceOutputValue.(int))
-			}
-			if conformanceOutput == "dev_fitness" {
-				println(conformanceOutput, conformanceOutputValue.(float64))
-			}
-			if conformanceOutput == "is_fit" {
-				println(conformanceOutput, conformanceOutputValue.(bool))
-			}
-			if conformanceOutput == "deviations" {
-				devList := conformanceOutputValue.([]Deviation)
-				for _, dev := range devList {
-					println(dev.Type, dev.Act0, dev.Act1)
-				}
-			}
-		}
-	}
+	//Write gino in a json file
+	ginoBytes, _ := json.Marshal(gino)
+	err = ioutil.WriteFile("mining-data/output/declareConformance.json", ginoBytes, 0644)
+
+	//for _, v := range gino {
+	//	println("------------------------------------------------------------")
+	//	for conformanceOutput, conformanceOutputValue := range v {
+	//		if conformanceOutput == "no_constr_total" {
+	//			println(conformanceOutput, conformanceOutputValue.(int))
+	//		}
+	//		if conformanceOutput == "no_dev_total" {
+	//			println(conformanceOutput, conformanceOutputValue.(int))
+	//		}
+	//		if conformanceOutput == "dev_fitness" {
+	//			println(conformanceOutput, conformanceOutputValue.(float64))
+	//		}
+	//		if conformanceOutput == "is_fit" {
+	//			println(conformanceOutput, conformanceOutputValue.(bool))
+	//		}
+	//		if conformanceOutput == "deviations" {
+	//			devList := conformanceOutputValue.([]Deviation)
+	//			for _, dev := range devList {
+	//				println(dev.Type, dev.Act0, dev.Act1)
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 func applyAlgorithm(projectedLog [][]string, model map[string]map[string]map[string]int, parameters map[interface{}]interface{}) []map[string]interface{} {

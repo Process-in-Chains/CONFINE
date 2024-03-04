@@ -15,18 +15,21 @@ func NewLogElaborator() *LogElaborator {
 	return logElaborator
 }
 
+/*Function that executes a process mining algorithm on a given event log*/
 func (logElaborator *LogElaborator) ApplyAlgorithm(algorithm string, processName string, eventLog xes.XES) {
+
 	//Check if the algorithm is unsupported
 	if logElaborator.isAlgorithmSupported(algorithm) != nil {
 		fmt.Println("Algorithm not supported")
 		return
 	}
+	//Execute the incremental HeuristicsMiner algorithm
 	if algorithm == "HeuristicsMiner" {
 		prosessMiningAlgorithms.HeuristicMiner(eventLog.XesToSlices(), processName)
 	}
+	//Execute the DeclareConformance algorithm
 	if algorithm == "DeclareConformance" {
-		prosessMiningAlgorithms.DeclareConformance(eventLog, "mining-data/input/declareModel.json")
-
+		prosessMiningAlgorithms.DeclareConformance(eventLog, "mining-data/input/declareModelSepsis.json")
 	}
 }
 
