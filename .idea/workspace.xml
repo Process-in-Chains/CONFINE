@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cba642b-1f33-45d0-82ef-1c5047244812" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/mining-data/input/declareModelSepsis.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app" beforeDir="false" afterPath="$PROJECT_DIR$/src/app" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mining-data/output/process-01_output.pnml" beforeDir="false" afterPath="$PROJECT_DIR$/src/mining-data/output/process-01_output.pnml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-elaboration/logElaboration.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/logElaboration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/declare-conformance/declareConformance.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/declare-conformance/declareConformance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logprovision" beforeDir="false" afterPath="$PROJECT_DIR$/src/logprovision" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/provisioner/log-provision/log_provision.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/provisioner/log-provision/log_provision.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/declareConformance.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/declareConformance.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/secure-miner/log-management/logManagement.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-management/logManagement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-request/logRequest.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-request/logRequest.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/attestation/attestation.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/attestation/attestation.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +56,7 @@
     &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;development-branch&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/dave/Desktop/docker-volumes/EGo-volume/InterOrganizationalProcessMining/CONFINE/src/mining-data/input&quot;,
@@ -102,7 +105,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-2946fb9b3188-155fe4b6e3a0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.14475.38" />
+        <option value="bundled-gosdk-2946fb9b3188-155fe4b6e3a0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.14808.20" />
       </set>
     </attachedChunks>
   </component>
@@ -238,6 +241,22 @@
             </ChatHistoryModel>
           </value>
         </entry>
+        <entry key="7dd867">
+          <value>
+            <ChatHistoryModel>
+              <option name="id" value="7dd867" />
+              <option name="initiateTms" value="1710687864985" />
+              <option name="isStopped" value="true" />
+              <option name="request" value="show me how check if the pubKey in 99 match the certificate signature in cert" />
+              <option name="response" value="" />
+              <option name="usedLocalFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/utils/attestation/attestation.go" />
+                </list>
+              </option>
+            </ChatHistoryModel>
+          </value>
+        </entry>
         <entry key="8833d0">
           <value>
             <ChatHistoryModel>
@@ -321,6 +340,23 @@
               <option name="responseFileName" value="" />
               <option name="responseFilePath" value="" />
               <option name="responseTms" value="1709077412377" />
+            </ChatHistoryModel>
+          </value>
+        </entry>
+        <entry key="b96552">
+          <value>
+            <ChatHistoryModel>
+              <option name="id" value="b96552" />
+              <option name="initiateTms" value="1710634559416" />
+              <option name="response" value="" />
+              <option name="responseFileName" value="" />
+              <option name="responseFilePath" value="" />
+              <option name="responseTms" value="1710634566811" />
+              <option name="usedLocalFilePaths">
+                <list>
+                  <option value="$PROJECT_DIR$/src/utils/attestation/attestation.go" />
+                </list>
+              </option>
             </ChatHistoryModel>
           </value>
         </entry>

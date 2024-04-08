@@ -17,7 +17,7 @@ type Tuple struct {
 	Value0 string
 	Value1 string
 }
-
+/*String labels of the Declare contraints*/
 var RESPONDED_EXISTENCE = "responded_existence"
 var EXISTENCE = "existence"
 var ABSENCE = "absence"
@@ -35,45 +35,48 @@ var CHAINPRECEDENCE = "chainprecedence"
 var ALTSUCCESSION = "altsuccession"
 var CHAINSUCCESSION = "chainsuccession"
 
+/*Function of the Conformance Checking algorithm with Declare models*/
 func DeclareConformance(eventLog xes.XES, modelPath string) {
-	//	parameters := make(map[interface{}]interface{})
-	//
 	processModelByets, err := ioutil.ReadFile(modelPath)
 	jsonModelStructure := make(map[string]map[string]map[string]int)
 	err = json.Unmarshal(processModelByets, &jsonModelStructure)
 	if err != nil {
 		print(err.Error())
 	}
-	gino := applyAlgorithm(eventLog.XesToSlices(), jsonModelStructure, nil)
-	//Write gino in a json file
-	ginoBytes, _ := json.Marshal(gino)
+	result := applyAlgorithm(eventLog.XesToSlices(), jsonModelStructure, nil)
+	//Write result in a json file
+	ginoBytes, _ := json.Marshal(result)
 	err = ioutil.WriteFile("mining-data/output/declareConformance.json", ginoBytes, 0644)
 
-	//for _, v := range gino {
-	//	println("------------------------------------------------------------")
-	//	for conformanceOutput, conformanceOutputValue := range v {
-	//		if conformanceOutput == "no_constr_total" {
-	//			println(conformanceOutput, conformanceOutputValue.(int))
-	//		}
-	//		if conformanceOutput == "no_dev_total" {
-	//			println(conformanceOutput, conformanceOutputValue.(int))
-	//		}
-	//		if conformanceOutput == "dev_fitness" {
-	//			println(conformanceOutput, conformanceOutputValue.(float64))
-	//		}
-	//		if conformanceOutput == "is_fit" {
-	//			println(conformanceOutput, conformanceOutputValue.(bool))
-	//		}
-	//		if conformanceOutput == "deviations" {
-	//			devList := conformanceOutputValue.([]Deviation)
-	//			for _, dev := range devList {
-	//				println(dev.Type, dev.Act0, dev.Act1)
-	//			}
-	//		}
-	//	}
-	//}
+}
+/*Print the results of the conformance checking*/
+func printConformanceResult(result []map[string]interface{}) {
+	for _, v := range result {
+		println("------------------------------------------------------------")
+		for conformanceOutput, conformanceOutputValue := range v {
+			if conformanceOutput == "no_constr_total" {
+				println(conformanceOutput, conformanceOutputValue.(int))
+			}
+			if conformanceOutput == "no_dev_total" {
+				println(conformanceOutput, conformanceOutputValue.(int))
+			}
+			if conformanceOutput == "dev_fitness" {
+				println(conformanceOutput, conformanceOutputValue.(float64))
+			}
+			if conformanceOutput == "is_fit" {
+				println(conformanceOutput, conformanceOutputValue.(bool))
+			}
+			if conformanceOutput == "deviations" {
+				devList := conformanceOutputValue.([]Deviation)
+				for _, dev := range devList {
+					println(dev.Type, dev.Act0, dev.Act1)
+				}
+			}
+		}
+	}
 }
 
+/*Execute all the checks of the algorithm*/
 func applyAlgorithm(projectedLog [][]string, model map[string]map[string]map[string]int, parameters map[interface{}]interface{}) []map[string]interface{} {
 	if parameters == nil {
 		parameters = make(map[interface{}]interface{})
@@ -114,7 +117,7 @@ func applyAlgorithm(projectedLog [][]string, model map[string]map[string]map[str
 	}
 	return confCases
 }
-
+/*Existence constraint check*/
 func checkExistence(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, parameters map[interface{}]interface{}) {
 	if existence, ok := model[EXISTENCE]; ok {
 		for act := range existence {
@@ -126,7 +129,7 @@ func checkExistence(trace []string, model map[string]map[string]map[string]int, 
 		}
 	}
 }
-
+/*Not existence constraints check*/
 func checkAbsence(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, parameters map[interface{}]interface{}) {
 	if _, ok := model[ABSENCE]; ok {
 		for act := range model[ABSENCE] {
@@ -138,6 +141,7 @@ func checkAbsence(trace []string, model map[string]map[string]map[string]int, tr
 		}
 	}
 }
+/*Check exactly one constraint check*/
 func checkExactlyOne(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, parameters map[interface{}]interface{}) {
 	if val, ok := model[EXACTLY_ONE]; ok {
 		traceCounter := make(map[string]int)
@@ -153,7 +157,7 @@ func checkExactlyOne(trace []string, model map[string]map[string]map[string]int,
 		}
 	}
 }
-
+/*Responded existence constrait check*/
 func checkRespondedExistence(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}) {
 	if val, ok := model[RESPONDED_EXISTENCE]; ok {
 		for stringActCouple := range val {
@@ -166,6 +170,7 @@ func checkRespondedExistence(trace []string, model map[string]map[string]map[str
 		}
 	}
 }
+/*Init constraint check*/
 func checkInit(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, parameters map[interface{}]interface{}) {
 	if val, ok := model[INIT]; ok {
 		for act := range val {
@@ -204,7 +209,7 @@ func checkNonCoexistence(trace []string, model map[string]map[string]map[string]
 }
 
 func checkResponse(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, actIdxs map[string][]int, parameters map[interface{}]interface{}) {
-	if val, ok := model["RESPONSE"]; ok {
+	if val, ok := model[RESPONSE]; ok {
 		for stringActCouple := range val {
 			actCouple := parseString(stringActCouple)
 			if contains(trace, actCouple.Value0) {
@@ -247,7 +252,7 @@ func checkSuccession(trace []string, model map[string]map[string]map[string]int,
 }
 
 func checkAltResponse(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, actIdxs map[string][]int, parameters map[interface{}]interface{}) {
-	if val, ok := model["ALTRESPONSE"]; ok {
+	if val, ok := model[ALTRESPONSE]; ok {
 		for stringActCouple := range val {
 			actCouple := parseString(stringActCouple)
 			specIdxs := make([][2]interface{}, 0)
@@ -325,7 +330,7 @@ func checkChainResponse(trace []string, model map[string]map[string]map[string]i
 }
 
 func checkAltPrecedence(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, actIdxs map[string][]int, parameters map[interface{}]interface{}) {
-	if val, ok := model["ALTPRECEDENCE"]; ok {
+	if val, ok := model[ALTPRECEDENCE]; ok {
 		for stringActCouple := range val {
 			actCouple := parseString(stringActCouple)
 			specIdxs := make([][2]interface{}, 0)

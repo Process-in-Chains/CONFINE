@@ -40,7 +40,6 @@ func main() {
 	logPath := "declare-conformance/event_log.xes"
 	modelPath := "declare-conformance/declare-model.json"
 	eventLog := xes.ReadXes(logPath)
-	//
 	processModelByets, err := ioutil.ReadFile(modelPath)
 	jsonModelStructure := make(map[string]map[string]map[string]int)
 	err = json.Unmarshal(processModelByets, &jsonModelStructure)

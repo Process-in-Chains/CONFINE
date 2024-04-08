@@ -46,6 +46,13 @@ type LogReceiver struct {
 	logElaborator *logelaboration.LogElaborator
 }
 
+/*
+TODO:
+Va bene usare il sistema di encryption che stiamo usando per la fase di inizializzazione. Li il miner non è un server, quindi non ha senso usare TLS. Cambia per la location del file di chiave privata e pubblica. FORSE POSSIAMO USARE IN QUESTO CASO IL CERTIFICATO TLS GENERATO QUI SOTTO.
+Nella fase di trasmissione invece usiamo il certificato TLS per verificare l'identità del miner. Una volta verificata, criptiamo con la chiave pubblica di una privata randomica.
+AL MOMENTO USIAMO TLS PER VERIFICARE L'IDENTITA' DEL MINER, MA NON DOBBIAMO USARLO PER CRIPTARE I SEGMENTI TRASMESSI. PER QUELLI DOBBIAMO INCLUDERE UNA COPPIA DI CHIAVI PUBBLICHE E PRIVATE RANDOMICHE CREATE NELLA TEE DA INSERIRE NEL REPORT.
+*/
+
 /*Constructor function of the log receiver*/
 func NewLogReceiver(port int) *LogReceiver {
 	/*Generate a certificate and a private key for TLS with the provisioner.*/
@@ -79,7 +86,7 @@ func NewLogReceiver(port int) *LogReceiver {
 	handler.HandleFunc("/secret", func(w http.ResponseWriter, r *http.Request) {
 		secretLogHandler(w, r, s)
 	})
-	/*Use the certificate for the TLS configuratin*/
+	/*Use the certificate for the TLS configuration*/
 	tlsCfg := tls.Config{
 		Certificates: []tls.Certificate{
 			{
@@ -88,6 +95,7 @@ func NewLogReceiver(port int) *LogReceiver {
 			},
 		},
 	}
+	/*Set up the HTTP server of the log receiver*/
 	s.server = &http.Server{
 		Addr:      fmt.Sprintf(":%d", port),
 		Handler:   handler,
@@ -105,7 +113,7 @@ func (s *LogReceiver) SetAlgorithm(algorithm string) {
 /*Function to start the LogReceiver's server*/
 func (s *LogReceiver) Start() error {
 	fmt.Printf("Log Receiver listening on port %d...\n", s.port)
-	return s.server.ListenAndServe()
+	return s.server.ListenAndServeTLS("", "")
 }
 
 /*Function to stop the LogReceiver's server*/

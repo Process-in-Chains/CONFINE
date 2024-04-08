@@ -151,28 +151,19 @@ func handleTraceListRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println("New trace list request received")
-	// On the server side, receive the public key bytes and deserialize it
 	pubKeyBytes := r.Form.Get("publicKey")
 	deserializedPubKey, err := x509.ParsePKIXPublicKey([]byte(pubKeyBytes))
 	if err != nil {
 		panic(err)
 	}
 	objectPublicKey := deserializedPubKey.(*rsa.PublicKey)
-	//objectPublicKey := encryption.LoadPublicKeyFromFile("./public.pem")
-	//serverAddr := r.Form.Get("logreceiver")
-	//certBytes, _ := remoteAttestation(serverAddr)
-
 	// Genera una nuova chiave simmetrica casuale
 	symKey := encryption.GenerateRandomDecryptionToken()
-	fmt.Println(len(symKey))
-	fmt.Println(symKey)
 	// Cripta la chiave simmetrica con RSA
 	encryptedKey, err := rsa.EncryptPKCS1v15(rand.Reader, objectPublicKey, symKey)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(string(encryptedKey))
-	fmt.Println("----------------------------------------merge key is: ", MYMERGEKEY)
 	traceSizeList, err := xes.GetTraceSize(MYLOGPATH, MYMERGEKEY)
 	if err != nil {
 		log.Fatal(err)
@@ -249,10 +240,15 @@ func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 	myPubKeyBytes, err := x509.MarshalPKIXPublicKey(&myPublicKey)
 	publicKeyString := base64.StdEncoding.EncodeToString(myPubKeyBytes)
 	header := getHeaderForm(string(symKey), fileSizeKB, hashList, publicKeyString)
+	//Here we are using the attested TLS channel to send the log to the log receiver. In the TLS certificate, we have the public key of the log receiver.
 	tlsConfig := &tls.Config{RootCAs: x509.NewCertPool(), ServerName: "localhost"}
+	//Parse the TLS Certificate
 	cert, _ := x509.ParseCertificate(certBytes)
+	//Add the certificate to the TLS configuration
 	tlsConfig.RootCAs.AddCert(cert)
+	//Send the header here
 	utilsAttestation.HttpPOST(tlsConfig, serverAddr+"/secret", header)
+	//Send the segments here
 	sendSegments(symKey, certBytes, encryptedKey, serverAddr, publicKeyString, MYREFERENCE)
 	fmt.Println("Sent log over attested TLS channel.")
 }
