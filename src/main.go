@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-//ego-go build -buildvcs=false && ego sign enclave.json && OE_SIMULATION=1 ego run ./app -segsize 2000 -port 8080 -test true
+//ego-go build -buildvcs=false && ego sign enclave.json && sudo ego run ./app -segsize 2000 -port 8080 -test true
 /*
 Secure Miner main.
 It initializes the necessary variables, parses command-line arguments, starts the log receiver, and prompts the user for commands to execute.

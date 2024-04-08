@@ -1,8 +1,8 @@
 package main
 
-//go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log healthcare_newkeys/specialised_clinic_newkeys.xes -mergekey hospitalCaseId
-//go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8088 -log healthcare_newkeys/hospital_newkeys.xes -mergekey concept:name
-//go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8089 -log healthcare_newkeys/pharma_newkeys.xes -mergekey treatmentID
+//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log healthcare_newkeys/specialised_clinic_newkeys.xes -mergekey hospitalCaseId -measurement `ego uniqueid app`
+//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8088 -log healthcare_newkeys/hospital_newkeys.xes -mergekey concept:name -measurement `ego uniqueid app`
+//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8089 -log healthcare_newkeys/pharma_newkeys.xes -mergekey treatmentID -measurement `ego uniqueid app`
 import (
 	utilsHTTP "app/utils/attestation"
 	utilsAttestation "app/utils/http"
@@ -33,14 +33,17 @@ import (
 var MYLOGPATH = "./mining-data/provision-data/process-01/event_log_TEST.xes"
 var MYREFERENCE = "http://localhost:"
 var MYMERGEKEY = "concept:name"
-
+var EXPECTEDMEASUREMENT=""
 const PROCESSNAME = "process-01"
 
 func main() {
 	serverPort := flag.Int("port", 8081, "server address")
 	provisionData := flag.String("log", "event_log_TEST.xes", "event log to provide")
 	mrgkey := flag.String("mergekey", "concept:name", "merge key to be used when merging traces")
+	measurement:=flag.String("measurement", "", "expected measurement of the miner")
 	flag.Parse()
+	EXPECTEDMEASUREMENT=*measurement
+	fmt.Println(EXPECTEDMEASUREMENT)
 	MYMERGEKEY = *mrgkey
 	MYREFERENCE = MYREFERENCE + strconv.Itoa(*serverPort)
 	MYLOGPATH = "./mining-data/provision-data/process-01/" + *provisionData
@@ -218,7 +221,7 @@ func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	_ = deserializedPubKey.(*rsa.PublicKey)
-	certBytes, _ := utilsHTTP.RemoteAttestation(serverAddr, []byte(pubKeyBytes))
+	certBytes, _ := utilsHTTP.RemoteAttestation(serverAddr, []byte(EXPECTEDMEASUREMENT))
 	// Genera una nuova chiave simmetrica casuale
 	symKey := encryption.GenerateRandomDecryptionToken()
 	// Cripta la chiave simmetrica con RSA

@@ -7,7 +7,6 @@ import (
 	"crypto/sha256"
 	"crypto/tls"
 	"crypto/x509"
-	"encoding/binary"
 	"errors"
 	"fmt"
 	"github.com/edgelesssys/ego/attestation"
@@ -22,7 +21,7 @@ Se usiamo CA signed certificates abbiamo un modo per verificare l'identità del 
 */
 
 /*Method invoked to execute the remote attestation of the Secure Miner hosted in a given address*/
-func RemoteAttestation(serverAddr string, receivedKey []byte) ([]byte, []byte) {
+func RemoteAttestation(serverAddr string, expectedMeasurement []byte) ([]byte, []byte) {
 	// Get server certificate. Skip TLS certificate verification because the certificate is self-signed and we will verify it using the report instead.
 	tlsConfig := &tls.Config{InsecureSkipVerify: true}
 	// Get miner's organization TLS certificate
@@ -32,7 +31,6 @@ func RemoteAttestation(serverAddr string, receivedKey []byte) ([]byte, []byte) {
 		panic(errors.New("TLS certificate is not valid"))
 
 	}
-	//Verify certificate validity
 	//Use the miner's organization TLS certificate to get the report.
 	//Create a TLS config that uses the server certificate as root CA so that future connections to the server can be verified.
 	cert, _ := x509.ParseCertificate(minerCertBytes)
@@ -41,7 +39,7 @@ func RemoteAttestation(serverAddr string, receivedKey []byte) ([]byte, []byte) {
 	// Get the report via attested TLS channel
 	reportBytes := http.HttpGet(minerTLSConfig, serverAddr+"/report")
 	// Verify the report
-	if err := VerifyReport(reportBytes, minerCertBytes, receivedKey); err != nil {
+	if err := VerifyReport(reportBytes, minerCertBytes, expectedMeasurement); err != nil {
 		//TODO HARDWARE REQUIREMENT HERE. IF THE REMOTE ATTESTATION FAILS, THE SECURE MINER SHOULD BE STOPPED.
 		//panic(err)
 		fmt.Println("Log receiver not attested")
@@ -55,8 +53,8 @@ func RemoteAttestation(serverAddr string, receivedKey []byte) ([]byte, []byte) {
 }
 
 /*This function verifies that 1)The report is signed by a functioning INTEL SGX TEE 2)That the tuple  */
-func VerifyReport(reportBytes []byte, certBytes []byte, senderKey []byte) error {
-	//1)Report validation via endorsere starts here
+func VerifyReport(reportBytes []byte, certBytes []byte, expectedMeasurement []byte) error {
+	//1)Report validation via endorser starts here
 	// Verify the report validity and extract the report data.
 	report, err := eclient.VerifyRemoteReport(reportBytes)
 	if err == attestation.ErrTCBLevelInvalid {
@@ -65,23 +63,11 @@ func VerifyReport(reportBytes []byte, certBytes []byte, senderKey []byte) error 
 	} else if err != nil {
 		return err
 	}
+	//TODO HERE WE SHOULD ALSO ADD A FRESHNESS CHECK
 	//2)Secure miner verification starts here
-	// You can either verify the UniqueID or the tuple (SignerID, ProductID, SecurityVersion, Debug). Here we verify the tuple.
-	//Check security version
-	if report.SecurityVersion < 2 {
-		return errors.New("invalid security version")
-	}
-	//Check product ID
-	if binary.LittleEndian.Uint16(report.ProductID) != 1234 {
-		return errors.New("invalid product")
-	}
-	//Check the developer that signed the trusted app
-	if !isFromExpectedDeveloper(report, senderKey) {
-		return errors.New("the attested signer is not the expected developer")
-	}
-	//Check if the sender is running in simulation mode
-	if !report.Debug {
-		return errors.New("invalid debug")
+	// You can either verify the UniqueID or the tuple (SignerID, ProductID, SecurityVersion, Debug). Here we verify with the UNIQUEID.
+	if !bytes.Equal(report.UniqueID,expectedMeasurement){
+		return errors.New("the report measurement do not match the expected one")
 	}
 	//3)Veify that the report data matches the miner's TLS certificate
 	//Hash the TLS certificate
@@ -112,13 +98,6 @@ func validateCertificate(certBytes []byte) error {
 		return errors.New("the certificate does not belong to an authorized miner organization")
 	}
 	return nil
-}
-
-/*Check that the signer of the trusted app is the expected developer*/
-func isFromExpectedDeveloper(report attestation.Report, receivedKey []byte) bool {
-	reportSigner := report.SignerID
-	fmt.Println(reportSigner)
-	return bytes.Equal(reportSigner, receivedKey)
 }
 
 /*Check if the certificate's public key belong to a known organization*/
