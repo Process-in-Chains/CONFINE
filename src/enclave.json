@@ -4,8 +4,8 @@
  "debug": true,
  "heapSize": 512,
  "executableHeap": false,
- "productID": 1234,
- "securityVersion": 2,
+ "productID": 1,
+ "securityVersion": 1,
  "mounts": [
         {
           "source": "./mining-data/collaborators",

@@ -1,8 +1,8 @@
 package main
 
-// CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log healthcare_newkeys/specialised_clinic_newkeys.xes -mergekey hospitalCaseId
-// CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8088 -log healthcare_newkeys/hospital_newkeys.xes -mergekey concept:name
-// CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8089 -log healthcare_newkeys/pharma_newkeys.xes -mergekey treatmentID
+//go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log healthcare_newkeys/specialised_clinic_newkeys.xes -mergekey hospitalCaseId
+//go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8088 -log healthcare_newkeys/hospital_newkeys.xes -mergekey concept:name
+//go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8089 -log healthcare_newkeys/pharma_newkeys.xes -mergekey treatmentID
 import (
 	utilsHTTP "app/utils/attestation"
 	utilsAttestation "app/utils/http"
