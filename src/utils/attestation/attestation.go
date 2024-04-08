@@ -14,15 +14,9 @@ import (
 	"github.com/edgelesssys/ego/eclient"
 )
 
-/*
-Se usiamo self signed certificates non abbiamo modo di verificare l'identità del miner. In questo caso, dovremmo quindi inserire un'identity evidence nel report. Questo può essere fatto con una coppia di chiavi pubbliche e private randomiche generate nella TEE. La chiave pubblica può essere inserita nel report e la chiave privata può essere usata per criptare i segmenti del log.
-Se usiamo CA signed certificates abbiamo un modo per verificare l'identità del miner. Pero, non possiamo usare la chiave del certificato, poiche generata esternamente alla TEE. Qundi dovremmo crearla a runtime ed includere la sua pubblica nel report.
-
-*/
-
 /*Method invoked to execute the remote attestation of the Secure Miner hosted in a given address*/
 func RemoteAttestation(serverAddr string, expectedMeasurement []byte) ([]byte, []byte) {
-	// Get server certificate. Skip TLS certificate verification because the certificate is self-signed and we will verify it using the report instead.
+	// Get miner certificate. Skip TLS certificate verification because the certificate is self-signed and we will verify it using the report instead.
 	tlsConfig := &tls.Config{InsecureSkipVerify: true}
 	// Get miner's organization TLS certificate
 	minerCertBytes := http.HttpGet(tlsConfig, serverAddr+"/cert")
@@ -40,8 +34,7 @@ func RemoteAttestation(serverAddr string, expectedMeasurement []byte) ([]byte, [
 	reportBytes := http.HttpGet(minerTLSConfig, serverAddr+"/report")
 	// Verify the report
 	if err := VerifyReport(reportBytes, minerCertBytes, expectedMeasurement); err != nil {
-		//TODO HARDWARE REQUIREMENT HERE. IF THE REMOTE ATTESTATION FAILS, THE SECURE MINER SHOULD BE STOPPED.
-		//panic(err)
+		panic(err)
 		fmt.Println("Log receiver not attested")
 	}
 	// Create a TLS config that uses the server certificate as root CA so that future connections to the server can be verified.
