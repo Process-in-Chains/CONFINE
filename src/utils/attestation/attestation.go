@@ -7,6 +7,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"encoding/binary"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"github.com/edgelesssys/ego/attestation"
@@ -22,7 +23,7 @@ func RemoteAttestation(serverAddr string, receivedKey []byte) ([]byte, []byte) {
 	reportBytes := http.HttpGet(tlsConfig, serverAddr+"/report")
 	if err := VerifyReport(reportBytes, certBytes, receivedKey); err != nil {
 		//HARDWARE REQUIREMENTS HERE---------------------------------------------------------------------------------------------------
-		//panic(err)
+		panic(err)
 		fmt.Println("Log receiver not attested")
 	}
 	// Create a TLS config that uses the server certificate as root
@@ -35,6 +36,7 @@ func RemoteAttestation(serverAddr string, receivedKey []byte) ([]byte, []byte) {
 }
 func VerifyReport(reportBytes []byte, certBytes []byte, senderKey []byte) error {
 	report, err := eclient.VerifyRemoteReport(reportBytes)
+	fmt.Println("THIS IS THE REPORT:", report.Data)
 	if err == attestation.ErrTCBLevelInvalid {
 		fmt.Printf("Warning: TCB level is invalid: %v\n%v\n", report.TCBStatus, tcbstatus.Explain(report.TCBStatus))
 		fmt.Println("We'll ignore this issue in this sample. For an app that should run in production, you must decide which of the different TCBStatus values are acceptable for you to continue.")
@@ -55,6 +57,8 @@ func VerifyReport(reportBytes []byte, certBytes []byte, senderKey []byte) error 
 		return errors.New("invalid product")
 	}
 	//HERE VERIFIES THE IDENTITY OF THE SENDER TEE---------------------------------------------------------------------------------
+	hexString := hex.EncodeToString(report.UniqueID)
+	fmt.Println(string(hexString))
 	if !isSignerCollaborator(report) {
 		return errors.New("invalid signer")
 	}
@@ -75,5 +79,6 @@ func isSignerCollaborator(report attestation.Report) bool {
 func isFromSender(report attestation.Report, receivedKey []byte) bool {
 	reportSigner := report.SignerID
 	fmt.Println(reportSigner)
+	fmt.Println(receivedKey)
 	return bytes.Equal(reportSigner, receivedKey)
 }
