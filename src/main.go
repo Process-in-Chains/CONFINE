@@ -64,7 +64,6 @@ func main() {
 			logReceiver.SetAlgorithm("DeclareConformance")
 			logrequest.LogRequest("process-01", port, segmentsize)
 			test.WaitUntilStop()
-
 		}
 		/*This command initiates the mining process using 'event_log.xes' located in './mining-data/provision-data/process-01'.*/
 		if command == "3" {

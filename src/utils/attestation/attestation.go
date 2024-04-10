@@ -7,6 +7,7 @@ import (
 	"crypto/sha256"
 	"crypto/tls"
 	"crypto/x509"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"github.com/edgelesssys/ego/attestation"
@@ -59,7 +60,7 @@ func VerifyReport(reportBytes []byte, certBytes []byte, expectedMeasurement []by
 	//TODO HERE WE SHOULD ALSO ADD A FRESHNESS CHECK
 	//2)Secure miner verification starts here
 	// You can either verify the UniqueID or the tuple (SignerID, ProductID, SecurityVersion, Debug). Here we verify with the UNIQUEID.
-	if !bytes.Equal(report.UniqueID,expectedMeasurement){
+	if !bytes.Equal([]byte(hex.EncodeToString(report.UniqueID)), expectedMeasurement) {
 		return errors.New("the report measurement do not match the expected one")
 	}
 	//3)Veify that the report data matches the miner's TLS certificate
