@@ -1,0 +1,572 @@
+{
+    "response": {
+        "ER Registration<<AND>>Leucocytes": {
+            "support": 1050,
+            "confidence": 1008
+        },
+        "LacticAcid<<AND>>CRP": {
+            "support": 860,
+            "confidence": 695
+        },
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1029
+        },
+        "ER Registration<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1042
+        },
+        "ER Sepsis Triage<<AND>>Leucocytes": {
+            "support": 1049,
+            "confidence": 945
+        },
+        "ER Registration<<AND>>LacticAcid": {
+            "support": 1050,
+            "confidence": 858
+        },
+        "LacticAcid<<AND>>Leucocytes": {
+            "support": 860,
+            "confidence": 690
+        },
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1044
+        },
+        "ER Sepsis Triage<<AND>>CRP": {
+            "support": 1049,
+            "confidence": 943
+        },
+        "ER Triage<<AND>>CRP": {
+            "support": 1050,
+            "confidence": 983
+        },
+        "ER Registration<<AND>>CRP": {
+            "support": 1050,
+            "confidence": 1004
+        },
+        "ER Triage<<AND>>Leucocytes": {
+            "support": 1050,
+            "confidence": 989
+        }
+    },
+    "responded_existence": {
+        "ER Registration<<AND>>Leucocytes": {
+            "support": 1050,
+            "confidence": 1012
+        },
+        "LacticAcid<<AND>>CRP": {
+            "support": 860,
+            "confidence": 860
+        },
+        "ER Triage<<AND>>Leucocytes": {
+            "support": 1050,
+            "confidence": 1012
+        },
+        "ER Registration<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1049
+        },
+        "Leucocytes<<AND>>ER Triage": {
+            "support": 1012,
+            "confidence": 1012
+        },
+        "LacticAcid<<AND>>ER Triage": {
+            "support": 860,
+            "confidence": 860
+        },
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1049
+        },
+        "Leucocytes<<AND>>LacticAcid": {
+            "support": 1012,
+            "confidence": 860
+        },
+        "Leucocytes<<AND>>ER Registration": {
+            "support": 1012,
+            "confidence": 1012
+        },
+        "CRP<<AND>>ER Triage": {
+            "support": 1007,
+            "confidence": 1007
+        },
+        "ER Triage<<AND>>LacticAcid": {
+            "support": 1050,
+            "confidence": 860
+        },
+        "Leucocytes<<AND>>CRP": {
+            "support": 1012,
+            "confidence": 1006
+        },
+        "ER Triage<<AND>>ER Registration": {
+            "support": 1050,
+            "confidence": 1050
+        },
+        "CRP<<AND>>LacticAcid": {
+            "support": 1007,
+            "confidence": 860
+        },
+        "CRP<<AND>>ER Registration": {
+            "support": 1007,
+            "confidence": 1007
+        },
+        "ER Sepsis Triage<<AND>>ER Triage": {
+            "support": 1049,
+            "confidence": 1049
+        },
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1050
+        },
+        "ER Sepsis Triage<<AND>>LacticAcid": {
+            "support": 1049,
+            "confidence": 859
+        },
+        "ER Sepsis Triage<<AND>>ER Registration": {
+            "support": 1049,
+            "confidence": 1049
+        },
+        "LacticAcid<<AND>>Admission NC": {
+            "support": 860,
+            "confidence": 721
+        },
+        "ER Registration<<AND>>LacticAcid": {
+            "support": 1050,
+            "confidence": 860
+        },
+        "ER Sepsis Triage<<AND>>CRP": {
+            "support": 1049,
+            "confidence": 1006
+        },
+        "Leucocytes<<AND>>IV Antibiotics": {
+            "support": 1012,
+            "confidence": 823
+        },
+        "LacticAcid<<AND>>Leucocytes": {
+            "support": 860,
+            "confidence": 860
+        },
+        "LacticAcid<<AND>>IV Antibiotics": {
+            "support": 860,
+            "confidence": 789
+        },
+        "LacticAcid<<AND>>IV Liquid": {
+            "support": 860,
+            "confidence": 727
+        },
+        "ER Registration<<AND>>CRP": {
+            "support": 1050,
+            "confidence": 1007
+        },
+        "ER Triage<<AND>>CRP": {
+            "support": 1050,
+            "confidence": 1007
+        },
+        "CRP<<AND>>Leucocytes": {
+            "support": 1007,
+            "confidence": 1006
+        },
+        "CRP<<AND>>IV Antibiotics": {
+            "support": 1007,
+            "confidence": 823
+        },
+        "Leucocytes<<AND>>ER Sepsis Triage": {
+            "support": 1012,
+            "confidence": 1011
+        },
+        "LacticAcid<<AND>>ER Sepsis Triage": {
+            "support": 860,
+            "confidence": 859
+        },
+        "ER Sepsis Triage<<AND>>Leucocytes": {
+            "support": 1049,
+            "confidence": 1011
+        },
+        "CRP<<AND>>ER Sepsis Triage": {
+            "support": 1007,
+            "confidence": 1006
+        },
+        "LacticAcid<<AND>>ER Registration": {
+            "support": 860,
+            "confidence": 860
+        }
+    },
+    "chainprecedence": {
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 968
+        },
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1049,
+            "confidence": 902
+        }
+    },
+    "existence": {
+        "ER Triage": {
+            "support": 1050,
+            "confidence": 1050
+        },
+        "CRP": {
+            "support": 1050,
+            "confidence": 1007
+        },
+        "Leucocytes": {
+            "support": 1050,
+            "confidence": 1012
+        },
+        "ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1049
+        },
+        "LacticAcid": {
+            "support": 1050,
+            "confidence": 860
+        },
+        "ER Registration": {
+            "support": 1050,
+            "confidence": 1050
+        }
+    },
+    "altresponse": {
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1041
+        },
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1029
+        },
+        "ER Registration<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1042
+        }
+    },
+    "altprecedence": {
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1041
+        },
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1049,
+            "confidence": 1029
+        },
+        "ER Registration<<AND>>ER Sepsis Triage": {
+            "support": 1049,
+            "confidence": 1042
+        }
+    },
+    "precedence": {
+        "ER Triage<<AND>>Leucocytes": {
+            "support": 1012,
+            "confidence": 943
+        },
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1044
+        },
+        "ER Registration<<AND>>LacticAcid": {
+            "support": 860,
+            "confidence": 857
+        },
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1049,
+            "confidence": 1032
+        },
+        "ER Registration<<AND>>CRP": {
+            "support": 1007,
+            "confidence": 983
+        },
+        "ER Sepsis Triage<<AND>>LacticAcid": {
+            "support": 859,
+            "confidence": 720
+        },
+        "ER Sepsis Triage<<AND>>CRP": {
+            "support": 1006,
+            "confidence": 821
+        },
+        "ER Registration<<AND>>Leucocytes": {
+            "support": 1012,
+            "confidence": 984
+        },
+        "ER Triage<<AND>>LacticAcid": {
+            "support": 860,
+            "confidence": 822
+        },
+        "ER Registration<<AND>>ER Sepsis Triage": {
+            "support": 1049,
+            "confidence": 1042
+        },
+        "ER Sepsis Triage<<AND>>Leucocytes": {
+            "support": 1011,
+            "confidence": 822
+        },
+        "ER Triage<<AND>>CRP": {
+            "support": 1007,
+            "confidence": 942
+        }
+    },
+    "exactly_one": {
+        "ER Triage": {
+            "support": 1050,
+            "confidence": 1047
+        },
+        "ER Registration": {
+            "support": 1050,
+            "confidence": 1050
+        },
+        "ER Sepsis Triage": {
+            "support": 1049,
+            "confidence": 1049
+        }
+    },
+    "init": {
+        "ER Registration": {
+            "support": 1050,
+            "confidence": 995
+        }
+    },
+    "chainresponse": {
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 902
+        },
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 968
+        }
+    },
+    "absence": {
+        "Release D": {
+            "support": 1050,
+            "confidence": 1026
+        },
+        "Release B": {
+            "support": 1050,
+            "confidence": 994
+        },
+        "Release C": {
+            "support": 1050,
+            "confidence": 1025
+        },
+        "Release E": {
+            "support": 1050,
+            "confidence": 1044
+        },
+        "Admission IC": {
+            "support": 1050,
+            "confidence": 940
+        }
+    },
+    "succession": {
+        "ER Triage<<AND>>CRP": {
+            "support": 1050,
+            "confidence": 940
+        },
+        "ER Triage<<AND>>Leucocytes": {
+            "support": 1050,
+            "confidence": 941
+        },
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1029
+        },
+        "ER Registration<<AND>>CRP": {
+            "support": 1050,
+            "confidence": 983
+        },
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1044
+        },
+        "ER Registration<<AND>>Leucocytes": {
+            "support": 1050,
+            "confidence": 984
+        },
+        "ER Registration<<AND>>LacticAcid": {
+            "support": 1050,
+            "confidence": 857
+        },
+        "ER Registration<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1042
+        }
+    },
+    "altsuccession": {
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1029
+        },
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1041
+        },
+        "ER Registration<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1042
+        }
+    },
+    "chainsuccession": {
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 902
+        },
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 968
+        }
+    },
+    "coexistence": {
+        "CRP<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1007
+        },
+        "CRP<<AND>>IV Antibiotics": {
+            "support": 1007,
+            "confidence": 823
+        },
+        "CRP<<AND>>ER Registration": {
+            "support": 1050,
+            "confidence": 1007
+        },
+        "CRP<<AND>>Leucocytes": {
+            "support": 1013,
+            "confidence": 1006
+        },
+        "CRP<<AND>>LacticAcid": {
+            "support": 1007,
+            "confidence": 860
+        },
+        "CRP<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1006
+        },
+        "ER Triage<<AND>>CRP": {
+            "support": 1050,
+            "confidence": 1007
+        },
+        "ER Triage<<AND>>ER Registration": {
+            "support": 1050,
+            "confidence": 1050
+        },
+        "ER Triage<<AND>>Leucocytes": {
+            "support": 1050,
+            "confidence": 1012
+        },
+        "ER Triage<<AND>>LacticAcid": {
+            "support": 1050,
+            "confidence": 860
+        },
+        "ER Triage<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1049
+        },
+        "IV Liquid<<AND>>LacticAcid": {
+            "support": 886,
+            "confidence": 727
+        },
+        "IV Antibiotics<<AND>>CRP": {
+            "support": 1007,
+            "confidence": 823
+        },
+        "IV Antibiotics<<AND>>Leucocytes": {
+            "support": 1012,
+            "confidence": 823
+        },
+        "IV Antibiotics<<AND>>LacticAcid": {
+            "support": 894,
+            "confidence": 789
+        },
+        "ER Registration<<AND>>CRP": {
+            "support": 1050,
+            "confidence": 1007
+        },
+        "ER Registration<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1050
+        },
+        "ER Registration<<AND>>Leucocytes": {
+            "support": 1050,
+            "confidence": 1012
+        },
+        "ER Registration<<AND>>LacticAcid": {
+            "support": 1050,
+            "confidence": 860
+        },
+        "ER Registration<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1049
+        },
+        "Leucocytes<<AND>>CRP": {
+            "support": 1013,
+            "confidence": 1006
+        },
+        "Leucocytes<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1012
+        },
+        "Leucocytes<<AND>>IV Antibiotics": {
+            "support": 1012,
+            "confidence": 823
+        },
+        "Leucocytes<<AND>>ER Registration": {
+            "support": 1050,
+            "confidence": 1012
+        },
+        "Leucocytes<<AND>>LacticAcid": {
+            "support": 1012,
+            "confidence": 860
+        },
+        "Leucocytes<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 1011
+        },
+        "LacticAcid<<AND>>CRP": {
+            "support": 1007,
+            "confidence": 860
+        },
+        "LacticAcid<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 860
+        },
+        "LacticAcid<<AND>>IV Liquid": {
+            "support": 886,
+            "confidence": 727
+        },
+        "LacticAcid<<AND>>IV Antibiotics": {
+            "support": 894,
+            "confidence": 789
+        },
+        "LacticAcid<<AND>>ER Registration": {
+            "support": 1050,
+            "confidence": 860
+        },
+        "LacticAcid<<AND>>Leucocytes": {
+            "support": 1012,
+            "confidence": 860
+        },
+        "LacticAcid<<AND>>ER Sepsis Triage": {
+            "support": 1050,
+            "confidence": 859
+        },
+        "ER Sepsis Triage<<AND>>CRP": {
+            "support": 1050,
+            "confidence": 1006
+        },
+        "ER Sepsis Triage<<AND>>ER Triage": {
+            "support": 1050,
+            "confidence": 1049
+        },
+        "ER Sepsis Triage<<AND>>ER Registration": {
+            "support": 1050,
+            "confidence": 1049
+        },
+        "ER Sepsis Triage<<AND>>Leucocytes": {
+            "support": 1050,
+            "confidence": 1011
+        },
+        "ER Sepsis Triage<<AND>>LacticAcid": {
+            "support": 1050,
+            "confidence": 859
+        }
+    }
+}

@@ -1,6 +1,8 @@
 package main
 
-//go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log healthcare_newkeys/specialised_clinic_newkeys.xes -mergekey hospitalCaseId
+//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log healthcare_newkeys/specialised_clinic_newkeys.xes -mergekey hospitalCaseId -measurement `ego uniqueid app`
+//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8088 -log healthcare_newkeys/hospital_newkeys.xes -mergekey concept:name -measurement `ego uniqueid app`
+//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8089 -log healthcare_newkeys/pharma_newkeys.xes -mergekey treatmentID -measurement `ego uniqueid app`
 import (
 	utilsHTTP "app/utils/attestation"
 	utilsAttestation "app/utils/http"
@@ -31,14 +33,17 @@ import (
 var MYLOGPATH = "./mining-data/provision-data/process-01/event_log_TEST.xes"
 var MYREFERENCE = "http://localhost:"
 var MYMERGEKEY = "concept:name"
-
+var EXPECTEDMEASUREMENT=""
 const PROCESSNAME = "process-01"
 
 func main() {
 	serverPort := flag.Int("port", 8081, "server address")
 	provisionData := flag.String("log", "event_log_TEST.xes", "event log to provide")
 	mrgkey := flag.String("mergekey", "concept:name", "merge key to be used when merging traces")
+	measurement:=flag.String("measurement", "", "expected measurement of the miner")
 	flag.Parse()
+	EXPECTEDMEASUREMENT=*measurement
+	fmt.Println(EXPECTEDMEASUREMENT)
 	MYMERGEKEY = *mrgkey
 	MYREFERENCE = MYREFERENCE + strconv.Itoa(*serverPort)
 	MYLOGPATH = "./mining-data/provision-data/process-01/" + *provisionData
@@ -149,28 +154,19 @@ func handleTraceListRequest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Println("New trace list request received")
-	// On the server side, receive the public key bytes and deserialize it
 	pubKeyBytes := r.Form.Get("publicKey")
 	deserializedPubKey, err := x509.ParsePKIXPublicKey([]byte(pubKeyBytes))
 	if err != nil {
 		panic(err)
 	}
 	objectPublicKey := deserializedPubKey.(*rsa.PublicKey)
-	//objectPublicKey := encryption.LoadPublicKeyFromFile("./public.pem")
-	//serverAddr := r.Form.Get("logreceiver")
-	//certBytes, _ := remoteAttestation(serverAddr)
-
 	// Genera una nuova chiave simmetrica casuale
 	symKey := encryption.GenerateRandomDecryptionToken()
-	fmt.Println(len(symKey))
-	fmt.Println(symKey)
 	// Cripta la chiave simmetrica con RSA
 	encryptedKey, err := rsa.EncryptPKCS1v15(rand.Reader, objectPublicKey, symKey)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(string(encryptedKey))
-	fmt.Println("----------------------------------------merge key is: ", MYMERGEKEY)
 	traceSizeList, err := xes.GetTraceSize(MYLOGPATH, MYMERGEKEY)
 	if err != nil {
 		log.Fatal(err)
@@ -225,7 +221,7 @@ func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	_ = deserializedPubKey.(*rsa.PublicKey)
-	certBytes, _ := utilsHTTP.RemoteAttestation(serverAddr, []byte(pubKeyBytes))
+	certBytes, _ := utilsHTTP.RemoteAttestation(serverAddr, []byte(EXPECTEDMEASUREMENT))
 	// Genera una nuova chiave simmetrica casuale
 	symKey := encryption.GenerateRandomDecryptionToken()
 	// Cripta la chiave simmetrica con RSA
@@ -247,10 +243,15 @@ func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 	myPubKeyBytes, err := x509.MarshalPKIXPublicKey(&myPublicKey)
 	publicKeyString := base64.StdEncoding.EncodeToString(myPubKeyBytes)
 	header := getHeaderForm(string(symKey), fileSizeKB, hashList, publicKeyString)
+	//Here we are using the attested TLS channel to send the log to the log receiver. In the TLS certificate, we have the public key of the log receiver.
 	tlsConfig := &tls.Config{RootCAs: x509.NewCertPool(), ServerName: "localhost"}
+	//Parse the TLS Certificate
 	cert, _ := x509.ParseCertificate(certBytes)
+	//Add the certificate to the TLS configuration
 	tlsConfig.RootCAs.AddCert(cert)
+	//Send the header here
 	utilsAttestation.HttpPOST(tlsConfig, serverAddr+"/secret", header)
+	//Send the segments here
 	sendSegments(symKey, certBytes, encryptedKey, serverAddr, publicKeyString, MYREFERENCE)
 	fmt.Println("Sent log over attested TLS channel.")
 }
