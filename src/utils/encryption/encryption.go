@@ -225,3 +225,20 @@ func ParsePublicKeyToString(path string) (string, error) {
 
 }
 
+func GetReadablePublicKey(pubKey any) ([]byte, bool) {
+	pubBytes, err := x509.MarshalPKIXPublicKey(pubKey)
+	if err != nil {
+		fmt.Printf("Failed to marshal public key: %s\n", err)
+		return nil, true
+	}
+	print(string(pubBytes))
+	// Create a PEM block
+	pubPem := &pem.Block{
+		Type:  "PUBLIC KEY",
+		Bytes: pubBytes,
+	}
+
+	// Encode the PEM block to a readable format
+	pubPemBytes := pem.EncodeToMemory(pubPem)
+	return pubPemBytes, false
+}

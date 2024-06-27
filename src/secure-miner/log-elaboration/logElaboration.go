@@ -16,7 +16,7 @@ func NewLogElaborator() *LogElaborator {
 }
 
 /*Function that executes a process mining algorithm on a given event log*/
-func (logElaborator *LogElaborator) ApplyAlgorithm(algorithm string, processName string, eventLog xes.XES) {
+func (logElaborator *LogElaborator) ApplyAlgorithm(algorithm string, processName string, eventLog xes.XES, declareModelPath string) {
 
 	//Check if the algorithm is unsupported
 	if logElaborator.isAlgorithmSupported(algorithm) != nil {
@@ -29,7 +29,10 @@ func (logElaborator *LogElaborator) ApplyAlgorithm(algorithm string, processName
 	}
 	//Execute the DeclareConformance algorithm
 	if algorithm == "DeclareConformance" {
-		prosessMiningAlgorithms.DeclareConformance(eventLog, "mining-data/input/declareModelSepsis.json")
+		prosessMiningAlgorithms.DeclareConformance(eventLog, declareModelPath)
+	}
+	if algorithm == "IncrementalDeclareConformance" {
+		prosessMiningAlgorithms.IncrementalDeclareConformance(eventLog, declareModelPath)
 	}
 }
 

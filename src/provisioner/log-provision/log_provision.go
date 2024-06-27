@@ -1,11 +1,11 @@
 package main
 
-//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log healthcare_newkeys/specialised_clinic_newkeys.xes -mergekey hospitalCaseId -measurement `ego uniqueid app`
-//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8088 -log healthcare_newkeys/hospital_newkeys.xes -mergekey concept:name -measurement `ego uniqueid app`
-//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8089 -log healthcare_newkeys/pharma_newkeys.xes -mergekey treatmentID -measurement `ego uniqueid app`
+//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8087 -log testing_logs/motivating/hospital.xes -mergekey concept:name -measurement `ego uniqueid app` -skipattestation false
+//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8088 -log testing_logs/motivating/pharma.xes -mergekey concept:name -measurement `ego uniqueid app` -skipattestation false
+//CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8089 -log testing_logs/motivating/specialized.xes -mergekey concept:name -measurement `ego uniqueid app` -skipattestation false
 import (
-	utilsHTTP "app/utils/attestation"
-	utilsAttestation "app/utils/http"
+	utilsAttestation "app/utils/attestation"
+	utilsHTTP "app/utils/http"
 	"context"
 	"crypto/rsa"
 	"crypto/tls"
@@ -33,17 +33,20 @@ import (
 var MYLOGPATH = "./mining-data/provision-data/process-01/event_log_TEST.xes"
 var MYREFERENCE = "http://localhost:"
 var MYMERGEKEY = "concept:name"
-var EXPECTEDMEASUREMENT=""
+var SKIPATTESTATION bool
+var EXPECTEDMEASUREMENT = ""
+
 const PROCESSNAME = "process-01"
 
 func main() {
-	serverPort := flag.Int("port", 8081, "server address")
+	serverPort := flag.Int("port", 8094, "server address")
 	provisionData := flag.String("log", "event_log_TEST.xes", "event log to provide")
 	mrgkey := flag.String("mergekey", "concept:name", "merge key to be used when merging traces")
-	measurement:=flag.String("measurement", "", "expected measurement of the miner")
+	skipattestation := flag.String("skipattestation", "", "set to false if your secure miner is running in simulation")
+	measurement := flag.String("measurement", "", "expected measurement of the miner")
 	flag.Parse()
-	EXPECTEDMEASUREMENT=*measurement
-	fmt.Println(EXPECTEDMEASUREMENT)
+	SKIPATTESTATION, _ = strconv.ParseBool(*skipattestation)
+	EXPECTEDMEASUREMENT = *measurement
 	MYMERGEKEY = *mrgkey
 	MYREFERENCE = MYREFERENCE + strconv.Itoa(*serverPort)
 	MYLOGPATH = "./mining-data/provision-data/process-01/" + *provisionData
@@ -132,7 +135,7 @@ func sendSegments(symKey []byte, certBytes []byte, encryptedKey []byte, serverAd
 			cert, _ := x509.ParseCertificate(certBytes)
 			tlsConfig := &tls.Config{RootCAs: x509.NewCertPool(), ServerName: "localhost"}
 			tlsConfig.RootCAs.AddCert(cert)
-			utilsAttestation.HttpPOST(tlsConfig, serverAddr+"/secret", getSegmentForm(text, string(encryptedKey), batchNumberStr, publicKey, myreference))
+			utilsHTTP.HttpPOST(tlsConfig, serverAddr+"/secret", getSegmentForm(text, string(encryptedKey), batchNumberStr, publicKey, myreference))
 		}
 	}
 	err = os.RemoveAll("./mining-data/provision-data/" + PROCESSNAME + "/" + base64.StdEncoding.EncodeToString(symKey))
@@ -176,9 +179,6 @@ func handleTraceListRequest(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error marshalling to JSON:", err)
 		return
 	}
-	//encryptedTraceSizeList, _ := encryption.EncryptDataWithSymetric(jsonBytes, symKey)
-	fmt.Println(string(jsonBytes))
-	//response := map[string]string{"traceList": string(encryptedTraceSizeList), "encryptedKey": string(symKey)}
 	response := map[string]string{"traceList": string(jsonBytes), "encryptedKey": string(encryptedKey)}
 	jsonResponse, err := json.Marshal(response)
 	if err != nil {
@@ -221,7 +221,17 @@ func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 	_ = deserializedPubKey.(*rsa.PublicKey)
-	certBytes, _ := utilsHTTP.RemoteAttestation(serverAddr, []byte(EXPECTEDMEASUREMENT))
+	certBytes := []byte("")
+	fmt.Println(SKIPATTESTATION)
+	fmt.Println(EXPECTEDMEASUREMENT)
+	if !SKIPATTESTATION {
+		fmt.Println("Entering the attestation. . .")
+		certBytes, _ = utilsAttestation.RemoteAttestation(serverAddr, []byte(EXPECTEDMEASUREMENT))
+
+	} else {
+		tlsConfig := &tls.Config{InsecureSkipVerify: true}
+		certBytes = utilsHTTP.HttpGet(tlsConfig, serverAddr+"/cert")
+	}
 	// Genera una nuova chiave simmetrica casuale
 	symKey := encryption.GenerateRandomDecryptionToken()
 	// Cripta la chiave simmetrica con RSA
@@ -250,7 +260,7 @@ func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 	//Add the certificate to the TLS configuration
 	tlsConfig.RootCAs.AddCert(cert)
 	//Send the header here
-	utilsAttestation.HttpPOST(tlsConfig, serverAddr+"/secret", header)
+	utilsHTTP.HttpPOST(tlsConfig, serverAddr+"/secret", header)
 	//Send the segments here
 	sendSegments(symKey, certBytes, encryptedKey, serverAddr, publicKeyString, MYREFERENCE)
 	fmt.Println("Sent log over attested TLS channel.")

@@ -17,33 +17,23 @@ import (
 	"time"
 )
 
-const STOPWRITING = true
-
-/*
-TODO:
-Va bene usare il sistema di encryption che stiamo usando per la fase di inizializzazione. Li il miner non è un server, quindi non ha senso usare TLS. Cambia per la location del file di chiave privata e pubblica.
-Nella fase di trasmissione invece, non serve eseguire l'encryption come lo stiamo facendo, dato che possiamo ottenere lo stesso risultato utilizzando il certificato TLS. Rimuovi tutta la parte di encryption.
-*/
-
 /*This function contains the logic of the Secure Miner's Log Requester*/
 func LogRequest(processName string, receiverPort string, segmentsize int) {
 	println("TESTMODE - INITIALIZATION STARTED AT:", time.Now().UnixMilli())
 	//Initalize and write the trace map
 	globalTracesMap := make(map[string]map[string]bool)
-	if STOPWRITING {
-		_ = os.MkdirAll("./mining-data/consumption-data/"+processName+"/miningMetadata", os.ModePerm)
-		_ = os.WriteFile("./mining-data/consumption-data/"+processName+"/miningMetadata/map.json", []byte("{}"), 0644)
-		jsonData, err := json.MarshalIndent(globalTracesMap, "", "  ")
-		if err != nil {
-			fmt.Println("Error converting JSON:", err)
-			return
-		}
-		// WRITE Json in file
-		err = ioutil.WriteFile("./mining-data/consumption-data/"+processName+"/traceMap.json", jsonData, 0644)
-		if err != nil {
-			fmt.Println("Errore nella scrittura del file JSON:", err)
-			return
-		}
+	_ = os.MkdirAll("./mining-data/consumption-data/"+processName+"/miningMetadata", os.ModePerm)
+	_ = os.WriteFile("./mining-data/consumption-data/"+processName+"/miningMetadata/map.json", []byte("{}"), 0644)
+	jsonData, err := json.MarshalIndent(globalTracesMap, "", "  ")
+	if err != nil {
+		fmt.Println("Error converting JSON:", err)
+		return
+	}
+	// WRITE Json in file
+	err = ioutil.WriteFile("./mining-data/consumption-data/"+processName+"/traceMap.json", jsonData, 0644)
+	if err != nil {
+		fmt.Println("Errore nella scrittura del file JSON:", err)
+		return
 	}
 	//Read collaborator refeferences
 	references, err := collaborators.GetReferences()
@@ -99,13 +89,13 @@ func LogRequest(processName string, receiverPort string, segmentsize int) {
 		}
 		for trId, _ := range responseJson {
 			if _, ok := readTraceMap[trId]; ok {
-				readTraceMap[trId][httpReference] = !STOPWRITING
+				readTraceMap[trId][httpReference] = false
 				//TODO: IF OK=FALSE (LOOK ABOVE) THEN THE TRACE IS NOT OWNED BY THE MINER SO A NEW ENTRY SHOULD BE ADDED IN THE TRACEMAP WITH THE ID OF THE TRACE. YOU SHOULD DO ALSO ALL THE STUFF IN _X_
 			} else {
 				/*h is the header, it's not a case reference*/
 				if trId != "h" {
 					readTraceMap[trId] = make(map[string]bool)
-					readTraceMap[trId][httpReference] = !STOPWRITING
+					readTraceMap[trId][httpReference] = false
 					os.MkdirAll("./mining-data/consumption-data/"+processName+"/trace_"+trId, os.ModePerm)
 				}
 			}

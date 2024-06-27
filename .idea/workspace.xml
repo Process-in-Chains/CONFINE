@@ -5,11 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cba642b-1f33-45d0-82ef-1c5047244812" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/CONFINE.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CONFINE.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app" beforeDir="false" afterPath="$PROJECT_DIR$/src/app" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/src/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logprovision" beforeDir="false" afterPath="$PROJECT_DIR$/src/logprovision" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mining-data/collaborators/process-01/references.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/mining-data/collaborators/process-01/references.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mining-data/provision-data/process-01/testing_logs/motivating/event_log.xes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/provisioner/log-provision/log_provision.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/provisioner/log-provision/log_provision.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-elaboration/logElaboration.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/logElaboration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/declareConformance.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/declareConformance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/heuristicMiner.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/heuristicMiner.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-management/logManagement.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-management/logManagement.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-request/logRequest.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-request/logRequest.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/attestation/attestation.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/attestation/attestation.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/encryption/encryption.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/encryption/encryption.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/reset/reset.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/reset/reset.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/test/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/test/test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,13 +37,26 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file:///snap/go/10585" />
+  <component name="GOROOT" url="file:///snap/go/10630" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/mining-data/consumption-data/process-01/miningMetadata/dependencyMatrix2len.json" root0="FORCE_HIGHLIGHTING" />
-  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;l2brb&quot;
+  }
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: []
+}</component>
+  <component name="GitLabMergeRequestsSettings">{}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Process-in-Chains/CONFINE.git&quot;,
+    &quot;accountId&quot;: &quot;6ea09a75-f40d-4c2e-8216-be1664490912&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -46,6 +73,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -57,22 +85,55 @@
     &quot;git-widget-placeholder&quot;: &quot;development-branch&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/dave&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/pic&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
+  <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
+    <layout>
+      <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
+      <window_info id="Merge Requests" show_stripe_button="false" />
+      <window_info id="Commit_Guest" show_stripe_button="false" />
+      <window_info id="Pull Requests" show_stripe_button="false" />
+      <window_info id="Learn" show_stripe_button="false" />
+      <window_info id="DFA" show_stripe_button="false" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21377882" />
+      <window_info id="Commit" order="1" weight="0.25" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" show_stripe_button="false" />
+      <window_info anchor="bottom" id="File Transfer" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="0" weight="0.32998818" />
+      <window_info anchor="bottom" id="Problems" order="1" />
+      <window_info anchor="bottom" id="Problems View" order="2" weight="0.3302257" />
+      <window_info anchor="bottom" id="Terminal" order="3" />
+      <window_info anchor="bottom" id="Services" order="4" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.32991204" />
+      <window_info anchor="right" id="Endpoints" show_stripe_button="false" />
+      <window_info anchor="right" id="make" show_stripe_button="false" side_tool="true" />
+      <window_info anchor="right" id="Coverage" show_stripe_button="false" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="AIAssistant" order="1" weight="0.25" />
+      <window_info anchor="right" id="Database" order="2" weight="0.25" />
+      <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.25" />
+    </layout>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/mining-data/provision-data/process-01" />
       <recent name="$PROJECT_DIR$/src/mining-data/input" />
       <recent name="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/mining-data/provision-data/process-01" />
-      <recent name="$PROJECT_DIR$/mining-data/consumption-data/process-01/miningMetadata" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/evaluation/eventlogs" />
+      <recent name="$PROJECT_DIR$/src/mining-data/provision-data/process-01/event_logs/traffic_fines" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/secure-miner/log-elaboration" />
       <recent name="$PROJECT_DIR$/mining-data/provision-data/process-01" />
@@ -103,7 +164,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-2946fb9b3188-155fe4b6e3a0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.14475.38" />
+        <option value="bundled-gosdk-33c477a475b1-b97fc8a1e17c-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-241.14494.155" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-GO-241.14494.155" />
       </set>
     </attachedChunks>
   </component>

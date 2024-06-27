@@ -4,6 +4,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"os"
+	"path/filepath"
 	"runtime"
 	"strconv"
 	"time"
@@ -12,14 +13,21 @@ import (
 var STOPMONITORING = false
 
 func PrintRamUsage() {
-	// List of integer here
 	var ramList = []int{}
 	var timestampList = []int{}
 	for !STOPMONITORING {
 		var m runtime.MemStats
 		runtime.ReadMemStats(&m)
+		//ramList = append(ramList, int(m.Alloc))
+		//total_size, err := getSize("./mining-data/consumption-data")
+		//if err != nil {
+		//		total_size = 0
+		//		fmt.Println("empty")
+		//	} else {
+		//		fmt.Println(total_size)
+		//}
 		ramList = append(ramList, int(m.Alloc))
-		timestampList = append(timestampList, int(time.Now().Unix()))
+		timestampList = append(timestampList, int(time.Now().UnixMilli()))
 		time.Sleep(100 * time.Millisecond)
 	}
 	// Save RAM usage and timestamp to CSV file
@@ -35,7 +43,7 @@ func PrintRamUsage() {
 	var firstTimestamp = timestampList[0]
 	var lastTimestamp = timestampList[len(timestampList)-1]
 	fmt.Printf("TESTMODE - Average RAM Usage in bytes: %.2f\n", avg)
-	fmt.Printf("TESTMODE - Test duration in seconds: %d\n", lastTimestamp-firstTimestamp)
+	fmt.Printf("TESTMODE - Test duration in seconds: %d\n", (lastTimestamp-firstTimestamp)/1000)
 
 }
 func WaitUntilStop() {
@@ -66,4 +74,18 @@ func saveToCSV(ramList []int, timestampList []int) error {
 		}
 	}
 	return nil
+}
+func getSize(path string) (int64, error) {
+	var size int64
+	err := filepath.Walk(path, func(_ string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		// Add file size if it is not a directory
+		if !info.IsDir() {
+			size += info.Size()
+		}
+		return nil
+	})
+	return size, err
 }

@@ -15,7 +15,8 @@ import (
 	"strings"
 )
 
-var occurrencyThreshold = 1
+// var occurrencyThreshold = 1
+var occurrencyThreshold = 10
 var dependencyThreshold = 0.3
 var andThreshold = 0.1
 var longDepencency2Threshold = 0.99 //Usually it's high (almost 1)
@@ -693,7 +694,9 @@ func HeuristicMiner(ev [][]string, processName string) {
 
 	//fmt.Println("\n\nCAUSAL MATRIX\n")
 	//printCasualMatrix(causalM)
-
+	//printCasualMatrix(causalM)
+	//fmt.Println("-------------------")
+	//printDependencyMatrix(dependencyMatrix, eventMap, "full")
 	pnmlCreation, pnml := causalMatrixtoPnml(causalM, processName)
 
 	if pnmlCreation && depLongDist {

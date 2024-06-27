@@ -15,6 +15,10 @@ import (
 	"github.com/edgelesssys/ego/eclient"
 )
 
+/*NOTE for remote attestation: if in the /etc/sgx_default_qcnl.conf file the field 'collateral_service' field should be commented
+otherwise, the verifyReport method would directly communicate with the collateral_service without passing through your PCCS
+comment 'collateral_service' when your pccs is set_up and specify its url in the /etc/sgx_default_qcnl.conf file */
+
 /*Method invoked to execute the remote attestation of the Secure Miner hosted in a given address*/
 func RemoteAttestation(serverAddr string, expectedMeasurement []byte) ([]byte, []byte) {
 	// Get miner certificate. Skip TLS certificate verification because the certificate is self-signed and we will verify it using the report instead.
@@ -34,10 +38,12 @@ func RemoteAttestation(serverAddr string, expectedMeasurement []byte) ([]byte, [
 	// Get the report via attested TLS channel
 	reportBytes := http.HttpGet(minerTLSConfig, serverAddr+"/report")
 	// Verify the report
+	fmt.Println("Asking Report verification")
 	if err := VerifyReport(reportBytes, minerCertBytes, expectedMeasurement); err != nil {
 		panic(err)
 		fmt.Println("Log receiver not attested")
 	}
+	fmt.Println("Report verification failed")
 	// Create a TLS config that uses the server certificate as root CA so that future connections to the server can be verified.
 	//cert, _ := x509.ParseCertificate(minerCertBytes)
 	//tlsConfig = &tls.Config{RootCAs: x509.NewCertPool(), ServerName: "localhost"}
@@ -51,6 +57,7 @@ func VerifyReport(reportBytes []byte, certBytes []byte, expectedMeasurement []by
 	//1)Report validation via endorser starts here
 	// Verify the report validity and extract the report data.
 	report, err := eclient.VerifyRemoteReport(reportBytes)
+	fmt.Println("report returned")
 	if err == attestation.ErrTCBLevelInvalid {
 		fmt.Printf("Warning: TCB level is invalid: %v\n%v\n", report.TCBStatus, tcbstatus.Explain(report.TCBStatus))
 		fmt.Println("We'll ignore this issue in this sample. For an app that should run in production, you must decide which of the different TCBStatus values are acceptable for you to continue.")

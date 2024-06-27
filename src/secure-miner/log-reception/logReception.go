@@ -40,25 +40,20 @@ var (
 
 /*The log receiver object activated in the main*/
 type LogReceiver struct {
-	port          int
-	server        *http.Server
-	algorithm     string
-	logElaborator *logelaboration.LogElaborator
+	port             int
+	server           *http.Server
+	algorithm        string
+	declareModelPath string
+	tlsCertificate   []byte
+	logElaborator    *logelaboration.LogElaborator
 }
-
-/*
-TODO:
-Va bene usare il sistema di encryption che stiamo usando per la fase di inizializzazione. Li il miner non è un server, quindi non ha senso usare TLS. Cambia per la location del file di chiave privata e pubblica. FORSE POSSIAMO USARE IN QUESTO CASO IL CERTIFICATO TLS GENERATO QUI SOTTO.
-Nella fase di trasmissione invece usiamo il certificato TLS per verificare l'identità del miner. Una volta verificata, criptiamo con la chiave pubblica di una privata randomica.
-AL MOMENTO USIAMO TLS PER VERIFICARE L'IDENTITA' DEL MINER, MA NON DOBBIAMO USARLO PER CRIPTARE I SEGMENTI TRASMESSI. PER QUELLI DOBBIAMO INCLUDERE UNA COPPIA DI CHIAVI PUBBLICHE E PRIVATE RANDOMICHE CREATE NELLA TEE DA INSERIRE NEL REPORT.
-*/
 
 /*Constructor function of the log receiver*/
 func NewLogReceiver(port int) *LogReceiver {
 	/*Generate a certificate and a private key for TLS with the provisioner.*/
 	cert, priv := createCertificate()
 	hash := sha256.Sum256(cert)
-	s := &LogReceiver{port: port}
+	s := &LogReceiver{port: port, tlsCertificate: cert}
 	/*Generate the report (i.e., the attestation evidence) signed by the hardware's TEE. The report contains the hashed TLS certificate	*/
 	//TODO REPORT GENERATION AND SIGNING SHOULD BE MOVED IN /report REQUETS. ADD NONCE IN THE PROTOCOL TO AVOID REPLAY ATTACKS.
 	report, err := enclave.GetRemoteReport(hash[:])
@@ -108,6 +103,13 @@ func NewLogReceiver(port int) *LogReceiver {
 /*Function to change the Algorithm of the LogReceiver*/
 func (s *LogReceiver) SetAlgorithm(algorithm string) {
 	s.algorithm = algorithm
+}
+func (s *LogReceiver) SetProcessModel(declareModelPath string) {
+	s.declareModelPath = declareModelPath
+}
+
+func (s *LogReceiver) GetTLSCertificate() []byte {
+	return s.tlsCertificate
 }
 
 /*Function to start the LogReceiver's server*/
@@ -210,8 +212,9 @@ func secretLogHandler(w http.ResponseWriter, r *http.Request, logReceiver *LogRe
 		}
 		/*Get the algorithm set in the main*/
 		algorithm := logReceiver.algorithm
+		declareModelPath := logReceiver.declareModelPath
 		/*Call the trace handler*/
-		logmanagement.HandleSegment(*xesSegment, "process-01", senderPublicKey, senderReference, reference.MergeKey, readTraceMap, algorithm, *logReceiver.logElaborator)
+		logmanagement.HandleSegment(*xesSegment, "process-01", senderPublicKey, senderReference, reference.MergeKey, readTraceMap, algorithm, declareModelPath, *logReceiver.logElaborator)
 		mutex.Unlock()
 		/*Send response to the provisioner*/
 		response, _ := prepareResponse(true)

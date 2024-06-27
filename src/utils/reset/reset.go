@@ -37,7 +37,6 @@ func DeleteAllFilesInSubfolders(rootDir string) error {
 			return nil
 		}
 		if !info.IsDir() {
-
 			if err := os.Remove(path); err != nil {
 				return err
 			}

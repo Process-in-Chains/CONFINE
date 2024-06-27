@@ -2,6 +2,7 @@ package logmanagement
 
 import (
 	logelaboration "app/secure-miner/log-elaboration"
+	"app/utils/reset"
 	"app/utils/test"
 	"app/utils/xes"
 	"encoding/json"
@@ -18,7 +19,7 @@ import (
 var FIRSTCOMP = false
 
 /*This function handles a log segment sent by a provisioner to the Secure Miner*/
-func HandleSegment(logSegment xes.XES, processName string, publicKey string, myreference string, mergekey string, traceMap map[string]map[string]bool, algorithm string, logElaborator logelaboration.LogElaborator) {
+func HandleSegment(logSegment xes.XES, processName string, publicKey string, myreference string, mergekey string, traceMap map[string]map[string]bool, algorithm string, declareModelPath string, logElaborator logelaboration.LogElaborator) {
 	/*For each trace in the log segment...*/
 	for _, trace := range logSegment.Traces {
 		//traceId, _ := trace.GetId()
@@ -31,7 +32,7 @@ func HandleSegment(logSegment xes.XES, processName string, publicKey string, myr
 		if _, ok := traceMap[traceId]; ok && !traceMap[traceId][myreference] {
 			/*If the algorithm it's the HeuristicsMiner, we apply an incremental approach on the traces. Each completed trace is computed individually and increment the global result.*/
 			//TODO: THIS CHECK SHOULD BE REMOVED IN FUTURE VERSIONS FOR BETTER GENERALIZATION.
-			if algorithm == "HeuristicsMiner" {
+			if algorithm == "HeuristicsMiner" || algorithm == "IncrementalDeclareConformance" {
 				/*Mark the trace of the provisioner as arrived*/
 				traceMap[traceId][myreference] = true
 				/*If each provisioner has delivered the trace*/
@@ -60,7 +61,9 @@ func HandleSegment(logSegment xes.XES, processName string, publicKey string, myr
 						FIRSTCOMP = true
 					}
 					/*Use the log elaborator and apply the HeuristicsMiner algorithm on the merged trace*/
-					logElaborator.ApplyAlgorithm(algorithm, processName, logWithMergedTrace)
+					logElaborator.ApplyAlgorithm(algorithm, processName, logWithMergedTrace, declareModelPath)
+					/*Remove the trace after its use*/
+					reset.DeleteAllFilesInSubfolders("/mining-data/consumption-data/" + processName + "/trace_" + traceId)
 				} else /*If some provisioner has not already sent its trace...*/ {
 					/*Store the trace in memory*/
 					storeTrace(processName, traceId, trace, url.PathEscape(fmt.Sprintf("%d", time.Now().UnixNano()/int64(time.Millisecond))))
@@ -68,7 +71,7 @@ func HandleSegment(logSegment xes.XES, processName string, publicKey string, myr
 			}
 			/*If the algorithm is DeclareConformance, we adopt a lazy computation approach. Therefore, we compute just one time, when the whole log is completed.*/
 			//TODO THIS CHECK SHOULD BE REMOVED FOR BETTER GENERALIZATION (AS PER HEURISTICSMINER)
-			if algorithm == "DeclareConformance" {
+			if algorithm == "DeclareConformance" || algorithm == "ClassicHeuristics" {
 				/*Set the trace from*/
 				traceMap[traceId][myreference] = true
 				mergedTrace := xes.Trace{}
@@ -98,7 +101,7 @@ func HandleSegment(logSegment xes.XES, processName string, publicKey string, myr
 		if allTracesCollected(traceMap) {
 			/*In this case, we can apply the DeclareConformance algorithm*/
 			//TODO this check should be removed for better generalization
-			if algorithm == "DeclareConformance" {
+			if algorithm == "DeclareConformance" || algorithm == "ClassicHeuristics" {
 				/*Collect all the merged traces*/
 				finalLog := collectMergedTraces(processName)
 				if !FIRSTCOMP {
@@ -106,7 +109,13 @@ func HandleSegment(logSegment xes.XES, processName string, publicKey string, myr
 					FIRSTCOMP = true
 				}
 				/*Apply the DeclareConformance algorithm on the merged traces*/
-				logElaborator.ApplyAlgorithm(algorithm, processName, finalLog)
+				if algorithm == "ClassicHeuristics" {
+					logElaborator.ApplyAlgorithm("HeuristicsMiner", processName, finalLog, declareModelPath)
+				}
+				if algorithm == "DeclareConformance" {
+					logElaborator.ApplyAlgorithm(algorithm, processName, finalLog, declareModelPath)
+				}
+				reset.DeleteAllFilesInSubfolders("/mining-data/consumption-data/" + processName)
 			}
 			/*Print for testing*/
 			fmt.Println("TESTMODE - TEST ENDED AT: ", time.Now().UnixMilli())
@@ -196,5 +205,3 @@ func storeTrace(processName string, traceId string, trace xes.Trace, fileName st
 //	}
 //	//}
 //}
-
-

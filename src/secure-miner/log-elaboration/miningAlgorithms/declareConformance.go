@@ -3,7 +3,9 @@ package prosessMiningAlgorithms
 import (
 	"app/utils/xes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -17,6 +19,7 @@ type Tuple struct {
 	Value0 string
 	Value1 string
 }
+
 /*String labels of the Declare contraints*/
 var RESPONDED_EXISTENCE = "responded_existence"
 var EXISTENCE = "existence"
@@ -47,8 +50,54 @@ func DeclareConformance(eventLog xes.XES, modelPath string) {
 	//Write result in a json file
 	ginoBytes, _ := json.Marshal(result)
 	err = ioutil.WriteFile("mining-data/output/declareConformance.json", ginoBytes, 0644)
+}
+func IncrementalDeclareConformance(eventLog xes.XES, modelPath string) {
+	processModelByets, err := ioutil.ReadFile(modelPath)
+	jsonModelStructure := make(map[string]map[string]map[string]int)
+	err = json.Unmarshal(processModelByets, &jsonModelStructure)
+	if err != nil {
+		print(err.Error())
+	}
+	// Apply the algorithm to get the result
+	result := applyAlgorithm(eventLog.XesToSlices(), jsonModelStructure, nil)
+
+	// Read existing JSON file if it exists
+	existingResults := []map[string]interface{}{}
+	filePath := "mining-data/output/declareConformance.json"
+	if _, err := os.Stat(filePath); err == nil {
+		// File exists, read it
+		existingFileBytes, err := ioutil.ReadFile(filePath)
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+		err = json.Unmarshal(existingFileBytes, &existingResults)
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+	}
+
+	// Append the new results to the existing results
+	for _, res := range result {
+		existingResults = append(existingResults, res)
+	}
+
+	// Marshal the combined results to JSON
+	ginoBytes, err := json.Marshal(existingResults)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	// Write the updated JSON to the file
+	err = ioutil.WriteFile(filePath, ginoBytes, 0644)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
 
 }
+
 /*Print the results of the conformance checking*/
 func printConformanceResult(result []map[string]interface{}) {
 	for _, v := range result {
@@ -117,6 +166,7 @@ func applyAlgorithm(projectedLog [][]string, model map[string]map[string]map[str
 	}
 	return confCases
 }
+
 /*Existence constraint check*/
 func checkExistence(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, parameters map[interface{}]interface{}) {
 	if existence, ok := model[EXISTENCE]; ok {
@@ -129,6 +179,7 @@ func checkExistence(trace []string, model map[string]map[string]map[string]int, 
 		}
 	}
 }
+
 /*Not existence constraints check*/
 func checkAbsence(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, parameters map[interface{}]interface{}) {
 	if _, ok := model[ABSENCE]; ok {
@@ -141,6 +192,7 @@ func checkAbsence(trace []string, model map[string]map[string]map[string]int, tr
 		}
 	}
 }
+
 /*Check exactly one constraint check*/
 func checkExactlyOne(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, parameters map[interface{}]interface{}) {
 	if val, ok := model[EXACTLY_ONE]; ok {
@@ -157,6 +209,7 @@ func checkExactlyOne(trace []string, model map[string]map[string]map[string]int,
 		}
 	}
 }
+
 /*Responded existence constrait check*/
 func checkRespondedExistence(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}) {
 	if val, ok := model[RESPONDED_EXISTENCE]; ok {
@@ -170,6 +223,7 @@ func checkRespondedExistence(trace []string, model map[string]map[string]map[str
 		}
 	}
 }
+
 /*Init constraint check*/
 func checkInit(trace []string, model map[string]map[string]map[string]int, traceDict map[string]interface{}, parameters map[interface{}]interface{}) {
 	if val, ok := model[INIT]; ok {
