@@ -52,7 +52,7 @@ func main() {
 	for true {
 		time.Sleep(2000 * time.Millisecond)
 		fmt.Println()
-		fmt.Printf("Command list:\n1: CONFINE INCREMENTAL DISCOVERY - Discover process model with the incremental HeuristicsMiner via CONFINE protocol\n3: CONFINE CLASSICAL DISCOVERY - Discover process model with classical HeuristicsMiner via CONFINE protocol\n3: CONFINE CONFORMANCE CHEKCING - Declare conformance checking via CONFINE protocol \n3: Classic HeuristicsMiner execution using the local event log at '/mining-data/provision-data/process-01/event_log.xes'\n4: Show TLS public key of the secure miner\n")
+		fmt.Printf("Command list:\n1: CONFINE WITH INCREMENTAL DISCOVERY - Discover process model with the incremental HeuristicsMiner via CONFINE protocol\n2: CONFINE WITH NON-INCREMENTAL DISCOVERY - Discover process model with non incremental HeuristicsMiner via CONFINE protocol\n3: CONFINE WITH INCREMENTAL CONFORMANCE CHECKING - Incremental Declare Conformance checking via CONFINE protocol \n4: CONFINE WITH NON-INCREMENTAL CONFORMANCE CHECKING - Non-incremental Declare Conformance checking via CONFINE protocol \n5: Classic HeuristicsMiner execution using the local event log at '/mining-data/provision-data/process-01/event_log.xes'\n6: Show TLS public key of the secure miner\n")
 		fmt.Println()
 		var command string
 		fmt.Scanln(&command)

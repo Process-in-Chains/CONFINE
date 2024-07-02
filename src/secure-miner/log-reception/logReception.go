@@ -63,16 +63,16 @@ func NewLogReceiver(port int) *LogReceiver {
 	/*Define the handlers for the /cert, /report and /secret HTTP functions*/
 	handler := http.NewServeMux()
 	handler.HandleFunc("/cert", func(w http.ResponseWriter, r *http.Request) {
+		if !FIRSTATT {
+			fmt.Println("TESTMODE - FIRST ATTESTATION AT:", time.Now().UnixMilli())
+			FIRSTATT = true
+		}
 		if DEBUG {
 			fmt.Println("New certificate request received")
 		}
 		w.Write(cert)
 	})
 	handler.HandleFunc("/report", func(w http.ResponseWriter, r *http.Request) {
-		if !FIRSTATT {
-			fmt.Println("TESTMODE - FIRST ATTESTATION AT:", time.Now().UnixMilli())
-			FIRSTATT = true
-		}
 		if DEBUG {
 			fmt.Println("New report request received")
 		}

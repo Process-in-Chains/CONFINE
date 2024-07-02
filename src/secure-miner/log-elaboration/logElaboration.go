@@ -11,7 +11,7 @@ type LogElaborator struct {
 }
 
 func NewLogElaborator() *LogElaborator {
-	logElaborator := &LogElaborator{algorithms: []string{"HeuristicsMiner", "DeclareConformance"}}
+	logElaborator := &LogElaborator{algorithms: []string{"HeuristicsMiner", "DeclareConformance", "IncrementalDeclareConformance"}}
 	return logElaborator
 }
 
