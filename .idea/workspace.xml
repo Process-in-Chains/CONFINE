@@ -8,8 +8,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app" beforeDir="false" afterPath="$PROJECT_DIR$/src/app" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-elaboration/logElaboration.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/logElaboration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/heuristicMiner.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-elaboration/miningAlgorithms/heuristicMiner.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-management/logManagement.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-management/logManagement.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-request/logRequest.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-request/logRequest.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/test/test.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/test/test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +89,7 @@
       <window_info id="Pull Requests" show_stripe_button="false" />
       <window_info id="Learn" show_stripe_button="false" />
       <window_info id="DFA" show_stripe_button="false" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.2768014" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17888823" />
       <window_info id="Commit" order="1" weight="0.25" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />

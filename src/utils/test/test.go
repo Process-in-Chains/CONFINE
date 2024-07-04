@@ -11,6 +11,7 @@ import (
 )
 
 var STOPMONITORING = false
+var TEST_MODE = false
 
 func PrintRamUsage() {
 	var ramList = []int{}
@@ -18,14 +19,6 @@ func PrintRamUsage() {
 	for !STOPMONITORING {
 		var m runtime.MemStats
 		runtime.ReadMemStats(&m)
-		//ramList = append(ramList, int(m.Alloc))
-		//total_size, err := getSize("./mining-data/consumption-data")
-		//if err != nil {
-		//		total_size = 0
-		//		fmt.Println("empty")
-		//	} else {
-		//		fmt.Println(total_size)
-		//}
 		ramList = append(ramList, int(m.Alloc))
 		timestampList = append(timestampList, int(time.Now().UnixMilli()))
 		time.Sleep(100 * time.Millisecond)

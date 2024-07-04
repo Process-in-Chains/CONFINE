@@ -57,7 +57,9 @@ func HandleSegment(logSegment xes.XES, processName string, publicKey string, myr
 					traceArray = append(traceArray, mergedTrace)
 					logWithMergedTrace := xes.XES{Traces: traceArray}
 					if !FIRSTCOMP {
-						fmt.Println("TESTMODE - FIRST COMPUTATION AT:", time.Now().UnixMilli())
+						if test.TEST_MODE {
+							fmt.Println("TESTMODE - FIRST COMPUTATION AT:", time.Now().UnixMilli())
+						}
 						FIRSTCOMP = true
 					}
 					/*Use the log elaborator and apply the HeuristicsMiner algorithm on the merged trace*/
@@ -105,7 +107,9 @@ func HandleSegment(logSegment xes.XES, processName string, publicKey string, myr
 				/*Collect all the merged traces*/
 				finalLog := collectMergedTraces(processName)
 				if !FIRSTCOMP {
-					fmt.Println("TESTMODE - FIRST COMPUTATION AT:", time.Now().UnixMilli())
+					if test.TEST_MODE {
+						fmt.Println("TESTMODE - FIRST COMPUTATION AT:", time.Now().UnixMilli())
+					}
 					FIRSTCOMP = true
 				}
 				/*Apply the DeclareConformance algorithm on the merged traces*/
@@ -118,7 +122,9 @@ func HandleSegment(logSegment xes.XES, processName string, publicKey string, myr
 				reset.DeleteAllFilesInSubfolders("/mining-data/consumption-data/" + processName)
 			}
 			/*Print for testing*/
-			fmt.Println("TESTMODE - TEST ENDED AT: ", time.Now().UnixMilli())
+			if test.TEST_MODE {
+				fmt.Println("TESTMODE - TEST ENDED AT: ", time.Now().UnixMilli())
+			}
 			test.STOPMONITORING = true
 		}
 	}

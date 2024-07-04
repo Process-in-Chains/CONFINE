@@ -6,6 +6,7 @@ import (
 	logmanagement "app/secure-miner/log-management"
 	"app/utils/collaborators"
 	"app/utils/encryption"
+	"app/utils/test"
 	"app/utils/xes"
 	"context"
 	"crypto"
@@ -64,7 +65,9 @@ func NewLogReceiver(port int) *LogReceiver {
 	handler := http.NewServeMux()
 	handler.HandleFunc("/cert", func(w http.ResponseWriter, r *http.Request) {
 		if !FIRSTATT {
-			fmt.Println("TESTMODE - FIRST ATTESTATION AT:", time.Now().UnixMilli())
+			if test.TEST_MODE {
+				fmt.Println("TESTMODE - FIRST ATTESTATION AT:", time.Now().UnixMilli())
+			}
 			FIRSTATT = true
 		}
 		if DEBUG {
@@ -169,7 +172,9 @@ func secretLogHandler(w http.ResponseWriter, r *http.Request, logReceiver *LogRe
 	} else { /*If the message it's a log segment...*/
 		/*Check for the tests*/
 		if !FIRSTTS {
-			println("TESTMODE - FIRST SEGMENT RECEIVED AT:", time.Now().UnixMilli())
+			if test.TEST_MODE {
+				println("TESTMODE - FIRST SEGMENT RECEIVED AT:", time.Now().UnixMilli())
+			}
 			FIRSTTS = true
 		}
 		/*Parse the attributes of the POST form*/

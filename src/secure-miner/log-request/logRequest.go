@@ -2,6 +2,7 @@ package logrequest
 
 import (
 	"app/utils/collaborators"
+	"app/utils/test"
 	"crypto/rsa"
 	"crypto/tls"
 	"crypto/x509"
@@ -19,7 +20,9 @@ import (
 
 /*This function contains the logic of the Secure Miner's Log Requester*/
 func LogRequest(processName string, receiverPort string, segmentsize int) {
-	println("TESTMODE - INITIALIZATION STARTED AT:", time.Now().UnixMilli())
+	if test.TEST_MODE {
+		println("TESTMODE - INITIALIZATION STARTED AT:", time.Now().UnixMilli())
+	}
 	//Initalize and write the trace map
 	globalTracesMap := make(map[string]map[string]bool)
 	_ = os.MkdirAll("./mining-data/consumption-data/"+processName+"/miningMetadata", os.ModePerm)

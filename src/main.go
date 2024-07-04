@@ -29,11 +29,15 @@ var DeclareProcessModelPath = ""
 func main() {
 	var port string
 	var segmentsize int
-	var TESTMODE bool
+	var TESTMODESTR string
 	flag.StringVar(&port, "port", "", "Port number")
+	flag.StringVar(&TESTMODESTR, "test", "false", "Test mode")
 	flag.IntVar(&segmentsize, "segsize", 100, "Segement size to be processed in the TEE. Value in KB.")
-	flag.BoolVar(&TESTMODE, "test", false, "Test mode")
 	flag.Parse()
+	TESTMODE, err := strconv.ParseBool(TESTMODESTR)
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
 	if port == "" {
 		fmt.Println("Missing port number")
 		return
@@ -60,24 +64,28 @@ func main() {
 		if command == "1" {
 			if TESTMODE {
 				test.STOPMONITORING = false
+				test.TEST_MODE = true
 				go test.PrintRamUsage()
 				println("TESTMODE - TEST STARTED AT: ", time.Now().UnixMilli())
 			}
 			logReceiver.SetAlgorithm("HeuristicsMiner")
 			logrequest.LogRequest("process-01", port, segmentsize)
 			test.WaitUntilStop()
-
+			time.Sleep(1000 * time.Millisecond)
+			fmt.Println("Process discovery with HeuristicsMiner completed! Process model saved at /mining-data/output/heuristicsMiner_output.pnml")
 		}
 		if command == "2" {
 			if TESTMODE {
 				test.STOPMONITORING = false
+				test.TEST_MODE = true
 				go test.PrintRamUsage()
 				println("TESTMODE - TEST STARTED AT: ", time.Now().UnixMilli())
 			}
 			logReceiver.SetAlgorithm("ClassicHeuristics")
 			logrequest.LogRequest("process-01", port, segmentsize)
 			test.WaitUntilStop()
-
+			time.Sleep(1000 * time.Millisecond)
+			fmt.Println("Process discovery with HeuristicsMiner completed! Process model saved at /mining-data/output/heuristicsMiner_output.pnml")
 		}
 		/*This command initiates the CONFINE protocol with DeclareConformance (conformance checking algorithm)*/
 		if command == "3" {
@@ -92,6 +100,7 @@ func main() {
 				DeclareProcessModelPath = "./mining-data/input/" + processmodelpath
 				if TESTMODE {
 					test.STOPMONITORING = false
+					test.TEST_MODE = true
 					go test.PrintRamUsage()
 					println("TESTMODE - TEST STARTED AT: ", time.Now().UnixMilli())
 				}
@@ -99,6 +108,8 @@ func main() {
 				logReceiver.SetProcessModel("./mining-data/input/" + processmodelpath)
 				logrequest.LogRequest("process-01", port, segmentsize)
 				test.WaitUntilStop()
+				time.Sleep(1000 * time.Millisecond)
+				fmt.Println("Conformance checking with DeclareConformance completed! Conformance results saved at /mining-data/output/declareConformance.json")
 			}
 		}
 		if command == "4" {
@@ -113,6 +124,7 @@ func main() {
 				DeclareProcessModelPath = "./mining-data/input/" + processmodelpath
 				if TESTMODE {
 					test.STOPMONITORING = false
+					test.TEST_MODE = true
 					go test.PrintRamUsage()
 					println("TESTMODE - TEST STARTED AT: ", time.Now().UnixMilli())
 				}
@@ -120,6 +132,8 @@ func main() {
 				logReceiver.SetProcessModel("./mining-data/input/" + processmodelpath)
 				logrequest.LogRequest("process-01", port, segmentsize)
 				test.WaitUntilStop()
+				time.Sleep(1000 * time.Millisecond)
+				fmt.Println("Conformance checking with DeclareConformance completed! Conformance results saved at /mining-data/output/declareConformance.json")
 			}
 		}
 		/*This command initiates the mining process using 'event_log.xes' located in './mining-data/provision-data/process-01'.*/

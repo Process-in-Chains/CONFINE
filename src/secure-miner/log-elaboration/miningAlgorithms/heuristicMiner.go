@@ -560,7 +560,7 @@ func causalMatrixtoPnml(cm map[string]causalMatrix, processName string) (bool, P
 		return false, pnml
 	}
 	// Create and write PNML file
-	file, err := os.Create("./mining-data/output/" + processName + "_output.pnml")
+	file, err := os.Create("./mining-data/output/" + "heuristicsMiner_output.pnml")
 	//file, err := os.Create("output/" + processName + "_" + strconv.Itoa(int(timestamp)) + ".pnml")
 	if err != nil {
 		fmt.Println("Error creating file:", err)
@@ -619,7 +619,7 @@ func searchNewDependecyLongDistance2(dependencyMatrix2 [][]dependencyMeasure, ev
 
 	// Create and write PNML file
 	//file, err := os.Create("output/" + processName + "_" + strconv.Itoa(int(timestamp)) + ".pnml")
-	file, err := os.Create("./mining-data/output/" + processName + "_output.pnml")
+	file, err := os.Create("./mining-data/output/" + "heuristicsMiner_output.pnml")
 	if err != nil {
 		fmt.Println("Error creating file:", err)
 		return n, false
@@ -736,6 +736,5 @@ func HeuristicMiner(ev [][]string, processName string) {
 				fmt.Println("\n\nN place added with distance=2: ", n)
 			}
 		}
-		//fmt.Println("PNML file for process " + processName + " created successfully.")
 	}
 }
