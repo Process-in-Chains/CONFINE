@@ -5,7 +5,6 @@ import (
 	"app/secure-miner/log-elaboration"
 	logmanagement "app/secure-miner/log-management"
 	"app/utils/collaborators"
-	"app/utils/encryption"
 	"app/utils/test"
 	"app/utils/xes"
 	"context"
@@ -46,6 +45,7 @@ type LogReceiver struct {
 	algorithm        string
 	declareModelPath string
 	tlsCertificate   []byte
+	privateKey       crypto.PrivateKey
 	logElaborator    *logelaboration.LogElaborator
 }
 
@@ -54,7 +54,7 @@ func NewLogReceiver(port int) *LogReceiver {
 	/*Generate a certificate and a private key for TLS with the provisioner.*/
 	cert, priv := createCertificate()
 	hash := sha256.Sum256(cert)
-	s := &LogReceiver{port: port, tlsCertificate: cert}
+	s := &LogReceiver{port: port, tlsCertificate: cert, privateKey: priv}
 	/*Generate the report (i.e., the attestation evidence) signed by the hardware's TEE. The report contains the hashed TLS certificate	*/
 	//TODO REPORT GENERATION AND SIGNING SHOULD BE MOVED IN /report REQUETS. ADD NONCE IN THE PROTOCOL TO AVOID REPLAY ATTACKS.
 	report, err := enclave.GetRemoteReport(hash[:])
@@ -113,6 +113,10 @@ func (s *LogReceiver) SetProcessModel(declareModelPath string) {
 
 func (s *LogReceiver) GetTLSCertificate() []byte {
 	return s.tlsCertificate
+}
+
+func (s *LogReceiver) GetTLSPrivateKey() crypto.PrivateKey {
+	return s.privateKey
 }
 
 /*Function to start the LogReceiver's server*/
@@ -180,26 +184,9 @@ func secretLogHandler(w http.ResponseWriter, r *http.Request, logReceiver *LogRe
 		/*Parse the attributes of the POST form*/
 		eventLog := r.Form.Get("secret")
 		_ = r.Form.Get("segmentNumber")
-		senderPublicKey := r.Form.Get("publicKey")
 		senderReference := r.Form.Get("myreference")
-		privateKeyPath := "./private.pem"
-		privateKey, err := encryption.LoadPrivateKeyFromFile(privateKeyPath)
-		if err != nil {
-			log.Fatal("Error loading private key:", err)
-		}
-		key := r.Form.Get("key")
-		/*Decrypt the symmetric key using RSA*/
-		symKey, err := encryption.DecryptSymmetricKey([]byte(key), privateKey)
-		if err != nil {
-			log.Fatal("Error decrypting symmetric key:", err)
-		}
-		/*Decrypt the XES data using AES*/
-		decryptedData, err := encryption.DecryptXES([]byte(eventLog), symKey)
-		if err != nil {
-			log.Fatal("Error decrypting XES data:", err)
-		}
 		/*Parse the XES*/
-		xesSegment := xes.ParseXes(decryptedData)
+		xesSegment := xes.ParseXes([]byte(eventLog))
 		mutex.Lock()
 		/*Read the json containing the map of the traces received */
 		writtenTraceMap, err := ioutil.ReadFile("mining-data/consumption-data/process-01/traceMap.json")
@@ -219,7 +206,7 @@ func secretLogHandler(w http.ResponseWriter, r *http.Request, logReceiver *LogRe
 		algorithm := logReceiver.algorithm
 		declareModelPath := logReceiver.declareModelPath
 		/*Call the trace handler*/
-		logmanagement.HandleSegment(*xesSegment, "process-01", senderPublicKey, senderReference, reference.MergeKey, readTraceMap, algorithm, declareModelPath, *logReceiver.logElaborator)
+		logmanagement.HandleSegment(*xesSegment, "process-01", senderReference, reference.MergeKey, readTraceMap, algorithm, declareModelPath, *logReceiver.logElaborator)
 		mutex.Unlock()
 		/*Send response to the provisioner*/
 		response, _ := prepareResponse(true)

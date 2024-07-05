@@ -26,7 +26,6 @@ func HttpPOST(tlsConfig *tls.Config, posturl string, formData url.Values) []byte
 		fmt.Println("Failed to read response body:", err)
 		return nil
 	}
-	fmt.Println("Response:", string(body))
 	defer response.Body.Close()
 	return body
 }

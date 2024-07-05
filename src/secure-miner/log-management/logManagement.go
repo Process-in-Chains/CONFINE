@@ -19,7 +19,7 @@ import (
 var FIRSTCOMP = false
 
 /*This function handles a log segment sent by a provisioner to the Secure Miner*/
-func HandleSegment(logSegment xes.XES, processName string, publicKey string, myreference string, mergekey string, traceMap map[string]map[string]bool, algorithm string, declareModelPath string, logElaborator logelaboration.LogElaborator) {
+func HandleSegment(logSegment xes.XES, processName string, myreference string, mergekey string, traceMap map[string]map[string]bool, algorithm string, declareModelPath string, logElaborator logelaboration.LogElaborator) {
 	/*For each trace in the log segment...*/
 	for _, trace := range logSegment.Traces {
 		//traceId, _ := trace.GetId()

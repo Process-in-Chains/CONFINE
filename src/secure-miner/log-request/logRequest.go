@@ -2,12 +2,15 @@ package logrequest
 
 import (
 	"app/utils/collaborators"
+	"app/utils/encryption"
 	"app/utils/test"
+	"crypto"
+	"crypto/rand"
 	"crypto/rsa"
 	"crypto/tls"
 	"crypto/x509"
+	"encoding/base64"
 	"encoding/json"
-	"encoding/pem"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -19,7 +22,7 @@ import (
 )
 
 /*This function contains the logic of the Secure Miner's Log Requester*/
-func LogRequest(processName string, receiverPort string, segmentsize int) {
+func LogRequest(processName string, receiverPort string, segmentsize int, TLScert []byte, minerPrivateKey crypto.PrivateKey) {
 	if test.TEST_MODE {
 		println("TESTMODE - INITIALIZATION STARTED AT:", time.Now().UnixMilli())
 	}
@@ -65,18 +68,21 @@ func LogRequest(processName string, receiverPort string, segmentsize int) {
 	//TODO: HERE WE ARE NOT CHECKING THE VALIDITY OF THE PROVISIONER SERVICE. WE SHOULD DO IT OR USE SOME CERTIFICATE.
 	tlsConfig := &tls.Config{InsecureSkipVerify: true}
 	//Get the organization public key to be identified by the collaborators
-	//MOVE THE PUBLIC KEY FILES HERE---------------------------------------------------------------------------------------------------------------------------------------------------
-	organizationPublicKey := readPublicKey()
+	cert, _ := x509.ParseCertificate(TLScert)
+	organizationPublicKeyBytes, _ := x509.MarshalPKIXPublicKey(cert.PublicKey)
 	//Turn the public key into bytes
-	organizationPublicKeyBytes, err := x509.MarshalPKIXPublicKey(&organizationPublicKey)
+	//organizationPublicKeyBytes, err := x509.MarshalPKIXPublicKey(&organizationPublicKey)
 	if err != nil {
 		log.Fatal(err)
 	}
 	//Iterate over collaborators and get their tracelists
+	if err != nil {
+		log.Fatalf("failed to sign message: %v", err)
+	}
 	for _, item := range references {
 		httpReference := item.WebReference
 		//TODO HERE THE RESPONSE SHOULD BE ENCRYPTED WITH THE MINER'S ORGANIZATION PUBLIC KEY. THE CLIENT SHOULD DECRYPT THE RESPONSE WITH ITS ORGANIZATION'S PRIVATE KEY.
-		response := httpPOST(tlsConfig, httpReference+"/tracelistrequest", string(organizationPublicKeyBytes), "https://localhost:"+receiverPort, segmentsize, "")
+		response := httpPOST(tlsConfig, httpReference+"/tracelistrequest", string(organizationPublicKeyBytes), "https://localhost:"+receiverPort, segmentsize, "", string(TLScert))
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -85,15 +91,37 @@ func LogRequest(processName string, receiverPort string, segmentsize int) {
 		if err != nil {
 			fmt.Println(err)
 		}
+		//Extract the sym key from the http response
+		encryptedSymKeyBase64 := wrapperResponse["encryptedKey"]
+		encryptedKey, err := base64.StdEncoding.DecodeString(encryptedSymKeyBase64)
+		if err != nil {
+			log.Fatalf("failed to decode base64 encoded encrypted key: %v", err)
+		}
+		//Decrypt the symetric key with the private key of the miner TLS certificate
+		decryptedKey, err := rsa.DecryptPKCS1v15(rand.Reader, minerPrivateKey.(*rsa.PrivateKey), encryptedKey)
+		if err != nil {
+			log.Fatalf("failed to decrypt key: %v", err)
+		}
+		//Extract the encrypted trace list from the http resposne
+		encryptedTraceListBase64 := wrapperResponse["traceList"]
+		encryptedTraceList, err := base64.StdEncoding.DecodeString(encryptedTraceListBase64)
+		if err != nil {
+			log.Fatalf("failed to decode base64 encoded encrypted trace list: %v", err)
+		}
+		//Decrypt the trace list with the decrypted symetric key
+		decryptedTraceList, err := encryption.DecryptXES(encryptedTraceList, decryptedKey)
+		if err != nil {
+			log.Fatalf("failed to decrypt trace list with sym key %v", err)
+		}
 		var responseJson map[string]string
-		err = json.Unmarshal([]byte(wrapperResponse["traceList"]), &responseJson)
+		//err = json.Unmarshal([]byte(wrapperResponse["traceList"]), &responseJson)
+		err = json.Unmarshal(decryptedTraceList, &responseJson)
 		if err != nil {
 			log.Fatal(err)
 		}
 		for trId, _ := range responseJson {
 			if _, ok := readTraceMap[trId]; ok {
 				readTraceMap[trId][httpReference] = false
-				//TODO: IF OK=FALSE (LOOK ABOVE) THEN THE TRACE IS NOT OWNED BY THE MINER SO A NEW ENTRY SHOULD BE ADDED IN THE TRACEMAP WITH THE ID OF THE TRACE. YOU SHOULD DO ALSO ALL THE STUFF IN _X_
 			} else {
 				/*h is the header, it's not a case reference*/
 				if trId != "h" {
@@ -127,17 +155,17 @@ func LogRequest(processName string, receiverPort string, segmentsize int) {
 	}
 	for _, item := range references {
 		httpReference := item.WebReference
-		go httpPOST(tlsConfig, httpReference+"/logrequest", string(organizationPublicKeyBytes), "https://localhost:"+receiverPort, segmentsize, string(traceListByte))
+		go httpPOST(tlsConfig, httpReference+"/logrequest", string(organizationPublicKeyBytes), "https://localhost:"+receiverPort, segmentsize, string(traceListByte), string(TLScert))
 	}
 }
-func httpPOST(tlsConfig *tls.Config, posturl string, publicKey string, logreceiver string, segmentSize int, loglist string) []byte {
+func httpPOST(tlsConfig *tls.Config, posturl string, publicKey string, logreceiver string, segmentSize int, loglist string, TLScert string) []byte {
 	client := &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: tlsConfig,
 		},
 	}
 	// Prepare the form data
-	formData := url.Values{"logreceiver": {logreceiver}, "publicKey": {publicKey}, "segmentSize": {strconv.Itoa(segmentSize)}, "loglist": {loglist}}
+	formData := url.Values{"logreceiver": {logreceiver}, "publicKey": {publicKey}, "segmentSize": {strconv.Itoa(segmentSize)}, "loglist": {loglist}, "tlsCert": {TLScert}}
 	// Send the POST request
 	response, err := client.PostForm(posturl, formData)
 	if err != nil {
@@ -155,27 +183,4 @@ func httpPOST(tlsConfig *tls.Config, posturl string, publicKey string, logreceiv
 	//fmt.Println("Response:", string(body))
 	defer response.Body.Close()
 	return body
-}
-func readPublicKey() rsa.PublicKey {
-	// Read the contents of the PEM file
-	pemData, err := ioutil.ReadFile("./public.pem")
-	if err != nil {
-		fmt.Println("Error reading PEM file:", err)
-	}
-	// Decode the PEM data
-	block, _ := pem.Decode(pemData)
-	if block == nil {
-		fmt.Println("Failed to decode PEM block")
-	}
-	// Parse the DER-encoded public key
-	pubKey, err := x509.ParsePKIXPublicKey(block.Bytes)
-	if err != nil {
-		fmt.Println("Error parsing public key:", err)
-	}
-	// Assert the type of the public key to RSA
-	rsaPubKey, ok := pubKey.(*rsa.PublicKey)
-	if !ok {
-		fmt.Println("Public key is not an RSA key")
-	}
-	return *rsaPubKey
 }

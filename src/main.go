@@ -69,7 +69,7 @@ func main() {
 				println("TESTMODE - TEST STARTED AT: ", time.Now().UnixMilli())
 			}
 			logReceiver.SetAlgorithm("HeuristicsMiner")
-			logrequest.LogRequest("process-01", port, segmentsize)
+			logrequest.LogRequest("process-01", port, segmentsize, logReceiver.GetTLSCertificate(), logReceiver.GetTLSPrivateKey())
 			test.WaitUntilStop()
 			time.Sleep(1000 * time.Millisecond)
 			fmt.Println("Process discovery with HeuristicsMiner completed! Process model saved at /mining-data/output/heuristicsMiner_output.pnml")
@@ -82,7 +82,7 @@ func main() {
 				println("TESTMODE - TEST STARTED AT: ", time.Now().UnixMilli())
 			}
 			logReceiver.SetAlgorithm("ClassicHeuristics")
-			logrequest.LogRequest("process-01", port, segmentsize)
+			logrequest.LogRequest("process-01", port, segmentsize, logReceiver.GetTLSCertificate(), logReceiver.GetTLSPrivateKey())
 			test.WaitUntilStop()
 			time.Sleep(1000 * time.Millisecond)
 			fmt.Println("Process discovery with HeuristicsMiner completed! Process model saved at /mining-data/output/heuristicsMiner_output.pnml")
@@ -106,7 +106,7 @@ func main() {
 				}
 				logReceiver.SetAlgorithm("IncrementalDeclareConformance")
 				logReceiver.SetProcessModel("./mining-data/input/" + processmodelpath)
-				logrequest.LogRequest("process-01", port, segmentsize)
+				logrequest.LogRequest("process-01", port, segmentsize, logReceiver.GetTLSCertificate(), logReceiver.GetTLSPrivateKey())
 				test.WaitUntilStop()
 				time.Sleep(1000 * time.Millisecond)
 				fmt.Println("Conformance checking with DeclareConformance completed! Conformance results saved at /mining-data/output/declareConformance.json")
@@ -130,7 +130,7 @@ func main() {
 				}
 				logReceiver.SetAlgorithm("DeclareConformance")
 				logReceiver.SetProcessModel("./mining-data/input/" + processmodelpath)
-				logrequest.LogRequest("process-01", port, segmentsize)
+				logrequest.LogRequest("process-01", port, segmentsize, logReceiver.GetTLSCertificate(), logReceiver.GetTLSPrivateKey())
 				test.WaitUntilStop()
 				time.Sleep(1000 * time.Millisecond)
 				fmt.Println("Conformance checking with DeclareConformance completed! Conformance results saved at /mining-data/output/declareConformance.json")
