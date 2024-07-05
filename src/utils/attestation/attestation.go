@@ -7,12 +7,17 @@ import (
 	"crypto/sha256"
 	"crypto/tls"
 	"crypto/x509"
+	"encoding/base64"
 	"encoding/hex"
+	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/edgelesssys/ego/attestation"
 	"github.com/edgelesssys/ego/attestation/tcbstatus"
 	"github.com/edgelesssys/ego/eclient"
+	"io/ioutil"
 	"log"
+	"os"
 )
 
 /*NOTE for remote attestation: if in the /etc/sgx_default_qcnl.conf file the field 'collateral_service' field should be commented
@@ -27,7 +32,7 @@ func RemoteAttestation(serverAddr string, expectedMeasurement []byte) ([]byte, [
 	minerCertBytes := http.HttpGet(tlsConfig, serverAddr+"/cert")
 	// Validate the certificate
 	if ValidateCertificate(minerCertBytes) != nil {
-		panic(errors.New("TLS certificate is not valid"))
+		panic(errors.New("Miner's TLS certificate is not valid"))
 	}
 	//Use the miner's organization TLS certificate to get the report.
 	//Create a TLS config that uses the server certificate as root CA so that future connections to the server can be verified.
@@ -89,7 +94,9 @@ func ValidateCertificate(certBytes []byte) error {
 	//Extract the public key from the certificate
 	pubKey := cert.PublicKey.(*rsa.PublicKey)
 	//Verifies if the public key of the certificate belongs to an authorized miner organization
-	if !isFromExpectedOrganization(pubKey) {
+	pubBytes, _ := x509.MarshalPKIXPublicKey(pubKey)
+
+	if !isFromExpectedOrganization(base64.StdEncoding.EncodeToString(pubBytes)) {
 		return errors.New("The certificate does not belong to an authorized miner organization")
 	}
 	log.Println("The provided certificate belongs to an authorized miner organization")
@@ -97,7 +104,27 @@ func ValidateCertificate(certBytes []byte) error {
 }
 
 /*Check if the certificate's public key belong to a known organization*/
-func isFromExpectedOrganization(pubKey *rsa.PublicKey) bool {
+func isFromExpectedOrganization(pubKey string) bool {
 	//TODO Implement a function that verifies if the public key belongs to an authorized miner organization
-	return true
+	// Step 1: Read the JSON file
+	file, err := os.Open("mining-data/provision-data/minerList.json")
+	if err != nil {
+		fmt.Println("Error opening file:", err)
+		return false
+	}
+	defer file.Close()
+	byteValue, _ := ioutil.ReadAll(file)
+	// Step 2: Parse the JSON content into a slice of strings
+	var keys []string
+	if err := json.Unmarshal(byteValue, &keys); err != nil {
+		fmt.Println("Error unmarshalling JSON:", err)
+		return false
+	}
+	// Step 3: Decode each public key string into a public key object
+	for _, keyStr := range keys {
+		if keyStr == pubKey {
+			return true
+		}
+	}
+	return false
 }

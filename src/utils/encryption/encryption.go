@@ -242,3 +242,22 @@ func GetReadablePublicKey(pubKey any) ([]byte, bool) {
 	pubPemBytes := pem.EncodeToMemory(pubPem)
 	return pubPemBytes, false
 }
+
+func ParsePublicKey(keyStr string) (interface{}, error) {
+	// Convert the key string to PEM format
+	pemKey := fmt.Sprintf("-----BEGIN PUBLIC KEY-----\n%s\n-----END PUBLIC KEY-----", keyStr)
+
+	// Decode the PEM formatted string
+	block, _ := pem.Decode([]byte(pemKey))
+	if block == nil {
+		return nil, fmt.Errorf("failed to decode PEM block containing public key")
+	}
+
+	// Parse the public key
+	pubKey, err := x509.ParsePKIXPublicKey(block.Bytes)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse public key: %w", err)
+	}
+
+	return pubKey, nil
+}
