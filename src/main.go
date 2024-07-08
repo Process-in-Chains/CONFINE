@@ -19,6 +19,10 @@ import (
 
 //ego-go build -buildvcs=false && ego sign enclave.json && sudo ego run ./app -segsize 2000 -port 8094 -test true
 ///cd Desktop/Davide/linux-sgx/external/dcap_source/QuoteGeneration/pccs/ && node pccs_server.js
+
+/*
+Run with sh script: 1)chmod +x runMiner.sh  2)./runMiner.sh
+*/
 /*
 Secure Miner main.
 It initializes the necessary variables, parses command-line arguments, starts the log receiver, and prompts the user for commands to execute.
@@ -56,7 +60,7 @@ func main() {
 	for true {
 		time.Sleep(2000 * time.Millisecond)
 		fmt.Println()
-		fmt.Printf("Command list:\n1: CONFINE WITH INCREMENTAL DISCOVERY - Discover process model with the incremental HeuristicsMiner via CONFINE protocol\n2: CONFINE WITH NON-INCREMENTAL DISCOVERY - Discover process model with non incremental HeuristicsMiner via CONFINE protocol\n3: CONFINE WITH INCREMENTAL CONFORMANCE CHECKING - Incremental Declare Conformance checking via CONFINE protocol \n4: CONFINE WITH NON-INCREMENTAL CONFORMANCE CHECKING - Non-incremental Declare Conformance checking via CONFINE protocol \n5: Classic HeuristicsMiner execution using the local event log at '/mining-data/provision-data/process-01/event_log.xes'\n6: Show TLS public key of the secure miner\n")
+		fmt.Printf("Command list:\n1: CONFINE DISCOVERY (INCREMENTAL) - Discover process model with the incremental HeuristicsMiner via CONFINE protocol\n2: CONFINE DISCOVERY (NON-INCREMENTAL) - Discover process model with non incremental HeuristicsMiner via CONFINE protocol\n3: CONFINE CONFORMANCE CHECKING (INCREMENTAL) - Incremental Declare Conformance checking via CONFINE protocol \n4: CONFINE CONFORMANCE CHECKING (NON-INCREMENTAL) - Non-incremental Declare Conformance checking via CONFINE protocol \n5: Classic HeuristicsMiner execution using the local event log at '/mining-data/provision-data/process-01/event_log.xes'\n6: Show TLS public key of the secure miner\n")
 		fmt.Println()
 		var command string
 		fmt.Scanln(&command)

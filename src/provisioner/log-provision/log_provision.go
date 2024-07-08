@@ -244,7 +244,7 @@ func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 	////TODO: Here you should remove sym key and the encryption process. No Encryption is needed. Now we have TLS
 	symKey := encryption.GenerateRandomDecryptionToken()
 	// Cripta la chiave simmetrica con RSA
-	//encryptedKey, _ := encryption.EncryptSymmetricKey(symKey, "./public.pem")
+	//encryptedKey, _ := encryption.EncryptSymmetricKey(symKey, "./developer_public.pem")
 	targetXes := xes.ReadXes(MYLOGPATH)
 	//TODO: FILTER XES HERE BEFORE SENDING(LOOK AT TODOS IN log-request AND log-provision)---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	hashList, err := xes.SplitXESFile2(*targetXes, batchSizeKB, "./mining-data/provision-data/"+PROCESSNAME+"/"+base64.StdEncoding.EncodeToString(symKey))
@@ -259,7 +259,7 @@ func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 	log.Println("Log segmentation completed with segment size " + strconv.Itoa(batchSizeKB) + "KB" + ". Number of segments: " + strconv.Itoa(len(hashList)))
 	// Conversione in kilobyte
 	fileSizeKB := int(fileInfo.Size() / 1024)
-	myPublicKey := readPublicKey("./public.pem")
+	myPublicKey := readPublicKey("./developer_public.pem")
 	myPubKeyBytes, err := x509.MarshalPKIXPublicKey(&myPublicKey)
 	publicKeyString := base64.StdEncoding.EncodeToString(myPubKeyBytes)
 	header := getHeaderForm(string(symKey), fileSizeKB, hashList, publicKeyString)
