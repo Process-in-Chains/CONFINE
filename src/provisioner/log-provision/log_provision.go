@@ -5,29 +5,25 @@ package main
 //CGO_CFLAGS=-I/opt/ego/include CGO_LDFLAGS=-L/opt/ego/lib go build -o logprovision provisioner/log-provision/log_provision.go && ./logprovision -port 8089 -log testing_logs/motivating/specialized.xes -mergekey concept:name -measurement `ego uniqueid app` -skipattestation false
 import (
 	utilsAttestation "app/utils/attestation"
+	"app/utils/encryption"
 	utilsHTTP "app/utils/http"
+	"app/utils/xes"
 	"context"
+	"crypto/rand"
 	"crypto/rsa"
 	"crypto/tls"
+	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
-	"encoding/pem"
+	"flag"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
-	//"strings"
-	"app/utils/encryption"
-	"crypto/x509"
-	//"encoding/hex"
-	"app/utils/xes"
-	"flag"
-	"fmt"
-	"log"
-	"net/url"
-	//"encoding/json"
-	"crypto/rand"
-	"io/ioutil"
-	"net/http"
 )
 
 var MYLOGPATH = "./mining-data/provision-data/process-01/event_log_TEST.xes"
@@ -38,6 +34,7 @@ var EXPECTEDMEASUREMENT = ""
 
 const PROCESSNAME = "process-01"
 
+/*Main function to run the log provider*/
 func main() {
 	serverPort := flag.Int("port", 8094, "server address")
 	provisionData := flag.String("log", "event_log_TEST.xes", "event log to provide")
@@ -59,11 +56,13 @@ func main() {
 	fmt.Println(server)
 }
 
+/*Log provider object*/
 type LogProvider struct {
 	port   int
 	server *http.Server
 }
 
+// Build a new log provider
 func NewLogProvider(port int) *LogProvider {
 	handler := http.NewServeMux()
 	handler.HandleFunc("/logrequest", handleLogRequest)
@@ -75,18 +74,26 @@ func NewLogProvider(port int) *LogProvider {
 	}
 	return s
 }
+
+// Start the log provider
 func (s *LogProvider) Start() error {
 	log.Printf("Log Server listening on port %d...\n", s.port)
 	return s.server.ListenAndServe()
 }
+
+// Stop the log provider
 func (s *LogProvider) Stop(ctx context.Context) error {
 	fmt.Println("Shutting down Log Provider...")
 	return s.server.Shutdown(ctx)
 }
+
+// Function to get the form for the segment
 func getSegmentForm(secret string, segmentNumber string, myreference string) url.Values {
 	return url.Values{"secret": {secret}, "segmentNumber": {segmentNumber}, "myreference": {myreference}}
 }
-func getHeaderForm(decryptionToken string, bytes int, hashList []string, publicKey string) url.Values {
+
+// Function to get the form for the header
+func getHeaderForm(bytes int, hashList []string) url.Values {
 	// Create a map to hold the values
 	data := map[string]interface{}{
 		"bytes":         bytes,
@@ -100,10 +107,12 @@ func getHeaderForm(decryptionToken string, bytes int, hashList []string, publicK
 	}
 	// Convert the JSON data to a string
 	jsonString := string(jsonData)
-	formData := url.Values{"header": {jsonString}, "decryptionToken": {decryptionToken}, "publicKey": {publicKey}}
+	formData := url.Values{"header": {jsonString}}
 	return formData
 }
-func sendSegments(symKey []byte, certBytes []byte, serverAddr string, publicKey string, myreference string) {
+
+/**Function that sends the segments to the secure miner**/
+func sendSegments(symKey []byte, certBytes []byte, serverAddr string, myreference string) {
 	files, err := ioutil.ReadDir("./mining-data/provision-data/" + PROCESSNAME + "/" + base64.StdEncoding.EncodeToString(symKey))
 	if err != nil {
 		log.Fatal(err)
@@ -118,8 +127,6 @@ func sendSegments(symKey []byte, certBytes []byte, serverAddr string, publicKey 
 				continue
 			}
 			segmentNumber := batchNumber
-
-			//content, e := encryption.EncryptXES("./mining-data/provision-data/"+PROCESSNAME+"/"+base64.StdEncoding.EncodeToString(symKey)+"/"+file.Name(), symKey)
 			content, e := ioutil.ReadFile("./mining-data/provision-data/" + PROCESSNAME + "/" + base64.StdEncoding.EncodeToString(symKey) + "/" + file.Name())
 			if e != nil {
 				fmt.Println(e)
@@ -141,6 +148,8 @@ func sendSegments(symKey []byte, certBytes []byte, serverAddr string, publicKey 
 	}
 
 }
+
+// Function to handle the trace list requests from the miner
 func handleTraceListRequest(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		err := r.ParseForm()
@@ -157,18 +166,12 @@ func handleTraceListRequest(w http.ResponseWriter, r *http.Request) {
 	log.Println("New trace list request received")
 	tlsCertBytes := []byte(r.Form.Get("tlsCert"))
 	utilsAttestation.ValidateCertificate(tlsCertBytes)
-
-	/**
-	pubKeyBytes := r.Form.Get("publicKey")
-	deserializedPubKey, err := x509.ParsePKIXPublicKey([]byte(pubKeyBytes))**/
 	cert, err := x509.ParseCertificate(tlsCertBytes)
 	if err != nil {
 		panic(err)
 	}
 	objectPublicKey := cert.PublicKey.(*rsa.PublicKey)
-	// Generate symmetric key for the trace list
 	symKey := encryption.GenerateRandomDecryptionToken()
-	// Encrypt symmetric key with TLS public key
 	encryptedKey, err := rsa.EncryptPKCS1v15(rand.Reader, objectPublicKey, symKey)
 	encryptedKeyBase64 := base64.StdEncoding.EncodeToString(encryptedKey)
 	if err != nil {
@@ -201,6 +204,8 @@ func handleTraceListRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Println("Trace list successfully sent")
 }
+
+// Function to handle the log requests from the miner
 func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		err := r.ParseForm()
@@ -240,11 +245,8 @@ func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 		tlsConfig := &tls.Config{InsecureSkipVerify: true}
 		certBytes = utilsHTTP.HttpGet(tlsConfig, serverAddr+"/cert")
 	}
-	// Genera una nuova chiave simmetrica casuale
-	////TODO: Here you should remove sym key and the encryption process. No Encryption is needed. Now we have TLS
+	//TODO: Here you should remove sym key and the encryption process. No Encryption is needed. Now we have TLS
 	symKey := encryption.GenerateRandomDecryptionToken()
-	// Cripta la chiave simmetrica con RSA
-	//encryptedKey, _ := encryption.EncryptSymmetricKey(symKey, "./developer_public.pem")
 	targetXes := xes.ReadXes(MYLOGPATH)
 	//TODO: FILTER XES HERE BEFORE SENDING(LOOK AT TODOS IN log-request AND log-provision)---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	hashList, err := xes.SplitXESFile2(*targetXes, batchSizeKB, "./mining-data/provision-data/"+PROCESSNAME+"/"+base64.StdEncoding.EncodeToString(symKey))
@@ -257,44 +259,12 @@ func handleLogRequest(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	log.Println("Log segmentation completed with segment size " + strconv.Itoa(batchSizeKB) + "KB" + ". Number of segments: " + strconv.Itoa(len(hashList)))
-	// Conversione in kilobyte
 	fileSizeKB := int(fileInfo.Size() / 1024)
-	myPublicKey := readPublicKey("./developer_public.pem")
-	myPubKeyBytes, err := x509.MarshalPKIXPublicKey(&myPublicKey)
-	publicKeyString := base64.StdEncoding.EncodeToString(myPubKeyBytes)
-	header := getHeaderForm(string(symKey), fileSizeKB, hashList, publicKeyString)
-	//Here we are using the attested TLS channel to send the log to the log receiver. In the TLS certificate, we have the public key of the log receiver.
+	header := getHeaderForm(fileSizeKB, hashList)
 	tlsConfig := &tls.Config{RootCAs: x509.NewCertPool(), ServerName: "localhost"}
-	//Parse the TLS Certificate
 	cert, _ := x509.ParseCertificate(certBytes)
-	//Add the certificate to the TLS configuration
 	tlsConfig.RootCAs.AddCert(cert)
-	//Send the header here
 	utilsHTTP.HttpPOST(tlsConfig, serverAddr+"/secret", header)
-	//Send the segments here
-	sendSegments(symKey, certBytes, serverAddr, publicKeyString, MYREFERENCE)
+	sendSegments(symKey, certBytes, serverAddr, MYREFERENCE)
 	log.Println("Data transmission completed")
-}
-func readPublicKey(filePath string) rsa.PublicKey {
-	// Read the contents of the PEM file
-	pemData, err := ioutil.ReadFile(filePath)
-	if err != nil {
-		fmt.Println("Error reading PEM file:", err)
-	}
-	// Decode the PEM data
-	block, _ := pem.Decode(pemData)
-	if block == nil {
-		fmt.Println("Failed to decode PEM block")
-	}
-	// Parse the DER-encoded public key
-	pubKey, err := x509.ParsePKIXPublicKey(block.Bytes)
-	if err != nil {
-		fmt.Println("Error parsing public key:", err)
-	}
-	// Assert the type of the public key to RSA
-	rsaPubKey, ok := pubKey.(*rsa.PublicKey)
-	if !ok {
-		fmt.Println("Public key is not an RSA key")
-	}
-	return *rsaPubKey
 }

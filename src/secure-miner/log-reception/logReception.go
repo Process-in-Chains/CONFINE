@@ -20,7 +20,6 @@ import (
 	"io/ioutil"
 	"math/big"
 	"net/http"
-	"os"
 	"sync"
 	"time"
 	//"log"
@@ -170,11 +169,9 @@ func secretLogHandler(w http.ResponseWriter, r *http.Request, logReceiver *LogRe
 	/*If it's an header message...*/
 	if r.Form.Has("header") {
 		if DEBUG {
-			//bytes, segmentNumber, hashList := readHeader(headerString)
 			fmt.Println("New header received: ", r.Form.Get("header"))
 		}
 	} else { /*If the message it's a log segment...*/
-		/*Check for the tests*/
 		if !FIRSTTS {
 			if test.TEST_MODE {
 				println("TESTMODE - FIRST SEGMENT RECEIVED AT:", time.Now().UnixMilli())
@@ -260,17 +257,4 @@ func readHeader(header string) (int, int, []string) {
 type Response struct {
 	Success bool   `json:"success"`
 	Msg     string `json:"msg"`
-}
-
-func createFolderIfNotExists(folderPath string) error {
-	// Verify if the folder exists
-	if _, err := os.Stat(folderPath); os.IsNotExist(err) {
-		// If the folder does not extist, create it
-		err := os.MkdirAll(folderPath, os.ModePerm)
-		if err != nil {
-			return err
-		}
-		log.Printf("La cartella %s è stata creata.", folderPath)
-	}
-	return nil
 }

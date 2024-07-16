@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cba642b-1f33-45d0-82ef-1c5047244812" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/runLogServer.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app" beforeDir="false" afterPath="$PROJECT_DIR$/src/app" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enclave-debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/enclave-debug.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enclave.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/enclave.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logprovision" beforeDir="false" afterPath="$PROJECT_DIR$/src/logprovision" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mining-data/output/heuristicsMiner_output.pnml" beforeDir="false" afterPath="$PROJECT_DIR$/src/mining-data/output/heuristicsMiner_output.pnml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/provisioner/log-provision/log_provision.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/provisioner/log-provision/log_provision.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/runLogServer.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/runLogServer.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

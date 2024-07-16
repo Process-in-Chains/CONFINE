@@ -2,12 +2,12 @@
 
 # Default values for parameters
 
-PORT=8089
+PORT=8087
 
 # Default values for the motivating scenario event logs
-#LOG="testing_logs/motivating/hospital.xes"
+LOG="testing_logs/motivating/hospital.xes"
 #LOG="testing_logs/motivating/specialized.xes"
-LOG="testing_logs/motivating/pharma.xes"
+#LOG="testing_logs/motivating/pharma.xes"
 
 # Default values for the the merge key storing the case id of the event log
 MERGEKEY="concept:name"

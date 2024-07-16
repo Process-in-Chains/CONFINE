@@ -1,6 +1,6 @@
 {
  "exe": "app",
- "key": "private.pem",
+ "key": "developer_private.pem",
  "debug": true,
  "heapSize": 512,
  "executableHeap": false,
@@ -26,15 +26,5 @@
          "readOnly": false
        }
         ],
- "env": null,
- "files": [
-   {
-     "source": "./public.pem",
-     "target": "./public.pem"
-   },
-   {
-     "source": "./private.pem",
-     "target": "./private.pem"
-   }
-]
+ "env": null
 }

@@ -60,7 +60,7 @@ func main() {
 	for true {
 		time.Sleep(2000 * time.Millisecond)
 		fmt.Println()
-		fmt.Printf("Command list:\n1: CONFINE DISCOVERY (INCREMENTAL) - Discover process model with the incremental HeuristicsMiner via CONFINE protocol\n2: CONFINE DISCOVERY (NON-INCREMENTAL) - Discover process model with non incremental HeuristicsMiner via CONFINE protocol\n3: CONFINE CONFORMANCE CHECKING (INCREMENTAL) - Incremental Declare Conformance checking via CONFINE protocol \n4: CONFINE CONFORMANCE CHECKING (NON-INCREMENTAL) - Non-incremental Declare Conformance checking via CONFINE protocol \n5: Classic HeuristicsMiner execution using the local event log at '/mining-data/provision-data/process-01/event_log.xes'\n6: Show TLS public key of the secure miner\n")
+		fmt.Printf("Command list:\n1: CONFINE DISCOVERY (INCREMENTAL) - Discover process model with the incremental HeuristicsMiner via CONFINE protocol\n2: CONFINE DISCOVERY (NON-INCREMENTAL) - Discover process model with non incremental HeuristicsMiner via CONFINE protocol\n3: CONFINE CONFORMANCE CHECKING (INCREMENTAL) - Incremental Declare Conformance checking via CONFINE protocol \n4: CONFINE CONFORMANCE CHECKING (NON-INCREMENTAL) - Non-incremental Declare Conformance checking via CONFINE protocol \n5: Classic HeuristicsMiner execution\n6: Show TLS public key of the secure miner\n")
 		fmt.Println()
 		var command string
 		fmt.Scanln(&command)
@@ -142,8 +142,16 @@ func main() {
 		}
 		/*This command initiates the mining process using 'event_log.xes' located in './mining-data/provision-data/process-01'.*/
 		if command == "5" {
-			log_path := "./mining-data/provision-data/" + "process-01" + "/event_log.xes"
-			_, err := ioutil.ReadFile(log_path)
+
+			fmt.Println("Insert the path of the XES event log inside the '/mining-data/input/' folder of the project (e.g., '/event_log.xes')")
+			var log_path string
+			fmt.Scanln(&log_path)
+			_, err := ioutil.ReadFile("./mining-data/input/" + log_path)
+			if err != nil {
+				fmt.Println("Error while opening the declare process model '/mining-data/input/" + log_path)
+				fmt.Println(err.Error())
+			}
+			_, err = ioutil.ReadFile(log_path)
 			if err != nil {
 				fmt.Println("Error while opening the event log at", log_path)
 				fmt.Println(err.Error())
