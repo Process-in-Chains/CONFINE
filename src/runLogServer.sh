@@ -2,19 +2,19 @@
 
 # Default values for parameters
 
-PORT=8087
+PORT=8089
 
 # Default values for the motivating scenario event logs
-LOG="testing_logs/motivating/hospital.xes"
+#LOG="testing_logs/motivating/hospital.xes"
 #LOG="testing_logs/motivating/specialized.xes"
-#LOG="testing_logs/motivating/pharma.xes"
+LOG="testing_logs/motivating/pharma.xes"
 
 # Default values for the the merge key storing the case id of the event log
 MERGEKEY="concept:name"
 # Default values for the Secure Miner's measurement
 MEASUREMENT=$(ego uniqueid app)
 #If set to false, the provisioner will skip the remote attestation
-SKIPATTESTATION=true
+SKIPATTESTATION=true6
 
 # Parse command line arguments
 while [[ "$#" -gt 0 ]]; do

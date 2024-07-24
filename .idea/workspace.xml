@@ -5,18 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cba642b-1f33-45d0-82ef-1c5047244812" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/00000000000.xd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilot/chatSessions/xd.lck" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app" beforeDir="false" afterPath="$PROJECT_DIR$/src/app" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enclave-debug.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/enclave-debug.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enclave.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/enclave.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/declare-conformance/declare-model.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/declare-conformance/declareConformance.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/declare-conformance/event_log.xes" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logprovision" beforeDir="false" afterPath="$PROJECT_DIR$/src/logprovision" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mining-data/collaborators/process-01/references.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/mining-data/collaborators/process-01/logserver-config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mining-data/output/heuristicsMiner_output.pnml" beforeDir="false" afterPath="$PROJECT_DIR$/src/mining-data/output/heuristicsMiner_output.pnml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/provisioner/log-provision/log_provision.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/provisioner/log-provision/log_provision.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mining-data/output/test2024-07-08 16:14:20.204926068 +0000 UTC m=+20.428263726.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mining-data/output/test2024-07-08 19:25:58.602969076 +0000 UTC m=+15.335556221.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mining-data/output/test2024-07-14 14:36:36.545924558 +0000 UTC m=+13.024059585.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mining-data/provision-data/minerList.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/mining-data/provision-data/minerList.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/runLogServer.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/runLogServer.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-reception/logReception.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/secure-miner/log-request/logRequest.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/secure-miner/log-request/logRequest.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/collaborators/collaborators.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/collaborators/collaborators.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +33,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$USER_HOME$/sdk/go1.21rc2" />
+  <component name="GOROOT" url="file:///snap/go/10660" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -78,7 +81,7 @@
     &quot;git-widget-placeholder&quot;: &quot;development-branch&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
     &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/dave/Desktop/docker-volumes/EGo-volume/InterOrganizationalProcessMining/CONFINE/src/mining-data/provision-data/process-01/testing_logs/motivating&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/pic/Desktop/Davide/projects/CONFINE/src/mining-data/collaborators&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
@@ -93,7 +96,7 @@
       <window_info id="Pull Requests" show_stripe_button="false" />
       <window_info id="Learn" show_stripe_button="false" />
       <window_info id="DFA" show_stripe_button="false" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17878251" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.37559807" />
       <window_info id="Commit" order="1" weight="0.25" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
@@ -103,9 +106,9 @@
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.32998818" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" weight="0.3302257" />
-      <window_info anchor="bottom" id="Terminal" order="3" />
-      <window_info anchor="bottom" id="Services" order="4" />
-      <window_info anchor="bottom" id="Find" order="5" weight="0.32991204" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.32973734" />
+      <window_info anchor="bottom" id="Services" order="4" weight="0.32973734" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.32973734" />
       <window_info anchor="right" id="Endpoints" show_stripe_button="false" />
       <window_info anchor="right" id="make" show_stripe_button="false" side_tool="true" />
       <window_info anchor="right" id="Coverage" show_stripe_button="false" side_tool="true" />
@@ -125,11 +128,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/mining-data/collaborators" />
       <recent name="$PROJECT_DIR$/evaluation/eventlogs" />
       <recent name="$PROJECT_DIR$/src/mining-data/provision-data/process-01/event_logs/traffic_fines" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/secure-miner/log-elaboration" />
-      <recent name="$PROJECT_DIR$/mining-data/provision-data/process-01" />
     </key>
   </component>
   <component name="RunManager">
@@ -157,7 +160,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-2946fb9b3188-155fe4b6e3a0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-233.14808.20" />
+        <option value="bundled-gosdk-33c477a475b1-b97fc8a1e17c-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-241.14494.155" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-GO-241.14494.155" />
       </set>
     </attachedChunks>
   </component>

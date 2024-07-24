@@ -46,7 +46,7 @@ func LogRequest(processName string, receiverPort string, segmentsize int, TLScer
 	if err != nil {
 		log.Fatalf("Error getting references: %v", err)
 	}
-	writtendata, err := ioutil.ReadFile("./mining-data/collaborators/" + processName + "/references.json")
+	writtendata, err := ioutil.ReadFile("./mining-data/collaborators/" + processName + "/logserver-config.json")
 	//var references []map[string]interface{}
 	err = json.Unmarshal(writtendata, &references)
 	if err != nil {

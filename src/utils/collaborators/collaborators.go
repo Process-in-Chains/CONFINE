@@ -29,7 +29,7 @@ func GetReference(webReference string) (Reference, error) {
 
 func GetReferences() ([]Reference, error) {
 	// Read the JSON file
-	data, err := ioutil.ReadFile("mining-data/collaborators/process-01/references.json")
+	data, err := ioutil.ReadFile("mining-data/collaborators/process-01/logserver-config.json")
 	if err != nil {
 		fmt.Println("Error reading file:", err)
 		return nil, err

@@ -1,0 +1,14 @@
+[
+  {
+    "http_reference": "http://localhost:8087",
+    "merge_key": "concept:name"
+  },
+  {
+    "http_reference": "http://localhost:8088",
+    "merge_key": "concept:name"
+  },
+  {
+    "http_reference": "http://localhost:8089",
+    "merge_key": "concept:name"
+  }
+]
