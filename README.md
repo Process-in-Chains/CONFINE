@@ -73,9 +73,11 @@ and run the runLogServer.sh shell script
 ./runLogServer.sh -port 8089 -log testing_logs/motivating/pharma.xes -mergekey concept:name -measurement `ego uniqueid app` -skipattestation true
 ```
 with parameters :
-- port: specifies the port on which listen for new requests from the Secure Miner
-- log: is the path of the XES event log in the /src/mining-data/provision-data folder. The default value is 'testing_logs/motivating/pharma.xes'.
-- 
+- port: the port on which the log server listens for new requests from the Secure Miner. The default value is 8089.
+- log: the path of the XES event log in the /src/mining-data/provision-data folder. The default value is 'testing_logs/motivating/pharma.xes'.
+- mergekey: the name of the case identifier attribute inside the provided event log. The default value is 'concept:name'
+- measurement: the value that identifies the Secure Miner's source code for the remote attestation. The default value 'ego uniqueid app' uses an EGo command to compute this information using the Secure Miner's source code.
+- skipattestation: if is set to true the remote attestation phase of the CONFINE protocol will be skipped. The default value is true. **If the Secure Miner is running in simulation mode, this must be set to true**.
 ### Secure miner
 In order to enable communication with other parties involved in the Inter-organizational environment, you have to set your collaborator. To do so, you must edit the file refeece.json. The following commands describe how to do this. To do so, you must edit the file reference.json. First, from the src folder, navigate to the file:
 ```
