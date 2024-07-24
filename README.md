@@ -12,8 +12,8 @@ Provisioner Nodes host the Provisioner's components, encompassing the Log Record
 The Miner Node is characterized by two distinct execution environments: the Operating System(OS) and the Trusted Execution Environment (TEE). TEEs establish isolated contexts separate from the OS, safeguarding code and data through hardware-based encryption mechanisms. We leverage the security guarantees provided by TEEs to protect a Trusted App responsible for fulfilling the functions of the Secure Miner and its associated sub-components. 
 The Secure Miner exchange messages with Provisioners according to the CONFINE protocol. After the proper execution of the CONFINE protocol, the trusted app implementing the Secure Miner is able to retrieve event logs, merge them and elaborate their aggregation in the Trusted Execution Environment.
 
-## Demo
-[![Titolo del video](https://img.youtube.com/vi/Oaoo6gS_4tw&t/0.jpg)](https://www.youtube.com/watch?v=Oaoo6gS_4tw&t)
+## Youtube Demo
+[![Titolo del video](https://img.youtube.com/vi/Oaoo6gS_4tw/0.jpg)](https://www.youtube.com/watch?v=Oaoo6gS_4tw&t)
 
 ## Repository
 The main content of the repository is structured as follows:
