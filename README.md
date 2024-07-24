@@ -30,12 +30,12 @@ docker pull valeriogoretti9/confine:latest
 ```
 Once the image has been downloaded, you can execute the following command to create a container with the CONFINE image. Before execution, you must be careful to enter your volume path instead of the <INSERT HERE YOUR VOLUME PATH> tag. You can also set a container name by replacing the tag <INSERT HERE YOUR DOCKER CONTAINER NAME>.
 ```
-docker run --volume /var/run/aesmd:/var/run/aesmd -v <INSERT HERE YOUR VOLUME PATH>:/volume --name <INSERT HERE YOUR DOCKER CONTAINER NAME> -ti valeriogoretti9/confine:latest
+docker run --volume /var/run/aesmd:/var/run/aesmd -v <INSERT YOUR VOLUME PATH>:/volume --name <INSERT YOUR DOCKER CONTAINER NAME> -ti valeriogoretti9/confine:latest
 ```
 Once the Docker container is created, the following commands allow you to start it.
 ```
-docker start <INSERT HERE YOUR DOCKER CONTAINER NAME>
-docker attach <INSERT HERE YOUR DOCKER CONTAINER NAME>
+docker start <INSERT YOUR DOCKER CONTAINER NAME>
+docker attach <INSERT YOUR DOCKER CONTAINER NAME>
 ```
 
 ## Setup and run
@@ -49,22 +49,33 @@ cd CONFINE/
 ```
 In the next parts, you can see how to run [provisioner](#provisioner) and [secure miner](#secure-miner) components. 
 ### Provisioner
-At this point, the container is running and CONFINE is set. By executing the following command you will enter the folder dedicated to the provisioner part.
+At this point, the container is running. 
+
+By executing the following command, you enter the folder dedicated to the provisioner
 ```
-cd src/provisioner/log-provision
+cd mining-data/provision-data/process-01/
 ```
-You have to put the log (in xes format) you want to provide to your collaborators in the inter-organizational context into this folder.
-Once you added the xes file, you have to build the 'log_provision.go' program, which is located in the current folder. 
-However, the execution of the build command must be done in the src folder. So, please follow the following commands to return to the src folder and build the log provider.
+You have to put the log (in xes format) you want to provide to the Secure Miners into this folder. We already provide different inter-organizational log samples that you can find in this folder.
+
+After that, navigate to /src/provision-data and modify the minerList.json file
 ```
 cd ..
-cd ..
-go build -o logprovision provisioner/log-provision/log_provision.go
+nano minerList.json
 ```
-Once the build has been executed, you can start the log provider with the following command replacing the <INSERT THE PATH OF YOUR XES FILE HERE> tag with the inserted xes path
+Append to this file the TLS certificate string of the Secure Miners you want to be accepted by the provisioner. You will see in the Secure Miner section how to get this information.
+
+Now you are ready to run the provisioner. To facilitate its start-up, we prepared the shell script runLogServer.sh in the src folder. Let's navigate there
 ```
-./logprovision -port 8087 -log <INSERT THE PATH OF YOUR XES FILE HERE>
+cd ../..
 ```
+and run the runLogServer.sh shell script  
+```
+./runLogServer.sh -port 8089 -log testing_logs/motivating/pharma.xes -mergekey concept:name -measurement `ego uniqueid app` -skipattestation true
+```
+with parameters :
+- port: specifies the port on which listen for new requests from the Secure Miner
+- log: is the path of the XES event log in the /src/mining-data/provision-data folder. The default value is 'testing_logs/motivating/pharma.xes'.
+- 
 ### Secure miner
 In order to enable communication with other parties involved in the Inter-organizational environment, you have to set your collaborator. To do so, you must edit the file refeece.json. The following commands describe how to do this. To do so, you must edit the file reference.json. First, from the src folder, navigate to the file:
 ```
