@@ -15,6 +15,10 @@ The Secure Miner exchange messages with Provisioners according to the CONFINE pr
 ## Youtube Demo
 [![Titolo del video](https://img.youtube.com/vi/Oaoo6gS_4tw/0.jpg)](https://www.youtube.com/watch?v=Oaoo6gS_4tw&t)
 
+
+
+
+
 ## Repository
 The main content of the repository is structured as follows:
 -  [/src/](https://github.com/Process-in-Chains/CONFINE/tree/main/src): the root folder of the implementation source code
