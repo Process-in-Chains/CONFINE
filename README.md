@@ -13,7 +13,7 @@ The Miner Node is characterized by two distinct execution environments: the Oper
 The Secure Miner exchange messages with Provisioners according to the CONFINE protocol. After the proper execution of the CONFINE protocol, the trusted app implementing the Secure Miner is able to retrieve event logs, merge them and elaborate their aggregation in the Trusted Execution Environment.
 
 ## Screencast
-
+As follows you can find a screencast that shows how to set up and run the necessari comp
 https://github.com/user-attachments/assets/66b971bf-a0a8-4e60-97ee-e00796418a43
 
 ## Repository
