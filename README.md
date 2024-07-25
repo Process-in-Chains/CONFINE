@@ -89,7 +89,7 @@ In order to enable communication with log servers, you need to specify their ref
 cd mining-data/collaborators/process-01/
 nano logserver-config.json
 ```
-Now specify, for each log server, their respective `http_reference` and the `merge_key`. Let's assume we have three log servers whose `http_reference` are "localhost:8087", "localhost:8088", "localhost:8089" respectively, and their `merge_key` is "concept:name". You should have
+Now specify, for each log server, their respective `http_reference` and the `merge_key`. Let's assume you have three log servers whose `http_reference` are "localhost:8087", "localhost:8088", "localhost:8089" respectively, and their `merge_key` is "concept:name". You should have a setting like:
 ```
 [
   {
@@ -106,15 +106,24 @@ Now specify, for each log server, their respective `http_reference` and the `mer
   }
 ]
 ```
+Change this file according to your setting.
 
+We are ready to run the Secure Miner. As per log servers, we provide the `runMiner.sh` shell script to facilitate the deployment of the Secure Miner into the Intel SGX TEE.
+Navigate to the folder of the script
 ```
-ego-go build -buildvcs=false
-ego sign
+cd ../../...
 ```
-And finally run the secure miner with the command:
+Now run the Secure Miner using the following command:
 ```
-OE_SIMULATION=1 ego run ./app -segsize 2000 -port 8080 -test true
+./runMiner.sh -port 8094 -segsize 2000 -test true -simulation true
 ```
+with parameters :
+- **port**: the port on which the Secure Miner will receive the event log data. The default value is 8084.
+- **segsize**: the segment size employed by the log servers in KB during the remote attestation phase of the protocol. The default value is 2000.
+- **test**: boolean parameter to generate test data of the protocol. if it is true, it generate the test data. The default value is true.
+- **simulation**: if it is true, run the INTEL SGX trusted app in simulation mode, with no TEE deployment. The default value is true.**If you are not running on a fully SGX enabled machine, you must set it to true**
+
+  
 ## Evaluation
 The following section contains the experimental toolbench used to evaluate the effectiveness of CONFINE, presented in the paper Section 6. Evaluation files can be found in [/evaluation/](https://github.com/Process-in-Chains/CONFINE/tree/main/evaluation). We conduct convergence analysis to demonstrate the correctness of the collaborative data exchange process. Moreover, we gauge the memory usage with synthetic and real-life event logs, to observe the trend during the enactment of our protocol and assess scalability. 
 
