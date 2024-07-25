@@ -77,11 +77,11 @@ and run the runLogServer.sh shell script
 ./runLogServer.sh -port 8089 -log testing_logs/motivating/pharma.xes -mergekey concept:name -measurement `ego uniqueid app` -skipattestation true
 ```
 with parameters :
-- port: the port on which the log server listens for new requests from the Secure Miner. The default value is 8089.
-- log: the path of the XES event log in the /src/mining-data/provision-data folder. The default value is 'testing_logs/motivating/pharma.xes'.
-- mergekey: the name of the case identifier attribute inside the provided event log. The default value is 'concept:name'
-- measurement: the value that identifies the Secure Miner's source code for the remote attestation. The default value 'ego uniqueid app' uses an EGo command to compute this information using the Secure Miner's source code.
-- skipattestation: if is set to true the remote attestation phase of the CONFINE protocol will be skipped. The default value is true. **If the Secure Miner is running in simulation mode, this must be set to true**.
+- **port**: the port on which the log server listens for new requests from the Secure Miner. The default value is 8089.
+- **log**: the path of the XES event log in the /src/mining-data/provision-data folder. The default value is 'testing_logs/motivating/pharma.xes'.
+- **mergekey**: the name of the case identifier attribute inside the provided event log. The default value is 'concept:name'
+- **measurement**: the value that identifies the Secure Miner's source code for the remote attestation. The default value 'ego uniqueid app' uses an EGo command to compute this information using the Secure Miner's source code.
+- **skipattestation**: if it is set to true, the remote attestation phase of the CONFINE protocol will be skipped. The default value is true. **If the Secure Miner is running in simulation mode, this must be set to true**.
 - 
 ### Secure miner
 In order to enable communication with log servers, you need to specify their references in the `logserver-config.json` file. Let's navigate to the file and open it
@@ -89,9 +89,22 @@ In order to enable communication with log servers, you need to specify their ref
 cd mining-data/collaborators/process-01/
 nano logserver-config.json
 ```
-Now specify, for each log server, its `http_reference` and the `merge_key` 
+Now specify, for each log server, their respective `http_reference` and the `merge_key`. Let's assume we have three log servers whose `http_reference` are "localhost:8087", "localhost:8088", "localhost:8089" respectively, and their `merge_key` is "concept:name". You should have
 ```
-
+[
+  {
+    "http_reference": "http://localhost:8087",
+    "merge_key": "concept:name"
+  },
+  {
+    "http_reference": "http://localhost:8088",
+    "merge_key": "concept:name"
+  },
+  {
+    "http_reference": "http://localhost:8089",
+    "merge_key": "concept:name"
+  }
+]
 ```
 
 ```
