@@ -82,7 +82,7 @@ with parameters :
 - **mergekey**: the name of the case identifier attribute inside the provided event log. The default value is 'concept:name'
 - **measurement**: the value that identifies the Secure Miner's source code for the remote attestation. The default value 'ego uniqueid app' uses an EGo command to compute this information using the Secure Miner's source code.
 - **skipattestation**: if it is set to true, the remote attestation phase of the CONFINE protocol will be skipped. The default value is true. **If the Secure Miner is running in simulation mode, this must be set to true**.
-- 
+
 ### Secure miner
 In order to enable communication with log servers, you need to specify their references in the `logserver-config.json` file. Let's navigate to the file and open it
 ```
@@ -120,8 +120,8 @@ Now run the Secure Miner using the following command:
 with parameters :
 - **port**: the port on which the Secure Miner will receive the event log data. The default value is 8084.
 - **segsize**: the segment size employed by the log servers in KB during the remote attestation phase of the protocol. The default value is 2000.
-- **test**: boolean parameter to generate test data of the protocol. if it is true, it generate the test data. The default value is true.
-- **simulation**: if it is true, run the INTEL SGX trusted app in simulation mode, with no TEE deployment. The default value is true.**If you are not running on a fully SGX enabled machine, you must set it to true**
+- **test**: boolean parameter to generate test data of the protocol. if it is true, it generates the test data. The default value is true.
+- **simulation**: if it is true, run the INTEL SGX trusted app in simulation mode with no TEE deployment. The default value is true. **If you are not running on a fully SGX enabled machine, you must set it to true**
 
   
 ## Evaluation
