@@ -82,26 +82,18 @@ with parameters :
 - mergekey: the name of the case identifier attribute inside the provided event log. The default value is 'concept:name'
 - measurement: the value that identifies the Secure Miner's source code for the remote attestation. The default value 'ego uniqueid app' uses an EGo command to compute this information using the Secure Miner's source code.
 - skipattestation: if is set to true the remote attestation phase of the CONFINE protocol will be skipped. The default value is true. **If the Secure Miner is running in simulation mode, this must be set to true**.
+- 
 ### Secure miner
-In order to enable communication with other parties involved in the Inter-organizational environment, you have to set your collaborator. To do so, you must edit the file refeece.json. The following commands describe how to do this. To do so, you must edit the file reference.json. First, from the src folder, navigate to the file:
+In order to enable communication with log servers, you need to specify their references in the `logserver-config.json` file. Let's navigate to the file and open it
 ```
 cd mining-data/collaborators/process-01/
+nano logserver-config.json
 ```
-Inside this folder is the references.json file. Edit this file adding your collaborators. The file contains a list of contributors and for each one you need to set the public key and the reference port on which you want to communicate. The following json is an example for an environment with 2 other collaborators.
+Now specify, for each log server, its `http_reference` and the `merge_key` 
 ```
-[
-  {
-    "public_key": "...""
-    "http_reference": "..."
-  },
-  {
-    "public_key": "...""
-    "http_reference": "..."
-  }
-]
+
 ```
-You have to put, inside this direcroty, the log (in xes format) you want to provide in the inter-organizational context into this folder. The name of this xes file must be "event_log.xes". 
-Afterwards, you can build the secure miner code and execute it with the following commands.
+
 ```
 ego-go build -buildvcs=false
 ego sign
