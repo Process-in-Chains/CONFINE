@@ -55,11 +55,11 @@ In the next parts, you can see how to run [provisioner](#provisioner) and [secur
 ### Provisioner
 At this point, the container is running. 
 
-By executing the following command, you enter the folder dedicated to the provisioner
+Enter the folder dedicated to the provisioner data by executing the following command 
 ```
 cd mining-data/provision-data/process-01/
 ```
-You have to put the log (in xes format) you want to provide to the Secure Miners into this folder. We already provide different inter-organizational log samples that you can find in this folder.
+You have to put the log (in XES format) you want to provide to the Secure Miners into this folder. We already provide different inter-organizational log samples that you can find in this folder.
 
 After that, navigate to /src/provision-data and modify the minerList.json file
 ```
@@ -78,10 +78,10 @@ and run the runLogServer.sh shell script
 ```
 with parameters :
 - **port**: the port on which the log server listens for new requests from the Secure Miner. The default value is 8089.
-- **log**: the path of the XES event log in the /src/mining-data/provision-data folder. The default value is 'testing_logs/motivating/pharma.xes'.
-- **mergekey**: the name of the case identifier attribute inside the provided event log. The default value is 'concept:name'
-- **measurement**: the value that identifies the Secure Miner's source code for the remote attestation. The default value 'ego uniqueid app' uses an EGo command to compute this information using the Secure Miner's source code.
-- **skipattestation**: if it is set to true, the remote attestation phase of the CONFINE protocol will be skipped. The default value is true. **If the Secure Miner is running in simulation mode, this must be set to true**.
+- **log**: the path of the XES event log in the `/src/mining-data/provision-data` folder. The default value is `testing_logs/motivating/pharma.xes`.
+- **mergekey**: the name of the case identifier attribute inside the provided event log. The default value is `concept:name`.
+- **measurement**: the value that identifies the Secure Miner's source code for the remote attestation. The default value `ego uniqueid app` uses an EGo command to compute this information using the Secure Miner's source code.
+- **skipattestation**: if it is set to `true`, the remote attestation phase of the CONFINE protocol will be skipped. The default value is `true`. **If the Secure Miner is running in simulation mode, this must be set to true**.
 
 ### Secure miner
 In order to enable communication with log servers, you need to specify their references in the `logserver-config.json` file. Let's navigate to the file and open it
@@ -89,7 +89,7 @@ In order to enable communication with log servers, you need to specify their ref
 cd mining-data/collaborators/process-01/
 nano logserver-config.json
 ```
-Now specify, for each log server, their respective `http_reference` and the `merge_key`. Let's assume you have three log servers whose `http_reference` are "localhost:8087", "localhost:8088", "localhost:8089" respectively, and their `merge_key` is "concept:name". You should have a setting like:
+Now specify, for each log server, its `http_reference` and the `merge_key` (i.e, the case attribute storing the process instance identifier). Let's assume you have three log servers whose `http_reference` are "localhost:8087", "localhost:8088", "localhost:8089" respectively, and their `merge_key` is "concept:name". You should have a setting like this
 ```
 [
   {
@@ -106,22 +106,27 @@ Now specify, for each log server, their respective `http_reference` and the `mer
   }
 ]
 ```
-Change this file according to your setting.
+Change this file according to your settings.
 
 We are ready to run the Secure Miner. As per log servers, we provide the `runMiner.sh` shell script to facilitate the deployment of the Secure Miner into the Intel SGX TEE.
 Navigate to the folder of the script
 ```
 cd ../../...
 ```
-Now run the Secure Miner using the following command:
+and run the Secure Miner using the following command:
 ```
 ./runMiner.sh -port 8094 -segsize 2000 -test true -simulation true
 ```
 with parameters :
-- **port**: the port on which the Secure Miner will receive the event log data. The default value is 8084.
-- **segsize**: the segment size employed by the log servers in KB during the remote attestation phase of the protocol. The default value is 2000.
-- **test**: boolean parameter to generate test data of the protocol. if it is true, it generates the test data. The default value is true.
-- **simulation**: if it is true, run the INTEL SGX trusted app in simulation mode with no TEE deployment. The default value is true. **If you are not running on a fully SGX enabled machine, you must set it to true**
+- **port**: the port on which the Secure Miner will receive the event log data. The default value is `8084`.
+- **segsize**: the segment size in KB employed by the log servers during the data transmission phase of the protocol. The default value is `2000`.
+- **test**:  if it is `true`, it generates the test data. The default value is `true`.
+- **simulation**: if it is `true`, run the Intel SGX trusted app in simulation mode (no TEE deployment). The default value is `true`. **If you are not running on a SGX enabled machine with a full Intel SGX installation, set this parameter to true**
+
+If the Secure Miner is correctly running, you should be able to see its terminal interface. You can interact with the Secure Miner application through four commands
+![SecureMinerInterface](https://github.com/user-attachments/assets/aca93cfe-76d7-4b55-ab43-9aad4e14aead)
+
+
 
   
 ## Evaluation
