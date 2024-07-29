@@ -68,7 +68,7 @@ nano minerList.json
 ```
 Append to this file the TLS certificate string of the Secure Miners you want to be accepted by the provisioner. You will see in the Secure Miner section how to get this information.
 
-Now you are ready to run the provisioner. To facilitate its start-up, we prepared the shell script runLogServer.sh in the src folder. Let's navigate there
+Now you are ready to run the provisioner. To facilitate its start-up, we prepared the shell script `runLogServer.sh` in the `/src` folder. Let's navigate there
 ```
 cd ../..
 ```
