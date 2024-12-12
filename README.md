@@ -1,8 +1,18 @@
 # CONFINE: Preserving data secrecy in inter-organizational process mining
-The CONFINE framework represents a decentralized paradigm for inter-organizational process mining, utilizing trusted applications operating within Trusted Execution Environments (TEEs) to uphold the tenets of data privacy and confidentiality. This repository houses the prototype implementation of the principal components constituting the framework, namely:
+The CONFINE framework implements a decentralized paradigm for inter-organizational process mining, utilizing trusted applications operating within Trusted Execution Environments (TEEs) to uphold the tenets of data privacy and confidentiality. This repository houses the prototype implementation of the principal components constituting the framework, namely:
 
 - Provisioners: HTTP servers responsible for delivering event logs designated for mining.
 - Secure Miners: [EGo](https://www.edgeless.systems/products/ego/) Intel SGX trusted applications retrieving and merging event logs to be fed into process mining algorithms.
+
+## Publications and further material
+For more information about the CONFINE approach and toolkit, consult the following publications:
+- Valerio Goretti, Davide Basile, Luca Barbaro, Claudio Di Ciccio (2024) Trusted Execution Environment for Decentralized Process Mining. In: CAiSE 2024, 509-527, Springer.
+  - Paper (DOI): [10.1007/978-3-031-61057-8_30](https://doi.org/10.1007/978-3-031-61057-8_30)
+  - Paper (ePrint): [arXiv.org/abs/2407.10684](https://arxiv.org/abs/2312.12105)
+  - Presentation: [slideshare.net/slideshow/trusted-execution-environment-for-decentralized-process-mining/269604280](https://www.slideshare.net/slideshow/trusted-execution-environment-for-decentralized-process-mining/269604280)
+- Valerio Goretti, Davide Basile, Luca Barbaro, Claudio Di Ciccio (2024) CONFINE: Preserving Data Secrecy in Decentralized Process Mining. In: ICPM Doctoral Consortium / Demo 2024, 63-68, CEUR-ws.org.
+  - Paper (URL): [ceur-ws.org/Vol-3783/paper_324.pdf](https://ceur-ws.org/Vol-3783/paper_324.pdf) (open access)
+  - Poster: [slideshare.net/slideshow/confine-preserving-data-secrecy-in-decentralized-process-mining-demo-poster/272579908](https://www.slideshare.net/slideshow/confine-preserving-data-secrecy-in-decentralized-process-mining-demo-poster/272579908)
 
 ## Framework overview
 ![deploymentdiagram-1](https://github.com/Process-in-Chains/CONFINE/assets/60829979/5c8dded3-5f04-42a7-a9d0-1a4583ddf708)
