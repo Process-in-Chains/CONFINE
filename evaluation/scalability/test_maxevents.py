@@ -10,7 +10,7 @@ from sklearn.linear_model import LinearRegression
 
 
 
-base_path = '/Users/luca/Documents/PythonProjects/TEE_Evaluation/test_number_activies/'
+base_path = './test_number_activies/'
 
 file_activities = ['18', '34', '66', '98', '130', '162', '194','226','258']
 folder_names = ['segsize_100', 'segsize_1000', 'segsize_10000']
@@ -408,6 +408,6 @@ plt.xlim([0, 270.9])
 plt.ylim([0, 80])
 
 plt.tight_layout()
-plt.savefig('/Users/luca/Documents/PythonProjects/TEE_Evaluation/test_number_activies/maxevents.pdf')
+plt.savefig('scalability_maxevents.pdf')
 plt.show()
 

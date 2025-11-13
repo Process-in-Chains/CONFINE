@@ -10,7 +10,7 @@ from sklearn.linear_model import LinearRegression
 
 
 
-base_path = '/Users/luca/Documents/PythonProjects/TEE_Evaluation/test_number_traces/'
+base_path = './test_number_traces/'
 
 file_sizes = ['128', '256', '512', '1024', '2048', '4096', '8192']
 folder_names = ['segsize_100', 'segsize_1000', 'segsize_10000']
@@ -400,6 +400,6 @@ plt.ylim([0, 70])
 plt.tight_layout()
 plt.grid(True, linestyle='--')
 
-plt.savefig('/Users/luca/Documents/PythonProjects/TEE_Evaluation/test_number_traces/numtraces.pdf')
+plt.savefig('scalability_numtraces.pdf')
 plt.show()
 
