@@ -5,14 +5,20 @@ The CONFINE framework implements a decentralized paradigm for inter-organization
 - Secure Miners: [EGo](https://www.edgeless.systems/products/ego/) Intel SGX trusted applications retrieving and merging event logs to be fed into process mining algorithms.
 
 ## Publications and further material
-For more information about the CONFINE approach and toolkit, consult the following publications:
-- Valerio Goretti, Davide Basile, Luca Barbaro, Claudio Di Ciccio (2024) Trusted Execution Environment for Decentralized Process Mining. In: CAiSE 2024, 509-527, Springer.
+For an overview of the CONFINE approach and toolkit, check out the following:
+  - Presentation: [slideshare.net/slideshow/trusted-execution-environment-for-decentralized-process-mining/269604280](https://www.slideshare.net/slideshow/trusted-execution-environment-for-decentralized-process-mining/269604280)
+  - Screencast: [youtu.be/Oaoo6gS_4tw?si=hY0ztcbUrGO8PjIr](https://youtu.be/Oaoo6gS_4tw?si=hY0ztcbUrGO8PjIr) (also below)
+  - Poster: [slideshare.net/slideshow/confine-preserving-data-secrecy-in-decentralized-process-mining-demo-poster/272579908](https://www.slideshare.net/slideshow/confine-preserving-data-secrecy-in-decentralized-process-mining-demo-poster/272579908)
+
+For further details, consult the following publications:
+- Davide Basile, Valerio Goretti, Luca Barbaro, Hajo A. Reijers, Claudio Di Ciccio (2026): _“A TEE-based approach for preserving data secrecy in process mining with decentralized sources”_. In: Journal of Information Security and Applications, 98, 104381. Elsevier.
+  - Paper (DOI): [10.1016/j.jisa.2026.104381](https://doi.org/10.1016/j.jisa.2026.104381)
+  - Paper (ePrint): [arxiv.org/abs/2602.04697](https://arxiv.org/abs/2602.04697)
+- Valerio Goretti, Davide Basile, Luca Barbaro, Claudio Di Ciccio (2024): _“Trusted Execution Environment for Decentralized Process Mining”_. In: CAiSE 2024, 509-527, Springer.
   - Paper (DOI): [10.1007/978-3-031-61057-8_30](https://doi.org/10.1007/978-3-031-61057-8_30)
   - Paper (ePrint): [arXiv.org/abs/2407.10684](https://arxiv.org/abs/2312.12105)
-  - Presentation: [slideshare.net/slideshow/trusted-execution-environment-for-decentralized-process-mining/269604280](https://www.slideshare.net/slideshow/trusted-execution-environment-for-decentralized-process-mining/269604280)
-- Valerio Goretti, Davide Basile, Luca Barbaro, Claudio Di Ciccio (2024) CONFINE: Preserving Data Secrecy in Decentralized Process Mining. In: ICPM Doctoral Consortium / Demo 2024, 63-68, CEUR-ws.org.
+- Valerio Goretti, Davide Basile, Luca Barbaro, Claudio Di Ciccio (2024): _“CONFINE: Preserving Data Secrecy in Decentralized Process Mining”_. In: ICPM Doctoral Consortium / Demo 2024, 63-68, CEUR-ws.org.
   - Paper (URL): [ceur-ws.org/Vol-3783/paper_324.pdf](https://ceur-ws.org/Vol-3783/paper_324.pdf) (open access)
-  - Poster: [slideshare.net/slideshow/confine-preserving-data-secrecy-in-decentralized-process-mining-demo-poster/272579908](https://www.slideshare.net/slideshow/confine-preserving-data-secrecy-in-decentralized-process-mining-demo-poster/272579908)
 
 ## Framework overview
 ![deploymentdiagram-1](https://github.com/Process-in-Chains/CONFINE/assets/60829979/5c8dded3-5f04-42a7-a9d0-1a4583ddf708)
@@ -23,7 +29,7 @@ The Miner Node is characterized by two distinct execution environments: the Oper
 The Secure Miner exchange messages with Provisioners according to the CONFINE protocol. After the proper execution of the CONFINE protocol, the trusted app implementing the Secure Miner is able to retrieve event logs, merge them and elaborate their aggregation in the Trusted Execution Environment.
 
 ## Screencast
-As follows you can find a screencast that shows how to set up and run the necessary components
+In the following screencast, we demonstrate how to set up and run the necessary components
 
 https://github.com/user-attachments/assets/66b971bf-a0a8-4e60-97ee-e00796418a43
 
